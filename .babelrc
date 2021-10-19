@@ -8,7 +8,10 @@
         "corejs": 3
       }
     ],
-    "@babel/react",
+    [
+      "@babel/react",
+      { "runtime": "automatic", "importSource": "@emotion/react" }
+    ],
     "@babel/typescript"
   ],
   "plugins": [
@@ -24,6 +27,7 @@
         "rootPathPrefix": "@/",
         "rootPathSuffix": "src"
       }
-    ]
+    ],
+    "@emotion"
   ]
 }
