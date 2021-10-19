@@ -1,7 +1,6 @@
 enum Uri {
-  main = '/',
-  login = '/login',
-  signup = '/signup',
+  home = '/',
+  count = '/count',
 }
 
 export default Uri;
