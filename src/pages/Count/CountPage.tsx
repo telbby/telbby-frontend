@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import { css } from '@emotion/react';
+
 import { useCountValue, useSetCount } from '@/atoms/countState';
+import { css } from '@emotion/react';
 
 const countValueStyle = css`
   color: blue;

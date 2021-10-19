@@ -1,8 +1,8 @@
 import {
+  SetterOrUpdater,
   atom,
   useRecoilValue,
   useSetRecoilState,
-  SetterOrUpdater,
 } from 'recoil';
 
 const countState = atom({

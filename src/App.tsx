@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
-import { css } from '@emotion/react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
-import Uri from './constants/uri';
-import HomePage from './pages/Home/HomePage';
-import CountPage from './pages/Count/CountPage';
+
+import { css } from '@emotion/react';
+
 import Navigation from './components/Navigation/Navigation';
+import Uri from './constants/uri';
+import CountPage from './pages/Count/CountPage';
+import HomePage from './pages/Home/HomePage';
 
 const appTitleStyle = css`
   color: red;
