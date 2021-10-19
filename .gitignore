@@ -23,7 +23,6 @@ lerna-debug.log*
 
 # Application specific files
 .sass-cache
-.vscode
 
 # Dependency directories
 node_modules/
