@@ -4,10 +4,10 @@ import { RecoilRoot } from 'recoil';
 
 import { css } from '@emotion/react';
 
-import Navigation from './components/Navigation/Navigation';
+import Navigation from './components/Navigation';
 import Uri from './constants/uri';
-import CountPage from './pages/Count/CountPage';
-import HomePage from './pages/Home/HomePage';
+import CountPage from './pages/CountPage';
+import HomePage from './pages/HomePage';
 
 const appTitleStyle = css`
   color: red;
