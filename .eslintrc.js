@@ -51,4 +51,11 @@ module.exports = {
       extends: ['plugin:testing-library/react'],
     },
   ],
+  ignorePatterns: [
+    'node_modules/',
+    'build',
+    './webpack',
+    '**/*.js',
+    'setupTests.ts',
+  ],
 };
