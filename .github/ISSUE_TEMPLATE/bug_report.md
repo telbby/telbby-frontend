@@ -4,7 +4,6 @@ about: 버그 발생 관련 이슈 발행
 title: ''
 labels: bug
 assignees: ''
-
 ---
 
 ## 버그 설명 <!-- 발생한 버그에 대한 간단한 설명 작성 -->
