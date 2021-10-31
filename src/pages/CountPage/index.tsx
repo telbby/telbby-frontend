@@ -3,6 +3,8 @@ import React, { FC } from 'react';
 import { useCountValue, useSetCount } from '@/atoms/countState';
 import Navigation from '@/components/Navigation';
 
+import { countValueStyle } from './style';
+
 const CountPage: FC = () => {
   const count = useCountValue();
   const setCount = useSetCount();
@@ -14,7 +16,7 @@ const CountPage: FC = () => {
     <>
       <Navigation />
       <h1>Count</h1>
-      <h2>{count}</h2>
+      <h2 css={countValueStyle}>{count}</h2>
 
       <div>
         <button type="button" onClick={onPlus}>
