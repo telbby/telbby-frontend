@@ -1,5 +1,5 @@
-import { Global, css } from '@emotion/react';
 import React, { ReactElement } from 'react';
+import { Global, css } from '@emotion/react';
 
 import D2Coding from '@/assets/fonts/D2Coding.woff';
 import D2CodingBold from '@/assets/fonts/D2CodingBold.woff';
