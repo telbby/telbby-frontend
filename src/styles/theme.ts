@@ -10,6 +10,10 @@ const theme = {
   colorBrown: '#554545',
   colorSuccess: '#6DCCA3',
   colorError: '#F45452',
+
+  fontBasic: '"Noto Sans KR", sans-serif',
+  fontCoding: '"D2Coding", monospace',
+  fontCodingBold: '"D2CodingBold", monospace',
 };
 
 export default theme;

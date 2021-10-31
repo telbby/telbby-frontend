@@ -13,5 +13,9 @@ declare module '@emotion/react' {
     colorBrown: string;
     colorSuccess: string;
     colorError: string;
+
+    fontBasic: string;
+    fontCoding: string;
+    fontCodingBold: string;
   }
 }
