@@ -8,6 +8,7 @@ import Navigation from './components/Navigation';
 import Uri from './constants/uri';
 import CountPage from './pages/CountPage';
 import HomePage from './pages/HomePage';
+import GlobalStyle from './styles/global';
 
 const appTitleStyle = css`
   color: red;
@@ -17,6 +18,7 @@ const App: FC = () => {
   return (
     <BrowserRouter>
       <RecoilRoot>
+        <GlobalStyle />
         <h1 css={appTitleStyle}>Hello Hello</h1>
         <div>
           <Navigation />
