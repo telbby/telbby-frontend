@@ -1,26 +1,19 @@
 /* eslint-disable no-restricted-syntax */
-/*
- * FIXME:
- * generator 내에서 배열을 순회하며 yield 를 호출하는 구문이 있는데,
- * 이 때 linter error가 나와 잠시 에러를 해지하였습니다.
- * 리팩토링하며 수정될 가능성이 있습니다.
- */
 
 import React, { ReactElement, useCallback, useEffect, useState } from 'react';
 
 import ShellLine from '@/components/ShellLine';
 
-type UseShellParams = { type: string; title: string }[];
-type UseShellReturnType = {
-  shellLines: ReactElement[];
-  setNextShellLine: () => void;
-};
-
 /**
  * form 요소들을 받아
  * shell line과 다음 shell을 호출할 수 있는 함수를 반환합니다.
  *
- * @usage
+ * FIXME:
+ * generator 내에서 배열을 순회하며 yield 를 호출하는 구문이 있는데,
+ * 이 때 linter error가 나와 잠시 에러를 해지하였습니다.
+ * 리팩토링하며 수정될 가능성이 있습니다.
+ *
+ * @example
  * const formElement = [
  *  { type: 'question', title: 'username' },
  *  { type: 'question', title: 'password' },
@@ -29,7 +22,12 @@ type UseShellReturnType = {
  *
  * const { shellLines, setNextShellLine } = useShell(formElement);
  */
-const useShell = (formElement: UseShellParams): UseShellReturnType => {
+const useShellLineControl = (
+  formElement: { type: string; title: string }[],
+): {
+  shellLines: ReactElement[];
+  setNextShellLine: () => void;
+} => {
   const [shellLines, setShellLines] = useState<ReactElement[]>([]);
 
   function* questionGenerator() {
@@ -49,4 +47,4 @@ const useShell = (formElement: UseShellParams): UseShellReturnType => {
   return { shellLines, setNextShellLine };
 };
 
-export default useShell;
+export default useShellLineControl;
