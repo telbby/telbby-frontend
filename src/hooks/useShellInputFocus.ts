@@ -1,19 +1,24 @@
-import { MutableRefObject, ReactElement, useEffect } from 'react';
+import { MutableRefObject, ReactElement, useCallback, useEffect } from 'react';
 
+/**
+ * shellLines가 업데이트 될때마다
+ * fieldsetRef에 있는 input 요소들을 탐색하여
+ * 가장 마지막 input 요소에 focus를 줍니다.
+ */
 const useShellInputFocus = (
   fieldsetRef: MutableRefObject<HTMLFieldSetElement>,
   shellLines: ReactElement[],
-): { handleFocus: () => void } => {
-  const handleFocus = () => {
-    const lines = fieldsetRef.current.querySelectorAll('label');
+): { setFocus: () => void } => {
+  const setFocus = useCallback(() => {
+    const lines = fieldsetRef.current.querySelectorAll('input');
 
     if (lines.length === 0) return;
     lines[lines.length - 1].focus();
-  };
+  }, []);
 
-  useEffect(() => handleFocus(), [shellLines]);
+  useEffect(setFocus, [shellLines]);
 
-  return { handleFocus };
+  return { setFocus };
 };
 
 export default useShellInputFocus;

@@ -14,30 +14,25 @@ type ShellProps = {
 
 /**
  * Shell 형태의 Chat UI 컴포넌트 입니다.
- *
  * Enter를 입력할 때마다 유효성을 검증하고, 다음 ShellLine을 가져옵니다.
- *
  * form 에 클릭을 하면, 자동으로 마지막 Input에 포커스가 갑니다.
  */
 const Shell = ({ formElement, subTitle }: ShellProps): ReactElement => {
   const fieldsetRef = useRef<HTMLFieldSetElement>();
   const { shellLines, setNextShellLine } = useShellLineControl(formElement);
-  const { handleFocus } = useShellInputFocus(fieldsetRef, shellLines);
+  const { setFocus } = useShellInputFocus(fieldsetRef, shellLines);
 
-  const checkFormValueValidation = (
-    e: React.KeyboardEvent<HTMLFieldSetElement>,
-  ) => {
-    if (e.key === 'Enter') {
-      setNextShellLine();
-    }
+  const setNextLine = (e: React.KeyboardEvent<HTMLFieldSetElement>) => {
+    const target = e.target as HTMLInputElement;
+    if (e.key === 'Enter') setNextShellLine(target);
   };
 
   return (
     <form
       aria-hidden
-      onClick={handleFocus}
       onSubmit={(e) => e.preventDefault()}
       css={S.formStyle}
+      onClick={setFocus}
     >
       <h1>
         {SHELL_TITLE}
@@ -45,7 +40,7 @@ const Shell = ({ formElement, subTitle }: ShellProps): ReactElement => {
       </h1>
       <fieldset
         aria-hidden
-        onKeyDown={checkFormValueValidation}
+        onKeyDown={setNextLine}
         ref={fieldsetRef}
         css={S.fieldsetStyle}
       >
