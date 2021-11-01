@@ -6,6 +6,7 @@ export type ShellLineProps = {
   lineType: string;
   lineTitle: string;
   inputType?: string;
+  checkValidation?: (value: string) => boolean;
 };
 
 const ShellLine = ({
@@ -14,9 +15,19 @@ const ShellLine = ({
   inputType,
 }: ShellLineProps): ReactElement => (
   <label htmlFor={lineTitle}>
-    <span css={S.LineType}>{lineType} </span>
-    <span css={S.LineLabel}>{lineTitle}: </span>
-    <input type={inputType} id={lineTitle} css={S.LineInput} />
+    {lineType !== 'ERROR' && (
+      <>
+        <span css={S.LineType}>{lineType} </span>
+        <span css={S.LineLabel}>{lineTitle}: </span>
+        <input type={inputType} id={lineTitle} css={S.LineInput} />
+      </>
+    )}
+    {lineType === 'ERROR' && (
+      <>
+        <span css={S.LineErrorType}>{lineType}: </span>
+        <span css={S.LineErrorLabel}>{lineTitle}</span>
+      </>
+    )}
   </label>
 );
 
