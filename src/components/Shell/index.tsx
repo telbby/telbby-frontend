@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef } from 'react';
+import React, { ReactElement, useEffect, useRef } from 'react';
 
 import { SHELL_SUCCESS_MESSAGE, SHELL_TITLE } from '@/constants/shell';
 import useShell from '@/hooks/useShell';
@@ -17,13 +17,19 @@ const Shell = ({ formElement, subTitle }: ShellProps): ReactElement => {
   const fieldsetRef = useRef<HTMLFieldSetElement>();
 
   const checkFormValueValidation = (e) => {
-    if (e.key === 'Enter') setNextShellLine();
+    if (e.key === 'Enter') {
+      setNextShellLine();
+    }
   };
 
   const handleFocus = () => {
     const lines = fieldsetRef.current.querySelectorAll('label');
+
+    if (lines.length === 0) return;
     lines[lines.length - 1].focus();
   };
+
+  useEffect(() => handleFocus(), [shellLines]);
 
   return (
     <form
