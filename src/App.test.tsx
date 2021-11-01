@@ -1,9 +1,14 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+
+import { render } from '@testing-library/react';
 
 import App from './App';
 
-it(`should be 'Hello Hello`, () => {
-  render(<App />);
-  screen.getByText('Hello Hello');
+it(`App rendering test`, () => {
+  render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>,
+  );
 });
