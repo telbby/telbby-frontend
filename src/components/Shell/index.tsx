@@ -1,7 +1,8 @@
-import React, { ReactElement, useEffect, useRef } from 'react';
+import React, { ReactElement, useRef } from 'react';
 
 import { SHELL_SUCCESS_MESSAGE, SHELL_TITLE } from '@/constants/shell';
-import useShell from '@/hooks/useShell';
+import useShellInputFocus from '@/hooks/useShellInputFocus';
+import useShellLineControl from '@/hooks/useShellLineControl';
 
 type ShellProps = {
   formElement: { type: string; title: string }[];
@@ -13,23 +14,17 @@ type ShellProps = {
  * form 리스트를 넘겨줘야 합니다.
  */
 const Shell = ({ formElement, subTitle }: ShellProps): ReactElement => {
-  const { shellLines, setNextShellLine } = useShell(formElement);
   const fieldsetRef = useRef<HTMLFieldSetElement>();
+  const { shellLines, setNextShellLine } = useShellLineControl(formElement);
+  const { handleFocus } = useShellInputFocus(fieldsetRef, shellLines);
 
-  const checkFormValueValidation = (e) => {
+  const checkFormValueValidation = (
+    e: React.KeyboardEvent<HTMLFieldSetElement>,
+  ) => {
     if (e.key === 'Enter') {
       setNextShellLine();
     }
   };
-
-  const handleFocus = () => {
-    const lines = fieldsetRef.current.querySelectorAll('label');
-
-    if (lines.length === 0) return;
-    lines[lines.length - 1].focus();
-  };
-
-  useEffect(() => handleFocus(), [shellLines]);
 
   return (
     <form
