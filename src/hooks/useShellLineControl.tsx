@@ -2,7 +2,7 @@
 
 import React, { ReactElement, useCallback, useEffect, useState } from 'react';
 
-import ShellLine from '@/components/ShellLine';
+import ShellLine, { ShellLineProps } from '@/components/ShellLine';
 
 /**
  * form 요소들을 받아
@@ -15,15 +15,15 @@ import ShellLine from '@/components/ShellLine';
  *
  * @example
  * const formElement = [
- *  { type: 'question', title: 'username' },
- *  { type: 'question', title: 'password' },
- *  { type: 'question', title: 'sign in' },
+ *  { lineType: 'question', lineTitle: 'username' },
+ *  { lineType: 'question', lineTitle: 'password', inputType: 'password' },
+ *  { lineType: 'question', lineTitle: 'sign in' },
  *  ];
  *
  * const { shellLines, setNextShellLine } = useShell(formElement);
  */
 const useShellLineControl = (
-  formElement: { type: string; title: string }[],
+  formElement: ShellLineProps[],
 ): {
   shellLines: ReactElement[];
   setNextShellLine: () => void;
@@ -31,8 +31,15 @@ const useShellLineControl = (
   const [shellLines, setShellLines] = useState<ReactElement[]>([]);
 
   function* questionGenerator() {
-    for (const { type, title } of formElement) {
-      yield <ShellLine key={title} type={type} title={title} />;
+    for (const props of formElement) {
+      yield (
+        <ShellLine
+          key={props.lineTitle}
+          lineType={props.lineType}
+          lineTitle={props.lineTitle}
+          inputType={props.inputType}
+        />
+      );
     }
   }
 

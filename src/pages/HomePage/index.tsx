@@ -7,9 +7,9 @@ import { titleStyle } from './style';
 
 const HomePage: FC = () => {
   const formElement = [
-    { type: 'question', title: 'username' },
-    { type: 'question', title: 'password' },
-    { type: 'question', title: 'sign in' },
+    { lineType: 'question', lineTitle: 'username' },
+    { lineType: 'question', lineTitle: 'password', inputType: 'password' },
+    { lineType: 'question', lineTitle: 'Sign in?' },
   ];
 
   return (

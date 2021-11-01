@@ -4,10 +4,11 @@ import { SHELL_SUCCESS_MESSAGE, SHELL_TITLE } from '@/constants/shell';
 import useShellInputFocus from '@/hooks/useShellInputFocus';
 import useShellLineControl from '@/hooks/useShellLineControl';
 
+import { ShellLineProps } from '../ShellLine';
 import * as S from './style';
 
 type ShellProps = {
-  formElement: { type: string; title: string }[];
+  formElement: ShellLineProps[];
   subTitle?: string;
 };
 
