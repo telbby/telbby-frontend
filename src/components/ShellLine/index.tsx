@@ -1,18 +1,27 @@
 import React, { ReactElement } from 'react';
 
-type ShellLineProps = {
-  type: string;
-  title: string;
+import * as S from './style';
+
+export type ShellLineProps = {
+  lineType: string;
+  lineTitle: string;
+  inputType?: string;
 };
 
 const ShellLine = ({
-  type, //
-  title,
+  lineType,
+  lineTitle,
+  inputType,
 }: ShellLineProps): ReactElement => (
-  <label htmlFor={title}>
-    {type} {title} :
-    <input type="text" id={title} />
+  <label htmlFor={lineTitle}>
+    <span css={S.LineType}>{lineType} </span>
+    <span css={S.LineLabel}>{lineTitle}: </span>
+    <input type={inputType} id={lineTitle} css={S.LineInput} />
   </label>
 );
+
+ShellLine.defaultProps = {
+  inputType: 'text',
+};
 
 export default ShellLine;
