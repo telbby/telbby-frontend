@@ -1,6 +1,10 @@
-import React, { ReactElement, useEffect, useRef } from 'react';
+import React, { ReactElement, useEffect, useRef, useState } from 'react';
 
-import { SHELL_ERROR_ACCESS_DENIED, SHELL_TITLE } from '@/constants/shell';
+import {
+  SHELL_ERROR_USER_ACCESS_DENIED,
+  SHELL_SUCCESS_MESSAGE,
+  SHELL_TITLE,
+} from '@/constants/shell';
 import useShellInputFocus from '@/hooks/useShellInputFocus';
 import useShellLine from '@/hooks/useShellLine';
 
@@ -8,11 +12,11 @@ import { ShellLineProps } from '../ShellLine';
 import * as S from './style';
 
 export type FormElementType = ShellLineProps & {
-  bodyKey: string;
+  bodyKey?: string;
   checkValidation?: (value: string) => boolean;
 };
 
-type ShellProps = {
+type ShellComponentProps = {
   formElement: FormElementType[];
   subTitle?: string;
 };
@@ -22,30 +26,47 @@ type ShellProps = {
  * Enter를 입력할 때마다 유효성을 검증하고, 다음 ShellLine을 가져옵니다.
  * form 에 클릭을 하면, 자동으로 마지막 Input에 포커스가 갑니다.
  */
-const Shell = ({ formElement, subTitle }: ShellProps): ReactElement => {
+const Shell = ({
+  formElement,
+  subTitle,
+}: ShellComponentProps): ReactElement => {
+  const [formValue, setFormValue] = useState({});
   const fieldsetRef = useRef<HTMLFieldSetElement>();
-  const { shellLines, addFormElementLine, addErrorLine, isGeneratorDone } =
-    useShellLine(formElement);
+  const {
+    shellLines,
+    addFormElementLine,
+    addErrorLine,
+    addNormalLine,
+    isGeneratorDone,
+  } = useShellLine(formElement);
   const { setFocus } = useShellInputFocus(fieldsetRef, shellLines);
 
-  const setNextLine = (e: React.KeyboardEvent<HTMLFieldSetElement>) => {
+  const setNextLine = (e: React.KeyboardEvent<HTMLFieldSetElement>): void => {
     const target = e.target as HTMLInputElement;
 
-    if (e.key === 'Enter') {
+    if (!isGeneratorDone && e.key === 'Enter') {
       const { id, value } = target;
       const elem = formElement.find(({ lineTitle }) => lineTitle === id);
 
-      if (elem.checkValidation && !elem.checkValidation(value))
-        addErrorLine(SHELL_ERROR_ACCESS_DENIED);
-
+      if (elem.checkValidation && !elem.checkValidation(value)) {
+        addErrorLine(SHELL_ERROR_USER_ACCESS_DENIED);
+        return;
+      }
       addFormElementLine();
+
+      if (elem.bodyKey) {
+        setFormValue((prev) => ({ ...prev, [elem.bodyKey]: value }));
+      }
     }
   };
 
   useEffect(() => {
-    // if (isGeneratorDone) addNormalLine(SHELL_SUCCESS_MESSAGE);
     if (isGeneratorDone) {
-      addErrorLine(SHELL_ERROR_ACCESS_DENIED);
+      // TODO:
+      // - 해당 부분에서 formValue와 함께 API 요청을 합니다.
+      // 성공을 하면 addNormalLine, 실패시 addErrorLine을 호출하면 됩니다.
+      console.log(formValue);
+      addNormalLine(SHELL_SUCCESS_MESSAGE);
     }
   }, [isGeneratorDone]);
 
