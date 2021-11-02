@@ -7,7 +7,8 @@
 
 import React, { ReactElement, useCallback, useEffect, useState } from 'react';
 
-import ShellLine, { ShellLineProps } from '@/components/ShellLine';
+import { FormElementType } from '@/components/Shell';
+import ShellLine from '@/components/ShellLine';
 
 import useGenerator from './useGenerator';
 
@@ -26,7 +27,7 @@ import useGenerator from './useGenerator';
  * - 에러가 발생했을 경우, 에러 메시지와 함께 ShellLine Generator를 reset 합니다.
  */
 const useShellLine = (
-  formElement: ShellLineProps[],
+  formElement: FormElementType[],
 ): {
   shellLines: ReactElement[];
   addFormElementLine: () => void;
@@ -34,7 +35,7 @@ const useShellLine = (
   addNormalLine: (message: string) => void;
   isGeneratorDone: boolean;
 } => {
-  const getFormElementShellLine = (props: ShellLineProps) => (
+  const getFormElementShellLine = (props: FormElementType) => (
     <ShellLine
       key={Math.random()}
       lineType={props.lineType}

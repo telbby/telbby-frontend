@@ -7,8 +7,13 @@ import useShellLine from '@/hooks/useShellLine';
 import { ShellLineProps } from '../ShellLine';
 import * as S from './style';
 
+export type FormElementType = ShellLineProps & {
+  bodyKey: string;
+  checkValidation?: (value: string) => boolean;
+};
+
 type ShellProps = {
-  formElement: ShellLineProps[];
+  formElement: FormElementType[];
   subTitle?: string;
 };
 
@@ -39,9 +44,9 @@ const Shell = ({ formElement, subTitle }: ShellProps): ReactElement => {
 
   useEffect(() => {
     // if (isGeneratorDone) addNormalLine(SHELL_SUCCESS_MESSAGE);
-    // if (isGeneratorDone) {
-    //   addErrorLine(SHELL_ERROR_ACCESS_DENIED);
-    // }
+    if (isGeneratorDone) {
+      addErrorLine(SHELL_ERROR_ACCESS_DENIED);
+    }
   }, [isGeneratorDone]);
 
   return (
