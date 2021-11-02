@@ -2,7 +2,9 @@ import { SerializedStyles, Theme, css } from '@emotion/react';
 
 export const formStyle = (theme: Theme): SerializedStyles => css`
   box-sizing: border-box;
-  width: 789px;
+  overflow-y: scroll;
+  width: calc(100% - 200px);
+  height: 247px;
   padding: 28px 30px;
   margin: 0 auto;
 

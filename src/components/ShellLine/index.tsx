@@ -6,7 +6,6 @@ export type ShellLineProps = {
   lineType: string;
   lineTitle: string;
   inputType?: string;
-  checkValidation?: (value: string) => boolean;
 };
 
 const ShellLine = ({
@@ -23,8 +22,13 @@ const ShellLine = ({
       {lineTitle}
       {!['ERROR', 'NORMAL'].includes(lineType) && ':'}{' '}
     </span>
-    {!['ERROR', 'NORMAL'].includes(lineType) && (
-      <input type={inputType} id={lineTitle} css={S.LineInput} />
+    {lineType !== 'ERROR' && (
+      <input
+        type={inputType}
+        id={lineTitle}
+        css={S.LineInput}
+        maxLength={lineType === 'NORMAL' ? 0 : 15}
+      />
     )}
   </label>
 );
