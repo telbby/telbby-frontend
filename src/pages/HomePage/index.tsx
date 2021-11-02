@@ -1,15 +1,14 @@
 import React, { FC } from 'react';
 
-import Navigation from '@/components/Navigation';
+import Layout from '@/components/common/Layout';
 
 import { titleStyle } from './style';
 
 const HomePage: FC = () => {
   return (
-    <div>
-      <Navigation />
+    <Layout>
       <h1 css={titleStyle}>Talk to telbby</h1>
-    </div>
+    </Layout>
   );
 };
 
