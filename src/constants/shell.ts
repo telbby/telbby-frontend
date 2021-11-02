@@ -3,6 +3,7 @@ export const SHELL_SUCCESS_MESSAGE =
   'Congrats! service has been added to telbby.';
 
 export const SHELL_ERROR_USER_ACCESS_DENIED = 'Access denied';
+export const MAX_SHELL_INPUT_LENGTH = 15;
 
 export const SHELL_LOGIN_FORM_ELEMENT = [
   { lineType: 'question', lineTitle: 'username', bodyKey: 'username' },

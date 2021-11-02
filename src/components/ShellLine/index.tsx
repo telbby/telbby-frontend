@@ -1,5 +1,7 @@
 import React, { ReactElement } from 'react';
 
+import { MAX_SHELL_INPUT_LENGTH } from '@/constants/shell';
+
 import * as S from './style';
 
 export type ShellLineProps = {
@@ -24,10 +26,11 @@ const ShellLine = ({
     </span>
     {lineType !== 'ERROR' && (
       <input
+        data-testid="shell-line-input"
         type={inputType}
         id={lineTitle}
         css={S.LineInput}
-        maxLength={lineType === 'NORMAL' ? 0 : 15}
+        maxLength={lineType === 'NORMAL' ? 0 : MAX_SHELL_INPUT_LENGTH}
       />
     )}
   </label>

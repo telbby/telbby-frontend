@@ -16,6 +16,7 @@ export const LineErrorLabel = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorGray3};
 `;
 
-export const LineInput = css`
+export const LineInput = (theme: Theme): SerializedStyles => css`
   all: unset;
+  caret-color: ${theme.colorPrimary};
 `;
