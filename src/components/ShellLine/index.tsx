@@ -15,18 +15,16 @@ const ShellLine = ({
   inputType,
 }: ShellLineProps): ReactElement => (
   <label htmlFor={lineTitle}>
-    {lineType !== 'ERROR' && (
-      <>
-        <span css={S.LineType}>{lineType} </span>
-        <span css={S.LineLabel}>{lineTitle}: </span>
-        <input type={inputType} id={lineTitle} css={S.LineInput} />
-      </>
-    )}
-    {lineType === 'ERROR' && (
-      <>
-        <span css={S.LineErrorType}>{lineType}: </span>
-        <span css={S.LineErrorLabel}>{lineTitle}</span>
-      </>
+    <span css={lineType === 'ERROR' ? S.LineErrorType : S.LineType}>
+      {lineType !== 'NORMAL' && lineType}
+      {lineType === 'ERROR' && ':'}{' '}
+    </span>
+    <span css={lineType === 'ERROR' ? S.LineErrorLabel : S.LineLabel}>
+      {lineTitle}
+      {!['ERROR', 'NORMAL'].includes(lineType) && ':'}{' '}
+    </span>
+    {!['ERROR', 'NORMAL'].includes(lineType) && (
+      <input type={inputType} id={lineTitle} css={S.LineInput} />
     )}
   </label>
 );
