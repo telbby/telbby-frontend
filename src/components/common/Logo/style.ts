@@ -4,10 +4,6 @@ export const logoStyle = (theme: Theme): SerializedStyles => css`
   display: flex;
   align-items: center;
 
-  img {
-    width: 32px;
-  }
-
   span {
     font-family: ${theme.fontCodingBold};
     font-size: 20px;

@@ -5,12 +5,13 @@ import { logoStyle } from './style';
 
 type LogoProps = {
   onlyImg?: boolean;
+  width?: string;
 };
 
-const Logo: FC<LogoProps> = ({ onlyImg }) => {
+const Logo: FC<LogoProps> = ({ onlyImg, width }) => {
   return (
     <div css={logoStyle}>
-      <img src={LogoImg} alt="logo" />
+      <img src={LogoImg} alt="logo" width={width} />
       {!onlyImg && <span>telbby</span>}
     </div>
   );
@@ -18,6 +19,7 @@ const Logo: FC<LogoProps> = ({ onlyImg }) => {
 
 Logo.defaultProps = {
   onlyImg: false,
+  width: '32px',
 };
 
 export default Logo;
