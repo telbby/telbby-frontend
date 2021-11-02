@@ -1,8 +1,12 @@
 import React, { ReactElement, useRef } from 'react';
 
-import { SHELL_SUCCESS_MESSAGE, SHELL_TITLE } from '@/constants/shell';
+import {
+  SHELL_ERROR_ACCESS_DENIED,
+  SHELL_SUCCESS_MESSAGE,
+  SHELL_TITLE,
+} from '@/constants/shell';
 import useShellInputFocus from '@/hooks/useShellInputFocus';
-import useShellLineControl from '@/hooks/useShellLineControl';
+import useShellLine from '@/hooks/useShellLine';
 
 import { ShellLineProps } from '../ShellLine';
 import * as S from './style';
@@ -19,12 +23,22 @@ type ShellProps = {
  */
 const Shell = ({ formElement, subTitle }: ShellProps): ReactElement => {
   const fieldsetRef = useRef<HTMLFieldSetElement>();
-  const { shellLines, setNextShellLine } = useShellLineControl(formElement);
+  const { shellLines, addFormElementLine, addErrorLine } =
+    useShellLine(formElement);
   const { setFocus } = useShellInputFocus(fieldsetRef, shellLines);
 
   const setNextLine = (e: React.KeyboardEvent<HTMLFieldSetElement>) => {
     const target = e.target as HTMLInputElement;
-    if (e.key === 'Enter') setNextShellLine(target);
+
+    if (e.key === 'Enter') {
+      const { id, value } = target;
+      const elem = formElement.find(({ lineTitle }) => lineTitle === id);
+
+      if (elem.checkValidation && !elem.checkValidation(value))
+        addErrorLine(SHELL_ERROR_ACCESS_DENIED);
+
+      addFormElementLine();
+    }
   };
 
   return (

@@ -9,7 +9,14 @@ const HomePage: FC = () => {
   const formElement = [
     { lineType: 'question', lineTitle: 'username' },
     { lineType: 'question', lineTitle: 'password', inputType: 'password' },
-    { lineType: 'question', lineTitle: 'Sign in?' },
+    {
+      lineType: 'question',
+      lineTitle: 'Sign in? [y/n]',
+      checkValidation: (val: string) => {
+        if (!['y', 'n'].includes(val)) return false;
+        return true;
+      },
+    },
   ];
 
   return (
