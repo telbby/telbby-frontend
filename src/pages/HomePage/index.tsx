@@ -1,12 +1,15 @@
 import React, { FC } from 'react';
 
 import Layout from '@/components/common/Layout';
-import Title from '@/components/common/Title';
+import Jumbotron from '@/components/common/Jumbotron';
 
 const HomePage: FC = () => {
   return (
     <Layout>
-      <Title text="Talk" />
+      <Jumbotron
+        title="Talk"
+        desc={['Thinking about project feedback?', 'Here telbby will listen.']}
+      />
     </Layout>
   );
 };

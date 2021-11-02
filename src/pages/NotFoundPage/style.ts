@@ -5,7 +5,7 @@ export const notFoundPageStyle = (theme: Theme): SerializedStyles => css`
   flex-direction: column;
   jusity-content: center;
   align-items: center;
-  margin-top: 5%;
+  margin-top: 10%;
 
   img {
     width: 300px;
@@ -15,7 +15,6 @@ export const notFoundPageStyle = (theme: Theme): SerializedStyles => css`
     font-family: ${theme.fontCoding};
     font-size: 20px;
     color: ${theme.colorPrimary};
-    margin: 0;
     margin-top: 5px;
   }
 `;
