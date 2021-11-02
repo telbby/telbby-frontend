@@ -1,10 +1,6 @@
-import React, { ReactElement, useRef } from 'react';
+import React, { ReactElement, useEffect, useRef } from 'react';
 
-import {
-  SHELL_ERROR_ACCESS_DENIED,
-  SHELL_SUCCESS_MESSAGE,
-  SHELL_TITLE,
-} from '@/constants/shell';
+import { SHELL_ERROR_ACCESS_DENIED, SHELL_TITLE } from '@/constants/shell';
 import useShellInputFocus from '@/hooks/useShellInputFocus';
 import useShellLine from '@/hooks/useShellLine';
 
@@ -23,7 +19,7 @@ type ShellProps = {
  */
 const Shell = ({ formElement, subTitle }: ShellProps): ReactElement => {
   const fieldsetRef = useRef<HTMLFieldSetElement>();
-  const { shellLines, addFormElementLine, addErrorLine } =
+  const { shellLines, addFormElementLine, addErrorLine, isGeneratorDone } =
     useShellLine(formElement);
   const { setFocus } = useShellInputFocus(fieldsetRef, shellLines);
 
@@ -41,12 +37,19 @@ const Shell = ({ formElement, subTitle }: ShellProps): ReactElement => {
     }
   };
 
+  useEffect(() => {
+    // if (isGeneratorDone) addNormalLine(SHELL_SUCCESS_MESSAGE);
+    // if (isGeneratorDone) {
+    //   addErrorLine(SHELL_ERROR_ACCESS_DENIED);
+    // }
+  }, [isGeneratorDone]);
+
   return (
     <form
       aria-hidden
       onSubmit={(e) => e.preventDefault()}
-      css={S.formStyle}
       onClick={setFocus}
+      css={S.formStyle}
     >
       <h1>
         {SHELL_TITLE}
@@ -58,10 +61,9 @@ const Shell = ({ formElement, subTitle }: ShellProps): ReactElement => {
         ref={fieldsetRef}
         css={S.fieldsetStyle}
       >
-        <legend>Telbby Service Terminal: </legend>
+        <legend>Telbby Service Shell: </legend>
         {shellLines}
       </fieldset>
-      <p>{SHELL_SUCCESS_MESSAGE}</p>
     </form>
   );
 };

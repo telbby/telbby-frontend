@@ -31,6 +31,8 @@ const useShellLine = (
   shellLines: ReactElement[];
   addFormElementLine: () => void;
   addErrorLine: (message: string) => void;
+  addNormalLine: (message: string) => void;
+  isGeneratorDone: boolean;
 } => {
   const getFormElementShellLine = (props: ShellLineProps) => (
     <ShellLine
@@ -40,8 +42,13 @@ const useShellLine = (
       inputType={props.inputType}
     />
   );
+
   const getErrorShellLine = (message: string) => (
     <ShellLine key={Math.random()} lineType="ERROR" lineTitle={message} />
+  );
+
+  const getNormalShellLine = (message: string) => (
+    <ShellLine key={Math.random()} lineType="NORMAL" lineTitle={message} />
   );
 
   /**
@@ -59,15 +66,25 @@ const useShellLine = (
 
   const [shellLines, setShellLines] = useState<ReactElement[]>([]);
   const { generator, resetGenerator } = useGenerator(formElementGenerator());
+  const [isGeneratorDone, setIsGeneratorDone] = useState<boolean>(false);
 
   const addFormElementLine = useCallback(() => {
     const { value, done } = generator.next();
-    if (!done && value) setShellLines((prev) => [...prev, value.line]);
+    if (!done && value) {
+      setShellLines((prev) => [...prev, value.line]);
+    } else if (done) {
+      setIsGeneratorDone(true);
+    }
   }, [generator]);
 
   const addErrorLine = (message: string) => {
     setShellLines((prev) => [...prev, getErrorShellLine(message)]);
+    setIsGeneratorDone(false);
     resetGenerator();
+  };
+
+  const addNormalLine = (message: string) => {
+    setShellLines((prev) => [...prev, getNormalShellLine(message)]);
   };
 
   /**
@@ -76,7 +93,13 @@ const useShellLine = (
    */
   useEffect(() => addFormElementLine(), [generator]);
 
-  return { shellLines, addFormElementLine, addErrorLine };
+  return {
+    shellLines,
+    addFormElementLine,
+    addErrorLine,
+    addNormalLine,
+    isGeneratorDone,
+  };
 };
 
 export default useShellLine;
