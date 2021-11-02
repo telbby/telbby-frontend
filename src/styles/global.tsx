@@ -27,10 +27,12 @@ const style = css`
     width: 100%;
     height: 100vh;
     font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f4f7ff;
   }
 
   button[type='button'] {
     cursor: pointer;
+    box-sizing: border-box;
   }
 
   a {
