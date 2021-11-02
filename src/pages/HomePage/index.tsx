@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
 
 import Layout from '@/components/common/Layout';
-
-import { titleStyle } from './style';
+import Title from '@/components/common/Title';
 
 const HomePage: FC = () => {
   return (
     <Layout>
-      <h1 css={titleStyle}>Talk to telbby</h1>
+      <Title text="Talk" />
     </Layout>
   );
 };
