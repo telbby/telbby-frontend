@@ -14,5 +14,6 @@ export type UpdateInfoResponseBody = {
 };
 
 export type User = {
+  idx: number;
   id: string;
 };
