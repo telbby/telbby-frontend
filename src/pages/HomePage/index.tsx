@@ -8,7 +8,10 @@ const HomePage: FC = () => {
     <Layout>
       <Jumbotron
         title="Talk"
-        desc={['Thinking about project feedback?', 'Here telbby will listen.']}
+        descList={[
+          'Thinking about project feedback?',
+          'Here telbby will listen.',
+        ]}
       />
     </Layout>
   );

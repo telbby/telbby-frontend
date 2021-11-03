@@ -4,19 +4,19 @@ import { wrapperStyle, titleStyle, descStyle } from './style';
 
 type JumbotronProps = {
   title: string;
-  desc?: string[];
+  descList?: string[];
 };
 
-const Jumbotron: FC<JumbotronProps> = ({ title, desc }) => {
+const Jumbotron: FC<JumbotronProps> = ({ title, descList }) => {
   return (
     <div css={wrapperStyle}>
       <h1 css={titleStyle}>
         <span>{title}</span> to telbby
       </h1>
-      {desc &&
-        desc.map((des) => (
-          <p css={descStyle} key={des}>
-            {des}
+      {descList &&
+        descList.map((desc) => (
+          <p css={descStyle} key={desc}>
+            {desc}
           </p>
         ))}
     </div>
@@ -24,7 +24,7 @@ const Jumbotron: FC<JumbotronProps> = ({ title, desc }) => {
 };
 
 Jumbotron.defaultProps = {
-  desc: null,
+  descList: null,
 };
 
 export default Jumbotron;
