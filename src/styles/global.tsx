@@ -27,15 +27,27 @@ const style = css`
     width: 100%;
     height: 100vh;
     font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f4f7ff;
   }
 
   button[type='button'] {
     cursor: pointer;
+    box-sizing: border-box;
   }
 
   a {
     color: black;
     text-decoration: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0;
   }
 `;
 

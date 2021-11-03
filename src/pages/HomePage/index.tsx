@@ -1,15 +1,19 @@
 import React, { FC } from 'react';
 
-import Navigation from '@/components/Navigation';
-
-import { titleStyle } from './style';
+import Layout from '@/components/common/Layout';
+import Jumbotron from '@/components/common/Jumbotron';
 
 const HomePage: FC = () => {
   return (
-    <div>
-      <Navigation />
-      <h1 css={titleStyle}>Talk to telbby</h1>
-    </div>
+    <Layout>
+      <Jumbotron
+        title="Talk"
+        descList={[
+          'Thinking about project feedback?',
+          'Here telbby will listen.',
+        ]}
+      />
+    </Layout>
   );
 };
 
