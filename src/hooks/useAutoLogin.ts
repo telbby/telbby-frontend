@@ -11,13 +11,13 @@ const useAutoLogin = (): { loading: boolean; isLoggedIn: boolean } => {
 
   useEffect(() => {
     setLoading(true);
+
+    // @TODO refresh API 성공 시, 사용자 정보 가져오는 API를 호출하여 사용자 상태로 저장
     authApi
       .refresh()
-      .then(() => {
-        setIsLoggedIn(true);
-        setLoading(false);
-      })
-      .catch(() => setIsLoggedIn(false));
+      .then(() => setIsLoggedIn(true))
+      .catch(() => setIsLoggedIn(false))
+      .then(() => setLoading(false));
   }, [userState]);
 
   return { loading, isLoggedIn };
