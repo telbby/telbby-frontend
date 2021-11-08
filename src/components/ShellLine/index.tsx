@@ -48,6 +48,7 @@ const ShellLine = ({
             maxLength={MAX_SHELL_INPUT_LENGTH}
             disabled={disabled}
             data-testid="shell-line-input"
+            autoComplete="off"
           />
         </>
       )}

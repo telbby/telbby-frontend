@@ -9,6 +9,7 @@ import React, {
 import {
   FormElementType,
   SHELL_FORM_ELEMENT,
+  SHELL_LOADING,
   SHELL_SUCCESS_MESSAGE,
 } from '@/constants/shell';
 import useGenerator from '@/hooks/useGenerator';
@@ -48,7 +49,7 @@ const Shell = ({ type }: ShellProps): ReactElement => {
     const { done, value } = questionList.next();
     if (done) {
       setIsQuestionDone(true);
-      return { type: 'default', content: SHELL_SUCCESS_MESSAGE };
+      return { type: 'default', content: SHELL_LOADING };
     }
 
     return value;
@@ -95,6 +96,9 @@ const Shell = ({ type }: ShellProps): ReactElement => {
     if (isQuestionDone) {
       // eslint-disable-next-line no-console
       console.log(formValue);
+      setTimeout(() => {
+        addShellLine({ type: 'default', content: SHELL_SUCCESS_MESSAGE });
+      }, 1000);
     }
   }, [isQuestionDone]);
 
