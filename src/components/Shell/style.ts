@@ -13,6 +13,7 @@ export const formStyle = (theme: Theme): SerializedStyles => css`
 
   font-family: ${theme.fontCoding};
   color: ${theme.colorGray2};
+  background-color: #fff;
   font-size: 30px;
   line-height: 38px;
 
