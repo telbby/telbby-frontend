@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { authApi } from '@/apis';
 import { LoginRequestBody } from '@/apis/dto';
-import { useUserState } from '@/atoms/userState';
+import { useSetUserState } from '@/atoms/userState';
 import { NETWORK_ERROR, loginError } from '@/constants/error';
 import Uri from '@/constants/uri';
 
@@ -13,7 +13,7 @@ const useAuth = (): {
   isLoading: boolean;
   error: string;
 } => {
-  const [, setUserState] = useUserState();
+  const setUserState = useSetUserState();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const history = useHistory();

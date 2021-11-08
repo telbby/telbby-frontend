@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
 import { authApi } from '@/apis';
-import { useUserState } from '@/atoms/userState';
+import { useUserStateValue } from '@/atoms/userState';
 
 const useAutoLogin = (): { isLoading: boolean; isLoggedIn: boolean } => {
-  const [userState] = useUserState();
+  const userState = useUserStateValue();
 
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
