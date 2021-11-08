@@ -1,62 +1,76 @@
-// import React from 'react';
+import React from 'react';
 
-// import {
-//   SHELL_ERROR_USER_ACCESS_DENIED,
-//   SHELL_SUCCESS_MESSAGE,
-// } from '@/constants/shell';
-// import { render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import {
+  SHELL_ERROR_USER_ACCESS_DENIED,
+  SHELL_SUCCESS_MESSAGE,
+} from '@/constants/shell';
 
-// import ShellLine from './index';
+import ShellLine, { ShellLineProps } from './index';
 
-// describe('ShellLine Component', () => {
-//   it(`FormElement ShellLine은
-//     props로 전달받은 lineType, lineTitle 을 text content로,
-//     inputType을 input type 속성으로 갖게 됩니다.
-//   `, () => {
-//     const props = {
-//       type: 'question',
-//       content: 'password',
-//     };
+describe('ShellLine Component', () => {
+  it(`question, config 타입의 ShellLine은 content를 렌더링합니다. input='text'도 함께 출력합니다.`, () => {
+    const props: ShellLineProps = {
+      type: 'config',
+      content: 'username',
+    };
 
-//     const { container } = render(
-//       <ShellLine type={props.type} content={props.content} />,
-//     );
+    const { container } = render(
+      <ShellLine type={props.type} content={props.content} />,
+    );
 
-//     expect(container).toHaveTextContent('question password:');
-//     expect(screen.getByTestId('shell-line-input')).toHaveAttribute(
-//       'type',
-//       'password',
-//     );
-//   });
-//   it(`Error ShellLine 은 ERROR 와 함께 error message를 출력합니다.`, () => {
-//     const props = {
-//       lineType: 'ERROR',
-//       lineTitle: SHELL_ERROR_USER_ACCESS_DENIED,
-//     };
+    expect(container).toHaveTextContent('config username:');
 
-//     const { container } = render(
-//       <ShellLine lineType={props.lineType} lineTitle={props.lineTitle} />,
-//     );
+    expect(screen.getByTestId('shell-line-input')).toHaveAttribute(
+      'type',
+      'text',
+    );
+  });
+  it(`content가 password일 경우, <input type='password'를 렌더링합니다.`, () => {
+    const props: ShellLineProps = {
+      type: 'question',
+      content: 'password',
+    };
 
-//     expect(container).toHaveTextContent(
-//       `ERROR: ${SHELL_ERROR_USER_ACCESS_DENIED}`,
-//     );
-//   });
-//   it(`NORMAL ShellLin message와 maxLength가 0인 input을 렌더링합니다.`, () => {
-//     const props = {
-//       lineType: 'NORMAL',
-//       lineTitle: SHELL_SUCCESS_MESSAGE,
-//     };
+    const { container } = render(
+      <ShellLine type={props.type} content={props.content} />,
+    );
 
-//     const { container } = render(
-//       <ShellLine lineType={props.lineType} lineTitle={props.lineTitle} />,
-//     );
+    expect(container).toHaveTextContent('question password:');
+    expect(screen.getByTestId('shell-line-input')).toHaveAttribute(
+      'type',
+      'password',
+    );
+  });
+  it(`error type의 ShellLine은 error message를 출력합니다. input은 갖지 않습니다.`, () => {
+    const props: ShellLineProps = {
+      type: 'error',
+      content: SHELL_ERROR_USER_ACCESS_DENIED,
+    };
 
-//     expect(container).toHaveTextContent(`${SHELL_SUCCESS_MESSAGE}`);
-//     expect(container).not.toContain(screen.getByTestId('shell-line-input'));
-//     expect(screen.getByTestId('shell-line-input')).toHaveAttribute(
-//       'maxLength',
-//       '0',
-//     );
-//   });
-// });
+    const { container } = render(
+      <ShellLine type={props.type} content={props.content} />,
+    );
+
+    expect(container).toHaveTextContent(
+      `ERROR: ${SHELL_ERROR_USER_ACCESS_DENIED}`,
+    );
+    expect(screen.queryByTestId('shell-line-input')).not.toBeInTheDocument();
+  });
+  it(`default type의 ShellLine은 maxLength가 0인 input을 렌더링합니다.`, () => {
+    const props: ShellLineProps = {
+      type: 'default',
+      content: SHELL_SUCCESS_MESSAGE,
+    };
+
+    const { container } = render(
+      <ShellLine type={props.type} content={props.content} />,
+    );
+
+    expect(container).toHaveTextContent(`${SHELL_SUCCESS_MESSAGE}`);
+    expect(screen.getByTestId('shell-line-input')).toHaveAttribute(
+      'maxLength',
+      '0',
+    );
+  });
+});

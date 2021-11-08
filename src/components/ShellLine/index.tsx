@@ -33,6 +33,7 @@ const ShellLine = ({
               css={S.Input}
               maxLength={0}
               disabled={disabled}
+              data-testid="shell-line-input"
             />
           )}
         </>
@@ -46,6 +47,7 @@ const ShellLine = ({
             css={S.Input}
             maxLength={MAX_SHELL_INPUT_LENGTH}
             disabled={disabled}
+            data-testid="shell-line-input"
           />
         </>
       )}
