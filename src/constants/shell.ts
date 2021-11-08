@@ -1,40 +1,40 @@
-export const SHELL_TITLE = 'telbby init v0.1.0';
+import { ShellLineProps } from '@/components/ShellLine';
+
 export const SHELL_SUCCESS_MESSAGE =
   'Congrats! service has been added to telbby.';
 
 export const SHELL_ERROR_USER_ACCESS_DENIED = 'Access denied';
 export const MAX_SHELL_INPUT_LENGTH = 15;
 
-export const SHELL_LOGIN_FORM_ELEMENT = [
-  { lineType: 'question', lineTitle: 'username', bodyKey: 'username' },
-  {
-    lineType: 'question',
-    lineTitle: 'password',
-    inputType: 'password',
-    bodyKey: 'password',
-  },
-  {
-    lineType: 'question',
-    lineTitle: 'Sign in? [y/n]',
-    checkValidation: (val: string): boolean => {
-      if (!['y', 'n'].includes(val)) return false;
-      return true;
-    },
-  },
-];
+export type FormElementType = ShellLineProps & {
+  formKey?: string;
+  validation?: (param?: unknown) => { isValid: boolean; message?: string };
+};
 
-export const SHELL_FEEDBACK_FORM_ELEMENT = [
-  { lineType: 'config', lineTitle: 'service name', bodyKey: 'name' },
-  {
-    lineType: 'config',
-    lineTitle: 'service description',
-    bodyKey: 'description',
-  },
-  { lineType: 'config', lineTitle: 'service domain', bodyKey: 'domain' },
-  { lineType: 'config', lineTitle: 'color theme', bodyKey: 'color-theme' },
-  {
-    lineType: 'config',
-    lineTitle: 'first question',
-    bodyKey: 'first-question',
-  },
-];
+export const SHELL_FORM_ELEMENT: Record<
+  'login' | 'feedback',
+  FormElementType[]
+> = {
+  login: [
+    { type: 'question', content: 'username', formKey: 'username' },
+    { type: 'question', content: 'password', formKey: 'password' },
+    {
+      type: 'question',
+      content: 'Sign in? [y/n]',
+      validation: (val: string): ReturnType<FormElementType['validation']> => {
+        if (!['y', 'n'].includes(val)) {
+          return { isValid: false, message: SHELL_ERROR_USER_ACCESS_DENIED };
+        }
+
+        return { isValid: true };
+      },
+    },
+  ],
+  feedback: [
+    { type: 'config', content: 'service name', formKey: 'name' },
+    { type: 'config', content: 'service description', formKey: 'descriptions' },
+    { type: 'config', content: 'service domain', formKey: 'domain' },
+    { type: 'config', content: 'color theme', formKey: 'theme' },
+    { type: 'config', content: 'first question', formKey: 'first-question' },
+  ],
+};
