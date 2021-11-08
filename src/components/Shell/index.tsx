@@ -1,96 +1,119 @@
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import React, {
+  ReactElement,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import {
-  SHELL_ERROR_USER_ACCESS_DENIED,
+  FormElementType,
+  SHELL_FORM_ELEMENT,
   SHELL_SUCCESS_MESSAGE,
-  SHELL_TITLE,
 } from '@/constants/shell';
-import useShellInputFocus from '@/hooks/useShellInputFocus';
-import useShellLine from '@/hooks/useShellLine';
+import useGenerator from '@/hooks/useGenerator';
 
-import { ShellLineProps } from '../ShellLine';
+import ShellLine, { ShellLineProps } from '../ShellLine';
 import * as S from './style';
 
-export type FormElementType = ShellLineProps & {
-  bodyKey?: string;
-  checkValidation?: (value: string) => boolean;
-};
-
-type ShellComponentProps = {
-  formElement: FormElementType[];
+type ShellProps = {
+  type: keyof typeof SHELL_FORM_ELEMENT;
   subTitle?: string;
 };
 
-/**
- * Shell 형태의 Chat UI 컴포넌트 입니다.
- * Enter를 입력할 때마다 유효성을 검증하고, 다음 ShellLine을 가져옵니다.
- * form 에 클릭을 하면, 자동으로 마지막 Input에 포커스가 갑니다.
- */
-const Shell = ({
-  formElement,
-  subTitle,
-}: ShellComponentProps): ReactElement => {
-  const [formValue, setFormValue] = useState({});
+const Shell = ({ type, subTitle }: ShellProps): ReactElement => {
   const fieldsetRef = useRef<HTMLFieldSetElement>();
-  const {
-    shellLines,
-    addFormElementLine,
-    addErrorLine,
-    addNormalLine,
-    isGeneratorDone,
-  } = useShellLine(formElement);
-  const { setFocus } = useShellInputFocus(fieldsetRef, shellLines);
+  const FIRST_LINE: FormElementType = {
+    type: 'default',
+    content: `telbby init v0.1.0 ${subTitle && `- ${subTitle}`}`,
+  };
+  const [lines, setLines] = useState<FormElementType[]>([FIRST_LINE]);
+  const [formValue, setFormValue] = useState({});
 
-  const setNextLine = (e: React.KeyboardEvent<HTMLFieldSetElement>): void => {
-    const target = e.target as HTMLInputElement;
+  const [questionList, reset] = useGenerator(SHELL_FORM_ELEMENT[type]);
+  const [isQuestionDone, setIsQuestionDone] = useState<boolean>(false);
 
-    if (!isGeneratorDone && e.key === 'Enter') {
-      const { id, value } = target;
-      const elem = formElement.find(({ lineTitle }) => lineTitle === id);
+  const checkValidation = (question: FormElementType, value: string) => {
+    if (!question.validation) return { isValid: true };
 
-      if (elem.checkValidation && !elem.checkValidation(value)) {
-        addErrorLine(SHELL_ERROR_USER_ACCESS_DENIED);
-        return;
+    return { ...question.validation(value) };
+  };
+
+  const addFormValue = (question: FormElementType, value: string) => {
+    if (!question.formKey) return;
+
+    setFormValue((prev) => ({ ...prev, [question.formKey]: value }));
+  };
+
+  const getNextLineProps = () => {
+    const { done, value } = questionList.next();
+    if (done) {
+      setIsQuestionDone(true);
+      return { type: 'default', content: SHELL_SUCCESS_MESSAGE };
+    }
+
+    return value;
+  };
+
+  const addShellLine = (props: ShellLineProps) => {
+    setLines((prev) => [...prev, props]);
+  };
+
+  const handleEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      const currentQuestion = lines[lines.length - 1];
+      const target = e.target as HTMLInputElement;
+      const inputValue = target.value;
+      let nextProps: FormElementType;
+
+      const { isValid, message } = checkValidation(currentQuestion, inputValue);
+
+      if (isValid) {
+        nextProps = getNextLineProps();
+        addFormValue(currentQuestion, inputValue);
+      } else {
+        nextProps = { type: 'error', content: message };
+        reset();
       }
-      addFormElementLine();
 
-      if (elem.bodyKey) {
-        setFormValue((prev) => ({ ...prev, [elem.bodyKey]: value }));
-      }
+      addShellLine(nextProps);
     }
   };
 
+  const setFocus = useCallback(() => {
+    const inputs = fieldsetRef.current.querySelectorAll('input');
+    if (inputs.length === 0) return;
+    inputs[inputs.length - 1].focus();
+  }, []);
+
+  useEffect(() => addShellLine(questionList.next().value), [questionList]);
+  useEffect(() => setFocus, [lines]);
+
+  // TODO: 해당 부분에서 formValue와 함께 API 요청을 합니다.
   useEffect(() => {
-    if (isGeneratorDone) {
-      // TODO:
-      // - 해당 부분에서 formValue와 함께 API 요청을 합니다.
-      // 성공을 하면 addNormalLine, 실패시 addErrorLine을 호출하면 됩니다.
+    if (isQuestionDone) {
+      // eslint-disable-next-line no-console
       console.log(formValue);
-      addNormalLine(SHELL_SUCCESS_MESSAGE);
     }
-  }, [isGeneratorDone]);
+  }, [isQuestionDone]);
 
   return (
-    <form
-      aria-hidden
-      onSubmit={(e) => e.preventDefault()}
-      onClick={setFocus}
-      css={S.formStyle}
-    >
-      <h1>
-        {SHELL_TITLE}
-        {subTitle && ` - ${subTitle}`}
-      </h1>
-      <fieldset
-        aria-hidden
-        onKeyDown={setNextLine}
-        ref={fieldsetRef}
-        css={S.fieldsetStyle}
-      >
-        <legend>Telbby Service Shell: </legend>
-        {shellLines}
-      </fieldset>
-    </form>
+    <div role="button" tabIndex={0} onKeyPress={handleEnter} onClick={setFocus}>
+      <form css={S.formStyle} onSubmit={(e) => e.preventDefault()}>
+        <fieldset ref={fieldsetRef} css={S.fieldsetStyle}>
+          <legend>Telbby Service Shell: </legend>
+          {lines.map(({ type: lineType, content, disabled }, index) => (
+            <ShellLine
+              // eslint-disable-next-line react/no-array-index-key
+              key={`${index}lineType`}
+              type={lineType}
+              content={content}
+              disabled={disabled}
+            />
+          ))}
+        </fieldset>
+      </form>
+    </div>
   );
 };
 
