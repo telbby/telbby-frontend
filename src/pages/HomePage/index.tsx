@@ -1,16 +1,20 @@
 import React, { FC } from 'react';
 
-import Navigation from '@/components/Navigation';
-import Shell from '@/components/Shell';
+import Jumbotron from '@/components/common/Jumbotron';
+import Layout from '@/components/common/Layout';
 
-import { titleStyle } from './style';
-
-const HomePage: FC = () => (
-  <div>
-    <Navigation />
-    <h1 css={titleStyle}>Talk to telbby</h1>
-    <Shell type="login" />
-  </div>
-);
+const HomePage: FC = () => {
+  return (
+    <Layout>
+      <Jumbotron
+        title="Talk"
+        descList={[
+          'Thinking about project feedback?',
+          'Here telbby will listen.',
+        ]}
+      />
+    </Layout>
+  );
+};
 
 export default HomePage;

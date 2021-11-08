@@ -1,15 +1,19 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import { render, screen } from '@testing-library/react';
 
 import HomePage from '.';
 
-it('should render "Home"', () => {
+it('should render proper Jumbotron', () => {
   render(
-    <BrowserRouter>
+    <MemoryRouter>
       <HomePage />
-    </BrowserRouter>,
+    </MemoryRouter>,
   );
-  screen.getByText('Talk to telbby');
+  expect(screen.getByRole('heading')).toHaveTextContent('Talk to telbby');
+  expect(
+    screen.queryByText('Thinking about project feedback?'),
+  ).toBeInTheDocument();
+  expect(screen.queryByText('Here telbby will listen.')).toBeInTheDocument();
 });

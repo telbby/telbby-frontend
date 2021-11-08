@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 
 import { useCountValue, useSetCount } from '@/atoms/countState';
-import Navigation from '@/components/Navigation';
 
 import { countValueStyle } from './style';
 
@@ -14,7 +13,6 @@ const CountPage: FC = () => {
 
   return (
     <>
-      <Navigation />
       <h1>Count</h1>
       <h2 css={countValueStyle}>{count}</h2>
 
