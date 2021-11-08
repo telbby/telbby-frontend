@@ -4,6 +4,7 @@ export const SHELL_SUCCESS_MESSAGE =
   'Congrats! service has been added to telbby.';
 
 export const SHELL_ERROR_USER_ACCESS_DENIED = 'Access denied';
+export const SHELL_ERROR_USER_SIGNUP_DENIED = 'Signup denied';
 export const MAX_SHELL_INPUT_LENGTH = 15;
 
 export type FormElementType = ShellLineProps & {
@@ -12,7 +13,7 @@ export type FormElementType = ShellLineProps & {
 };
 
 export const SHELL_FORM_ELEMENT: Record<
-  'login' | 'feedback',
+  'login' | 'signup' | 'services' | 'feedback',
   FormElementType[]
 > = {
   login: [
@@ -29,6 +30,25 @@ export const SHELL_FORM_ELEMENT: Record<
         return { isValid: true };
       },
     },
+  ],
+  signup: [
+    { type: 'question', content: 'username', formKey: 'username' },
+    { type: 'question', content: 'password', formKey: 'password' },
+    {
+      type: 'question',
+      content: 'Would you like to join? [y/n]',
+      validation: (val: string): ReturnType<FormElementType['validation']> => {
+        if (!['y', 'n'].includes(val)) {
+          return { isValid: false, message: SHELL_ERROR_USER_SIGNUP_DENIED };
+        }
+
+        return { isValid: true };
+      },
+    },
+  ],
+  services: [
+    { type: 'question', content: 'service name', formKey: 'name' },
+    { type: 'question', content: 'service domain', formKey: 'domain' },
   ],
   feedback: [
     { type: 'config', content: 'service name', formKey: 'name' },
