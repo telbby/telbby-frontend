@@ -1,22 +1,22 @@
 import { SerializedStyles, Theme, css } from '@emotion/react';
 
-export const LineType = (theme: Theme): SerializedStyles => css`
+export const Type = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorGray3};
 `;
 
-export const LineErrorType = (theme: Theme): SerializedStyles => css`
+export const ErrorType = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorError};
 `;
 
-export const LineLabel = (theme: Theme): SerializedStyles => css`
+export const DefaultContent = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorGray1};
 `;
 
-export const LineErrorLabel = (theme: Theme): SerializedStyles => css`
+export const ErrorContent = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorGray3};
 `;
 
-export const LineInput = (theme: Theme): SerializedStyles => css`
+export const Input = (theme: Theme): SerializedStyles => css`
   all: unset;
   caret-color: ${theme.colorPrimary};
 `;
