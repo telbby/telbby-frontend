@@ -104,7 +104,7 @@ const Shell = ({ type }: ShellProps): ReactElement => {
 
   return (
     <div role="button" tabIndex={0} onKeyPress={handleEnter} onClick={setFocus}>
-      <form css={S.formStyle} onSubmit={(e) => e.preventDefault()}>
+      <form css={S.formStyle}>
         <fieldset ref={fieldsetRef} css={S.fieldsetStyle}>
           <legend>Telbby Service Shell: </legend>
           {lines.map(({ type: lineType, content, disabled }, index) => (
