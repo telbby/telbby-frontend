@@ -81,6 +81,8 @@ const Shell = ({ type, subTitle }: ShellProps): ReactElement => {
   };
 
   const setFocus = useCallback(() => {
+    if (!fieldsetRef.current) return;
+
     const inputs = fieldsetRef.current.querySelectorAll('input');
     if (inputs.length === 0) return;
     inputs[inputs.length - 1].focus();
