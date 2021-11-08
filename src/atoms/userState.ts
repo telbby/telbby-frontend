@@ -1,6 +1,6 @@
 import { SetterOrUpdater, atom, useRecoilState } from 'recoil';
 
-import { User } from '@/apis/types';
+import { User } from '@/apis/dto';
 
 const userState = atom<User | null>({
   key: 'userState',

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { LoginRequestBody } from '@/apis/types';
-import * as usersApi from '@/apis/users';
-import { signupError } from '@/constants/error';
+import { usersApi } from '@/apis';
+import { LoginRequestBody } from '@/apis/dto';
+import { NETWORK_ERROR, signupError } from '@/constants/error';
 import Uri from '@/constants/uri';
 
 const useSignup = (): {
-  signup: ({ id, password }: LoginRequestBody) => Promise<void>;
+  signup: ({ userId, password }: LoginRequestBody) => Promise<void>;
   isLoading: boolean;
   error: string;
 } => {
@@ -15,19 +15,23 @@ const useSignup = (): {
   const [error, setError] = useState<string | null>(null);
   const history = useHistory();
 
-  const signup = async ({ id, password }: LoginRequestBody) => {
+  const signup = async ({ userId, password }: LoginRequestBody) => {
     try {
       setIsLoading(true);
 
-      await usersApi.signup({ id, password });
+      await usersApi.signup({ userId, password });
 
       // @TODO 회원가입 성공 시 로그인 페이지로 이동
       history.replace(Uri.home);
     } catch (e) {
-      if (signupError[e.response.status]) {
-        setError(signupError[e.response.status]);
-        throw e;
+      if (e.response) {
+        if (signupError[e.response.status]) {
+          setError(signupError[e.response.status]);
+        }
+      } else {
+        setError(NETWORK_ERROR);
       }
+      throw e;
     } finally {
       setIsLoading(false);
     }

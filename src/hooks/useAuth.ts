@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import * as authApi from '@/apis/auth';
-import { LoginRequestBody } from '@/apis/types';
+import { authApi } from '@/apis';
+import { LoginRequestBody } from '@/apis/dto';
 import { useUserState } from '@/atoms/userState';
-import { loginError } from '@/constants/error';
+import { NETWORK_ERROR, loginError } from '@/constants/error';
 import Uri from '@/constants/uri';
 
 const useAuth = (): {
-  login: ({ id, password }: LoginRequestBody) => Promise<void>;
+  login: ({ userId, password }: LoginRequestBody) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
   error: string;
@@ -18,20 +18,24 @@ const useAuth = (): {
   const [error, setError] = useState<string | null>(null);
   const history = useHistory();
 
-  const login = async ({ id, password }: LoginRequestBody) => {
+  const login = async ({ userId, password }: LoginRequestBody) => {
     try {
       setIsLoading(true);
 
-      await authApi.login({ id, password });
+      await authApi.login({ userId, password });
 
       // @TODO 로그인 성공 시 사용자 정보 가져오는 API 호출 후 상태로 저장
 
       history.replace(Uri.home);
     } catch (e) {
-      if (loginError[e.response.status]) {
-        setError(loginError[e.response.status]);
-        throw e;
+      if (e.response) {
+        if (loginError[e.response.status]) {
+          setError(loginError[e.response.status]);
+        }
+      } else {
+        setError(NETWORK_ERROR);
       }
+      throw e;
     } finally {
       setIsLoading(false);
     }
