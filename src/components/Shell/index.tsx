@@ -60,7 +60,7 @@ const Shell = ({ type, subTitle }: ShellProps): ReactElement => {
   };
 
   const handleEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter') {
+    if (!isQuestionDone && e.key === 'Enter') {
       const currentQuestion = lines[lines.length - 1];
       const target = e.target as HTMLInputElement;
       const inputValue = target.value;
