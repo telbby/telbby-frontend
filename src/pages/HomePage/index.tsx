@@ -9,7 +9,7 @@ const HomePage: FC = () => (
   <div>
     <Navigation />
     <h1 css={titleStyle}>Talk to telbby</h1>
-    <Shell type="login" subTitle="service settings" />
+    <Shell type="login" />
   </div>
 );
 

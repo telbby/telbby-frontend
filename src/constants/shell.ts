@@ -13,7 +13,7 @@ export type FormElementType = ShellLineProps & {
 };
 
 export const SHELL_FORM_ELEMENT: Record<
-  'login' | 'signup' | 'services' | 'feedback',
+  'login' | 'signup' | 'services' | 'service-settings',
   FormElementType[]
 > = {
   login: [
@@ -50,7 +50,7 @@ export const SHELL_FORM_ELEMENT: Record<
     { type: 'question', content: 'service name', formKey: 'name' },
     { type: 'question', content: 'service domain', formKey: 'domain' },
   ],
-  feedback: [
+  'service-settings': [
     { type: 'config', content: 'service name', formKey: 'name' },
     { type: 'config', content: 'service description', formKey: 'descriptions' },
     { type: 'config', content: 'service domain', formKey: 'domain' },

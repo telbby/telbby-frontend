@@ -18,14 +18,13 @@ import * as S from './style';
 
 type ShellProps = {
   type: keyof typeof SHELL_FORM_ELEMENT;
-  subTitle?: string;
 };
 
-const Shell = ({ type, subTitle }: ShellProps): ReactElement => {
+const Shell = ({ type }: ShellProps): ReactElement => {
   const fieldsetRef = useRef<HTMLFieldSetElement>();
   const FIRST_LINE: FormElementType = {
     type: 'default',
-    content: `telbby init v0.1.0 ${subTitle && `- ${subTitle}`}`,
+    content: `telbby init v0.1.0 - ${type.replace('-', ' ')}`,
   };
   const [lines, setLines] = useState<FormElementType[]>([FIRST_LINE]);
   const [formValue, setFormValue] = useState({});
@@ -117,10 +116,6 @@ const Shell = ({ type, subTitle }: ShellProps): ReactElement => {
       </form>
     </div>
   );
-};
-
-Shell.defaultProps = {
-  subTitle: '',
 };
 
 export default Shell;
