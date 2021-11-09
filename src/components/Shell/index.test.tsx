@@ -11,9 +11,18 @@ describe('Shell Component', () => {
     그러나, 두번째 요소는 렌더링하지 않습니다.
   `, () => {
     const shellType = 'login';
-    const { container } = render(<Shell type={shellType} />);
-    const formElement = SHELL_FORM_ELEMENT[shellType];
+    const requestWhenQuestionDone = async () =>
+      new Promise((resolve) => {
+        setTimeout(() => resolve('Success'), 1000);
+      });
+    const { container } = render(
+      <Shell
+        type={shellType}
+        requestWhenQuestionDone={requestWhenQuestionDone}
+      />,
+    );
 
+    const formElement = SHELL_FORM_ELEMENT[shellType];
     const { type: firstLineType, content: firstLineContent } = formElement[0];
     const { type: secondLineType, content: secondLineContent } = formElement[1];
 
@@ -26,7 +35,17 @@ describe('Shell Component', () => {
   });
   it(`Shell Component에 Enter를 입력하면, 다음 요소를 렌더링합니다.`, () => {
     const shellType = 'login';
-    const { container } = render(<Shell type={shellType} />);
+    const requestWhenQuestionDone = async () =>
+      new Promise((resolve) => {
+        setTimeout(() => resolve('Success'), 1000);
+      });
+    const { container } = render(
+      <Shell
+        type={shellType}
+        requestWhenQuestionDone={requestWhenQuestionDone}
+      />,
+    );
+
     const formElement = SHELL_FORM_ELEMENT[shellType];
     const { type: secondLineType, content: secondLineContent } = formElement[1];
 

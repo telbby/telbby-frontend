@@ -19,10 +19,12 @@ import * as S from './style';
 
 type ShellProps = {
   type: keyof typeof SHELL_FORM_ELEMENT;
+  requestWhenQuestionDone: (param: {
+    [key: string]: string | number;
+  }) => Promise<unknown>;
 };
 
-const Shell = ({ type }: ShellProps): ReactElement => {
-  const fieldsetRef = useRef<HTMLFieldSetElement>();
+const Shell = ({ type, requestWhenQuestionDone }: ShellProps): ReactElement => {
   const FIRST_LINE: FormElementType = {
     type: 'default',
     content: `telbby init v0.1.0 - ${type.replace('-', ' ')}`,
@@ -32,6 +34,15 @@ const Shell = ({ type }: ShellProps): ReactElement => {
 
   const [questionList, reset] = useGenerator(SHELL_FORM_ELEMENT[type]);
   const [isQuestionDone, setIsQuestionDone] = useState<boolean>(false);
+
+  const fieldsetRef = useRef<HTMLFieldSetElement>();
+  const setFocus = useCallback(() => {
+    if (!fieldsetRef.current) return;
+
+    const inputs = fieldsetRef.current.querySelectorAll('input');
+    if (inputs.length === 0) return;
+    inputs[inputs.length - 1].focus();
+  }, []);
 
   const checkValidation = (question: FormElementType, value: string) => {
     if (!question.validation) return { isValid: true };
@@ -80,26 +91,21 @@ const Shell = ({ type }: ShellProps): ReactElement => {
     }
   };
 
-  const setFocus = useCallback(() => {
-    if (!fieldsetRef.current) return;
-
-    const inputs = fieldsetRef.current.querySelectorAll('input');
-    if (inputs.length === 0) return;
-    inputs[inputs.length - 1].focus();
-  }, []);
-
-  useEffect(() => addShellLine(questionList.next().value), [questionList]);
-  useEffect(() => setFocus, [lines]);
-
-  // TODO: 해당 부분에서 formValue와 함께 API 요청을 합니다.
-  useEffect(() => {
-    if (isQuestionDone) {
-      // eslint-disable-next-line no-console
-      console.log(formValue);
-      setTimeout(() => {
-        addShellLine({ type: 'default', content: SHELL_SUCCESS_MESSAGE });
-      }, 1000);
+  const request = async (data: { [key: string]: string | number }) => {
+    try {
+      await requestWhenQuestionDone(data);
+      addShellLine({ type: 'default', content: SHELL_SUCCESS_MESSAGE });
+    } catch (error) {
+      addShellLine({ type: 'error', content: error.message });
+      setIsQuestionDone(false);
+      reset();
     }
+  };
+
+  useEffect(() => setFocus, [lines]);
+  useEffect(() => addShellLine(questionList.next().value), [questionList]);
+  useEffect(() => {
+    if (isQuestionDone) request(formValue);
   }, [isQuestionDone]);
 
   return (
