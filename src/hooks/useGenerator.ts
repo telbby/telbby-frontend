@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 import { useState } from 'react';
 
 /**
@@ -9,11 +8,9 @@ const useGenerator = (
   param: unknown[],
 ): [generator: Generator, reset: () => void] => {
   function* gen() {
-    for (const val of param) {
-      yield val;
+    for (let i = 0; i < param.length; i += 1) {
+      yield param[i];
     }
-    // const yieldValue = (val: unknown) => yield val;
-    // param.forEach((p) => yieldValue(p));
   }
 
   const [generator, setGenerator] = useState<Generator>(gen);
