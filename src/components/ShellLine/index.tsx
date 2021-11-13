@@ -16,12 +16,12 @@ const ShellLine = ({
   disabled,
 }: ShellLineProps): ReactElement => {
   const isPassword = content === 'password';
-  const isQuestion = ['question', 'config'].includes(type);
+  const isReadLine = ['question', 'config'].includes(type);
   const isError = type === 'error';
 
   return (
     <label htmlFor={content}>
-      {!isQuestion && (
+      {!isReadLine && (
         <>
           {isError && <span css={S.ErrorType}>ERROR: </span>}
           <span css={isError ? S.ErrorContent : S.DefaultContent}>
@@ -38,7 +38,7 @@ const ShellLine = ({
           )}
         </>
       )}
-      {isQuestion && (
+      {isReadLine && (
         <>
           <span css={S.Type}>{type} </span>
           <span css={S.DefaultContent}>{content}: </span>
