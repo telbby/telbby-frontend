@@ -36,7 +36,7 @@ const Shell = ({ type, requestWhenQuestionDone }: ShellProps): ReactElement => {
   const [isQuestionDone, setIsQuestionDone] = useState<boolean>(false);
 
   const fieldsetRef = useRef<HTMLFieldSetElement>();
-  const setFocus = useCallback(() => {
+  const setFocusOnLastLine = useCallback(() => {
     if (!fieldsetRef.current) return;
 
     const inputs = fieldsetRef.current.querySelectorAll('input');
@@ -102,14 +102,19 @@ const Shell = ({ type, requestWhenQuestionDone }: ShellProps): ReactElement => {
     }
   };
 
-  useEffect(() => setFocus, [lines]);
+  useEffect(() => setFocusOnLastLine, [lines]);
   useEffect(() => addShellLine(questionList.next().value), [questionList]);
   useEffect(() => {
     if (isQuestionDone) request(formValue);
   }, [isQuestionDone]);
 
   return (
-    <div role="button" tabIndex={0} onKeyPress={handleEnter} onClick={setFocus}>
+    <div
+      role="button"
+      tabIndex={0}
+      onKeyPress={handleEnter}
+      onClick={setFocusOnLastLine}
+    >
       <form css={S.formStyle}>
         <fieldset ref={fieldsetRef} css={S.fieldsetStyle}>
           <legend>Telbby Service Shell: </legend>
