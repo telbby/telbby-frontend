@@ -7,7 +7,7 @@ import Shell from '.';
 
 describe('Shell Component', () => {
   it(`Shell Component는 처음 렌더링 시
-    props에 전달되는 type에 해당하는 form element중 첫번재 요소를 렌더링합니다.
+    props에 전달되는 type에 해당하는 form element중 첫번째 요소를 렌더링합니다.
     그러나, 두번째 요소는 렌더링하지 않습니다.
   `, () => {
     const shellType = 'login';
