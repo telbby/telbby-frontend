@@ -9,7 +9,6 @@ import React, {
 import {
   FormElementType,
   SHELL_FORM_ELEMENT,
-  SHELL_LOADING,
   SHELL_SUCCESS_MESSAGE,
 } from '@/constants/shell';
 import useGenerator from '@/hooks/useGenerator';
@@ -29,7 +28,7 @@ const Shell = ({ type, requestWhenQuestionDone }: ShellProps): ReactElement => {
     type: 'default',
     content: `telbby init v0.1.0 - ${type.replace('-', ' ')}`,
   };
-  const [lines, setLines] = useState<FormElementType[]>([FIRST_LINE]);
+  const [lines, setLines] = useState<readonly FormElementType[]>([FIRST_LINE]);
   const [formValue, setFormValue] = useState({});
 
   const [questionList, reset] = useGenerator(SHELL_FORM_ELEMENT[type]);
@@ -58,10 +57,7 @@ const Shell = ({ type, requestWhenQuestionDone }: ShellProps): ReactElement => {
 
   const getNextLineProps = () => {
     const { done, value } = questionList.next();
-    if (done) {
-      setIsQuestionDone(true);
-      return { type: 'default', content: SHELL_LOADING };
-    }
+    if (done) return setIsQuestionDone(true);
 
     return value;
   };
@@ -87,7 +83,7 @@ const Shell = ({ type, requestWhenQuestionDone }: ShellProps): ReactElement => {
         reset();
       }
 
-      addShellLine(nextProps);
+      if (nextProps) addShellLine(nextProps);
     }
   };
 

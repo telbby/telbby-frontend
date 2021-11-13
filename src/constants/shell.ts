@@ -5,7 +5,6 @@ export const SHELL_SUCCESS_MESSAGE =
 
 export const SHELL_ERROR_USER_ACCESS_DENIED = 'Access denied';
 export const SHELL_ERROR_USER_SIGNUP_DENIED = 'Signup denied';
-export const SHELL_LOADING = 'Loading.......';
 export const MAX_SHELL_INPUT_LENGTH = 15;
 
 export type FormElementType = ShellLineProps & {
