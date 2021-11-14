@@ -14,7 +14,7 @@ export const SHELL_FORM_ELEMENT: Record<
   FormElementType[]
 > = {
   login: [
-    { type: ShellLineType.Question, message: 'username', formKey: 'username' },
+    { type: ShellLineType.Question, message: 'username', formKey: 'userId' },
     { type: ShellLineType.Question, message: 'password', formKey: 'password' },
     {
       type: ShellLineType.Question,
@@ -29,7 +29,7 @@ export const SHELL_FORM_ELEMENT: Record<
     },
   ],
   signup: [
-    { type: ShellLineType.Question, message: 'username', formKey: 'username' },
+    { type: ShellLineType.Question, message: 'username', formKey: 'userId' },
     { type: ShellLineType.Question, message: 'password', formKey: 'password' },
     {
       type: ShellLineType.Question,
