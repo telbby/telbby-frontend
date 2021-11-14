@@ -3,9 +3,7 @@ import UsersApi from './apis/usersApi';
 import { createAxiosApiClient } from './client';
 
 const getApiBaseURL = (): string => {
-  return process.env.NODE_ENV === 'development'
-    ? `${process.env.APP_API_URL}/`
-    : process.env.APP_API_URL;
+  return process.env.APP_API_URL ?? '/';
 };
 
 const baseURL = getApiBaseURL();
