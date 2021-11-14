@@ -68,24 +68,25 @@ const Shell = ({ type, requestWhenQuestionDone }: Props): ReactElement => {
   };
 
   const handleEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (!isQuestionDone && e.key === 'Enter') {
-      const currentQuestion = lines[lines.length - 1];
-      const target = e.target as HTMLInputElement;
-      const inputValue = target.value;
-      let nextProps: FormElementType;
+    if (e.key !== 'Enter') return;
+    if (isQuestionDone) return;
 
-      const { isValid, message } = checkValidation(currentQuestion, inputValue);
+    const currentQuestion = lines[lines.length - 1];
+    const target = e.target as HTMLInputElement;
+    const inputValue = target.value;
+    let nextProps: FormElementType;
 
-      if (isValid) {
-        nextProps = getNextLineProps();
-        addFormValue(currentQuestion, inputValue);
-      } else {
-        nextProps = { type: 'error', content: message };
-        reset();
-      }
+    const { isValid, message } = checkValidation(currentQuestion, inputValue);
 
-      if (nextProps) addShellLine(nextProps);
+    if (isValid) {
+      nextProps = getNextLineProps();
+      addFormValue(currentQuestion, inputValue);
+    } else {
+      nextProps = { type: 'error', content: message };
+      reset();
     }
+
+    if (nextProps) addShellLine(nextProps);
   };
 
   const request = async (data: { [key: string]: string | number }) => {
