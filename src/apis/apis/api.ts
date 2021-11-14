@@ -1,11 +1,11 @@
-import { ApiClient } from '../client';
+import { HTTPClient } from '../../utils/httpClient';
 
 abstract class Api {
   protected apiUrl: string;
 
-  protected client: ApiClient;
+  protected client: HTTPClient;
 
-  constructor(client: ApiClient, apiUrl: string) {
+  constructor(client: HTTPClient, apiUrl: string) {
     this.client = client;
     this.apiUrl = apiUrl;
   }

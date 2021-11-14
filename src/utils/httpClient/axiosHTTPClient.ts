@@ -1,10 +1,10 @@
 import { AxiosInstance, AxiosRequestConfig } from 'axios';
 
-import ApiClient from './apiClient';
-import ApiError from './apiError';
-import { ApiRequestConfig, ApiResponse, RequestHeaders } from './types';
+import HTTPClient from './httpClient';
+import HTTPError from './httpError';
+import { HTTPRequestConfig, HTTPResponse, RequestHeaders } from './types';
 
-export class AxiosApiClient extends ApiClient {
+class AxiosHTTPClient extends HTTPClient {
   private readonly client: AxiosInstance;
 
   private defaultRequestConfig: AxiosRequestConfig;
@@ -16,8 +16,8 @@ export class AxiosApiClient extends ApiClient {
   }
 
   async request<R = unknown, D = unknown>(
-    config: ApiRequestConfig<D>,
-  ): Promise<ApiResponse<R>> {
+    config: HTTPRequestConfig<D>,
+  ): Promise<HTTPResponse<R>> {
     try {
       const requestConfig = { ...this.defaultRequestConfig, ...config };
       const response = await this.client(requestConfig);
@@ -26,14 +26,14 @@ export class AxiosApiClient extends ApiClient {
 
       return { data, status };
     } catch (e) {
-      const apiErrorResponse: ApiResponse<D> = {
+      const httpErrorResponse: HTTPResponse<D> = {
         data: e.response?.data,
         status: e.response?.status,
       };
 
-      throw new ApiError({
+      throw new HTTPError({
         message: e.message,
-        response: e.response ? apiErrorResponse : undefined,
+        response: e.response ? httpErrorResponse : undefined,
       });
     }
   }
@@ -46,3 +46,5 @@ export class AxiosApiClient extends ApiClient {
     return this.defaultRequestConfig.headers;
   }
 }
+
+export default AxiosHTTPClient;
