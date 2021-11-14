@@ -11,10 +11,8 @@ describe('Shell Component', () => {
     그러나, 두번째 요소는 렌더링하지 않습니다.
   `, () => {
     const shellType = 'login';
-    const requestWhenQuestionDone = async () =>
-      new Promise((resolve) => {
-        setTimeout(() => resolve('Success'), 1000);
-      });
+    const requestWhenQuestionDone = () =>
+      new Promise((resolve) => setTimeout(() => resolve('Success')));
     const { container } = render(
       <Shell
         type={shellType}
