@@ -11,7 +11,7 @@ import {
   SHELL_FORM_ELEMENT,
   SHELL_SUCCESS_MESSAGE,
 } from '@/constants/shell';
-import useGenerator from '@/hooks/useGenerator';
+import useArrayIterator from '@/hooks/useArrayIterator';
 
 import ShellLine, { ShellLineProps, ShellLineType } from '../ShellLine';
 import * as S from './style';
@@ -36,7 +36,9 @@ const Shell = ({ type, requestWhenQuestionDone }: Props): ReactElement => {
   const [lines, setLines] = useState<readonly FormElementType[]>([FIRST_LINE]);
   const [formValue, setFormValue] = useState({});
 
-  const [questionList, reset] = useGenerator(SHELL_FORM_ELEMENT[type]);
+  const [questionList, reset] = useArrayIterator<FormElementType>(
+    SHELL_FORM_ELEMENT[type],
+  );
   const [isQuestionDone, setIsQuestionDone] = useState<boolean>(false);
 
   const fieldsetRef = useRef<HTMLFieldSetElement>();
@@ -61,8 +63,8 @@ const Shell = ({ type, requestWhenQuestionDone }: Props): ReactElement => {
   };
 
   const getNextLineProps = () => {
-    const { done, value } = questionList.next();
-    if (done) return setIsQuestionDone(true);
+    const { value } = questionList.next();
+    if (!value) return setIsQuestionDone(true);
 
     return value;
   };
