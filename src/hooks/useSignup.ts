@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { usersApi } from '@/apis';
+import { userApi } from '@/apis';
 import { LoginRequestBody } from '@/types';
 import {
   NETWORK_ERROR,
@@ -23,7 +23,7 @@ const useSignup = (): {
     try {
       setIsLoading(true);
 
-      await usersApi.signup({ userId, password });
+      await userApi.signup({ userId, password });
 
       // @TODO 회원가입 성공 시 로그인 페이지로 이동
       history.replace(Uri.home);

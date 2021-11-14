@@ -1,7 +1,7 @@
 import { LoginRequestBody, UpdateInfoResponseBody } from '@/types';
 import Api from '../api';
 
-class UsersApi extends Api {
+class UserApi extends Api {
   async signup(reqData: LoginRequestBody): Promise<UpdateInfoResponseBody> {
     const response = await this.client.post<UpdateInfoResponseBody>(
       this.apiUrl,
@@ -12,4 +12,4 @@ class UsersApi extends Api {
   }
 }
 
-export default UsersApi;
+export default UserApi;

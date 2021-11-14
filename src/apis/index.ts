@@ -1,5 +1,5 @@
 import AuthApi from './authApi';
-import UsersApi from './usersApi';
+import UserApi from './userApi';
 import { createAxiosHTTPClient } from '@/utils/httpClient';
 
 const getApiBaseURL = (): string => {
@@ -10,4 +10,4 @@ const baseURL = getApiBaseURL();
 const client = createAxiosHTTPClient({ baseURL, withCredentials: true });
 
 export const authApi = new AuthApi(client, '/api/auth');
-export const usersApi = new UsersApi(client, '/api/users');
+export const userApi = new UserApi(client, '/api/users');

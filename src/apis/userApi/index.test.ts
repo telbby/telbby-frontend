@@ -1,4 +1,4 @@
-import UsersApi from '.';
+import UserApi from '.';
 
 const mockedClient = {
   request: jest.fn(),
@@ -16,16 +16,16 @@ const mockedSignupResponseBody = {
   updatedAt: '0000-00-00',
 };
 
-describe('UsersApi.signup() 메서드 테스트', () => {
+describe('UserApi.signup() 메서드 테스트', () => {
   it('요청 성공 시 Response Body를 반환해야 합니다.', async () => {
-    const usersApi = new UsersApi(mockedClient, '/api/users');
+    const userApi = new UserApi(mockedClient, '/api/users');
 
     mockedClient.post.mockResolvedValueOnce({
       data: mockedSignupResponseBody,
       status: 200,
     });
 
-    const response = await usersApi.signup(mockedSignupRequestBody);
+    const response = await userApi.signup(mockedSignupRequestBody);
     expect(response).toBe(mockedSignupResponseBody);
   });
 });
