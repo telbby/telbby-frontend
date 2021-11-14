@@ -1,5 +1,5 @@
-import AuthApi from './apis/authApi';
-import UsersApi from './apis/usersApi';
+import AuthApi from './authApi';
+import UsersApi from './usersApi';
 import { createAxiosHTTPClient } from '@/utils/httpClient';
 
 const getApiBaseURL = (): string => {
