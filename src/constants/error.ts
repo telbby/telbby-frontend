@@ -8,3 +8,6 @@ export const loginError = {
 
 export const NETWORK_ERROR =
   'Network Error: There is a problem communicating with the server.';
+
+export const UNEXPECTED_ERROR =
+  'Unexpected Error: An unexpected error occurred.';

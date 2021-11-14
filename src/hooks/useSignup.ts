@@ -3,7 +3,11 @@ import { useHistory } from 'react-router-dom';
 
 import { usersApi } from '@/apis';
 import { LoginRequestBody } from '@/apis/dto';
-import { NETWORK_ERROR, signupError } from '@/constants/error';
+import {
+  NETWORK_ERROR,
+  signupError,
+  UNEXPECTED_ERROR,
+} from '@/constants/error';
 import Uri from '@/constants/uri';
 
 const useSignup = (): {
@@ -27,6 +31,8 @@ const useSignup = (): {
       if (e.response) {
         if (signupError[e.response.status]) {
           setError(signupError[e.response.status]);
+        } else {
+          setError(UNEXPECTED_ERROR);
         }
       } else {
         setError(NETWORK_ERROR);

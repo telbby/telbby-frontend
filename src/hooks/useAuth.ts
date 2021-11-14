@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { authApi } from '@/apis';
 import { LoginRequestBody } from '@/apis/dto';
 import { useSetUserState } from '@/atoms/userState';
-import { NETWORK_ERROR, loginError } from '@/constants/error';
+import { NETWORK_ERROR, loginError, UNEXPECTED_ERROR } from '@/constants/error';
 import Uri from '@/constants/uri';
 
 const useAuth = (): {
@@ -31,6 +31,8 @@ const useAuth = (): {
       if (e.response) {
         if (loginError[e.response.status]) {
           setError(loginError[e.response.status]);
+        } else {
+          setError(UNEXPECTED_ERROR);
         }
       } else {
         setError(NETWORK_ERROR);
