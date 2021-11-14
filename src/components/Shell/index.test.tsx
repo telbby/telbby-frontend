@@ -23,8 +23,8 @@ describe('Shell Component', () => {
     );
 
     const formElement = SHELL_FORM_ELEMENT[shellType];
-    const { type: firstLineType, content: firstLineContent } = formElement[0];
-    const { type: secondLineType, content: secondLineContent } = formElement[1];
+    const { type: firstLineType, message: firstLineContent } = formElement[0];
+    const { type: secondLineType, message: secondLineContent } = formElement[1];
 
     expect(container).toHaveTextContent(
       `${firstLineType} ${firstLineContent}:`,
@@ -49,7 +49,7 @@ describe('Shell Component', () => {
     );
 
     const formElement = SHELL_FORM_ELEMENT[shellType];
-    const { type: secondLineType, content: secondLineContent } = formElement[1];
+    const { type: secondLineType, message: secondLineContent } = formElement[1];
 
     expect(container).not.toHaveTextContent(
       `${secondLineType} ${secondLineContent}:`,

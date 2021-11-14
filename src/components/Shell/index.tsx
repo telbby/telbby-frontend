@@ -38,7 +38,7 @@ const Shell = ({
 }: Props): ReactElement => {
   const FIRST_LINE: FormElementType = {
     type: ShellLineType.Default,
-    content: `${SHELL_FIRST_LINE_PREFIX} - ${type.replace('-', ' ')}`,
+    message: `${SHELL_FIRST_LINE_PREFIX} - ${type.replace('-', ' ')}`,
   };
   const [lines, setLines] = useState<readonly FormElementType[]>([FIRST_LINE]);
   const [formValue, setFormValue] = useState({});
@@ -95,7 +95,7 @@ const Shell = ({
       nextProps = getNextLineProps();
       addFormValue(currentQuestion, inputValue);
     } else {
-      nextProps = { type: ShellLineType.Error, content: message };
+      nextProps = { type: ShellLineType.Error, message };
       reset();
     }
 
@@ -107,10 +107,10 @@ const Shell = ({
       await requestWhenQuestionDone(data);
       addShellLine({
         type: ShellLineType.Default,
-        content: SHELL_SUCCESS_MESSAGE,
+        message: SHELL_SUCCESS_MESSAGE,
       });
     } catch (error) {
-      addShellLine({ type: ShellLineType.Error, content: error.message });
+      addShellLine({ type: ShellLineType.Error, message: error.message });
       setIsQuestionDone(false);
       reset();
     }
@@ -133,12 +133,12 @@ const Shell = ({
       <form css={(theme) => formStyle({ theme, width, height })}>
         <fieldset ref={fieldsetRef} css={fieldsetStyle}>
           <legend>Telbby Service Shell: </legend>
-          {lines.map(({ type: lineType, content, disabled }, index) => (
+          {lines.map(({ type: lineType, message, disabled }, index) => (
             <ShellLine
               // eslint-disable-next-line react/no-array-index-key
               key={`${index}lineType`}
               type={lineType}
-              content={content}
+              message={message}
               disabled={disabled}
             />
           ))}

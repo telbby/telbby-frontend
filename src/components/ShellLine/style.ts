@@ -8,11 +8,11 @@ export const ErrorTypeStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorError};
 `;
 
-export const DefaultContentStyle = (theme: Theme): SerializedStyles => css`
+export const DefaultMessageStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorGray1};
 `;
 
-export const ErrorContentStyle = (theme: Theme): SerializedStyles => css`
+export const ErrorMessageStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorGray3};
 `;
 

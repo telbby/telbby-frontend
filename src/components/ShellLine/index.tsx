@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react';
 import { MAX_SHELL_INPUT_LENGTH } from '@/constants/shell';
 
 import {
-  DefaultContentStyle,
+  DefaultMessageStyle,
   DefaultTypeStyle,
-  ErrorContentStyle,
+  ErrorMessageStyle,
   ErrorTypeStyle,
   InputStyle,
 } from './style';
@@ -19,27 +19,27 @@ export enum ShellLineType {
 
 export type ShellLineProps = {
   type: ShellLineType;
-  content: string;
+  message: string;
   disabled?: boolean;
 };
 
 const ShellLine = ({
   type,
-  content,
+  message,
   disabled,
 }: ShellLineProps): ReactElement => {
-  const isPassword = content === 'password';
+  const isPassword = message === 'password';
   const isReadLine = [ShellLineType.Question, ShellLineType.Config].includes(
     type,
   );
   const isError = type === ShellLineType.Error;
 
   return (
-    <label htmlFor={content}>
+    <label htmlFor={message}>
       {isReadLine ? (
         <>
           <span css={DefaultTypeStyle}>{type} </span>
-          <span css={DefaultContentStyle}>{content}: </span>
+          <span css={DefaultMessageStyle}>{message}: </span>
           <input
             type={isPassword ? 'password' : 'text'}
             css={InputStyle}
@@ -53,8 +53,8 @@ const ShellLine = ({
       ) : (
         <>
           {isError && <span css={ErrorTypeStyle}>ERROR: </span>}
-          <span css={isError ? ErrorContentStyle : DefaultContentStyle}>
-            {content}
+          <span css={isError ? ErrorMessageStyle : DefaultMessageStyle}>
+            {message}
           </span>
           {!isError && (
             <input

@@ -14,11 +14,11 @@ export const SHELL_FORM_ELEMENT: Record<
   FormElementType[]
 > = {
   login: [
-    { type: ShellLineType.Question, content: 'username', formKey: 'username' },
-    { type: ShellLineType.Question, content: 'password', formKey: 'password' },
+    { type: ShellLineType.Question, message: 'username', formKey: 'username' },
+    { type: ShellLineType.Question, message: 'password', formKey: 'password' },
     {
       type: ShellLineType.Question,
-      content: 'Sign in? [y/n]',
+      message: 'Sign in? [y/n]',
       validation: (val: string): ReturnType<FormElementType['validation']> => {
         if (!['y', 'n'].includes(val)) {
           return { isValid: false, message: SHELL_ERROR_USER_ACCESS_DENIED };
@@ -29,11 +29,11 @@ export const SHELL_FORM_ELEMENT: Record<
     },
   ],
   signup: [
-    { type: ShellLineType.Question, content: 'username', formKey: 'username' },
-    { type: ShellLineType.Question, content: 'password', formKey: 'password' },
+    { type: ShellLineType.Question, message: 'username', formKey: 'username' },
+    { type: ShellLineType.Question, message: 'password', formKey: 'password' },
     {
       type: ShellLineType.Question,
-      content: 'Would you like to join? [y/n]',
+      message: 'Would you like to join? [y/n]',
       validation: (val: string): ReturnType<FormElementType['validation']> => {
         if (!['y', 'n'].includes(val)) {
           return { isValid: false, message: SHELL_ERROR_USER_SIGNUP_DENIED };
@@ -44,29 +44,29 @@ export const SHELL_FORM_ELEMENT: Record<
     },
   ],
   services: [
-    { type: ShellLineType.Question, content: 'service name', formKey: 'name' },
+    { type: ShellLineType.Question, message: 'service name', formKey: 'name' },
     {
       type: ShellLineType.Question,
-      content: 'service domain',
+      message: 'service domain',
       formKey: 'domain',
     },
   ],
   'service-settings': [
-    { type: ShellLineType.Config, content: 'service name', formKey: 'name' },
+    { type: ShellLineType.Config, message: 'service name', formKey: 'name' },
     {
       type: ShellLineType.Config,
-      content: 'service description',
+      message: 'service description',
       formKey: 'descriptions',
     },
     {
       type: ShellLineType.Config,
-      content: 'service domain',
+      message: 'service domain',
       formKey: 'domain',
     },
-    { type: ShellLineType.Config, content: 'color theme', formKey: 'theme' },
+    { type: ShellLineType.Config, message: 'color theme', formKey: 'theme' },
     {
       type: ShellLineType.Config,
-      content: 'first question',
+      message: 'first question',
       formKey: 'first-question',
     },
   ],
