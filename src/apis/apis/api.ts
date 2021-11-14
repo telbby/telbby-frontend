@@ -1,4 +1,4 @@
-import { HTTPClient } from '../../utils/httpClient';
+import { HTTPClient } from '@/utils/httpClient';
 
 abstract class Api {
   protected apiUrl: string;

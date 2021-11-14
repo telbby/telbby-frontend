@@ -1,6 +1,6 @@
 import AuthApi from './apis/authApi';
 import UsersApi from './apis/usersApi';
-import { createAxiosHTTPClient } from '../utils/httpClient';
+import { createAxiosHTTPClient } from '@/utils/httpClient';
 
 const getApiBaseURL = (): string => {
   return process.env.APP_API_URL ?? '/';
