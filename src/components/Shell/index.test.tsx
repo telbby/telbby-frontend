@@ -55,7 +55,7 @@ describe('Shell Component', () => {
       `${secondLineType} ${secondLineContent}:`,
     );
 
-    const inputs = screen.getAllByTestId('shell-line-input');
+    const inputs = screen.getAllByRole('textbox');
     const lastInputElement = inputs[inputs.length - 1];
 
     fireEvent.keyPress(lastInputElement, {

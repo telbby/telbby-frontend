@@ -33,7 +33,10 @@ describe('ShellLine Component', () => {
     );
 
     expect(container).toHaveTextContent('question password:');
-    expect(screen.getByAltText('input')).toHaveAttribute('type', 'password');
+    expect(screen.getByLabelText('password:')).toHaveAttribute(
+      'type',
+      'password',
+    );
   });
   it(`error type의 ShellLine은 error message를 출력합니다. input은 갖지 않습니다.`, () => {
     const props: ShellLineProps = {
