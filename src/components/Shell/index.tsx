@@ -6,24 +6,25 @@ import React, {
   useState,
 } from 'react';
 
-import {
-  FormElementType,
-  SHELL_FORM_ELEMENT,
-  SHELL_SUCCESS_MESSAGE,
-} from '@/constants/shell';
+import { SHELL_FORM_ELEMENT, SHELL_SUCCESS_MESSAGE } from '@/constants/shell';
 import useGenerator from '@/hooks/useGenerator';
 
 import ShellLine, { ShellLineProps } from '../ShellLine';
 import * as S from './style';
 
-type ShellProps = {
+export type FormElementType = ShellLineProps & {
+  formKey?: string;
+  validation?: (param?: unknown) => { isValid: boolean; message?: string };
+};
+
+type Props = {
   type: keyof typeof SHELL_FORM_ELEMENT;
   requestWhenQuestionDone: (param: {
     [key: string]: string | number;
   }) => Promise<unknown>;
 };
 
-const Shell = ({ type, requestWhenQuestionDone }: ShellProps): ReactElement => {
+const Shell = ({ type, requestWhenQuestionDone }: Props): ReactElement => {
   const FIRST_LINE: FormElementType = {
     type: 'default',
     content: `telbby init v0.1.0 - ${type.replace('-', ' ')}`,

@@ -1,4 +1,4 @@
-import { ShellLineProps } from '@/components/ShellLine';
+import { FormElementType } from '@/components/Shell';
 
 export const SHELL_SUCCESS_MESSAGE =
   'Congrats! service has been added to telbby.';
@@ -6,11 +6,6 @@ export const SHELL_SUCCESS_MESSAGE =
 export const SHELL_ERROR_USER_ACCESS_DENIED = 'Access denied';
 export const SHELL_ERROR_USER_SIGNUP_DENIED = 'Signup denied';
 export const MAX_SHELL_INPUT_LENGTH = 15;
-
-export type FormElementType = ShellLineProps & {
-  formKey?: string;
-  validation?: (param?: unknown) => { isValid: boolean; message?: string };
-};
 
 export const SHELL_FORM_ELEMENT: Record<
   'login' | 'signup' | 'services' | 'service-settings',
