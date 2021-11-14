@@ -43,10 +43,10 @@ const Shell = ({
   const [lines, setLines] = useState<readonly FormElementType[]>([FIRST_LINE]);
   const [formValue, setFormValue] = useState({});
 
-  const [questionList, reset] = useArrayIterator<FormElementType>(
+  const [queryList, reset] = useArrayIterator<FormElementType>(
     SHELL_FORM_ELEMENT[type],
   );
-  const [isQuestionDone, setIsQuestionDone] = useState<boolean>(false);
+  const [isQueryDone, setIsQueryDone] = useState<boolean>(false);
 
   const fieldsetRef = useRef<HTMLFieldSetElement>();
   const setFocusOnLastLine = useCallback(() => {
@@ -70,8 +70,8 @@ const Shell = ({
   };
 
   const getNextLineProps = () => {
-    const { value } = questionList.next();
-    if (!value) return setIsQuestionDone(true);
+    const { value } = queryList.next();
+    if (!value) return setIsQueryDone(true);
 
     return value;
   };
@@ -82,7 +82,7 @@ const Shell = ({
 
   const handleEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key !== 'Enter') return;
-    if (isQuestionDone) return;
+    if (isQueryDone) return;
 
     const currentQuestion = lines[lines.length - 1];
     const target = e.target as HTMLInputElement;
@@ -111,16 +111,16 @@ const Shell = ({
       });
     } catch (error) {
       addShellLine({ type: ShellLineType.Error, message: error.message });
-      setIsQuestionDone(false);
+      setIsQueryDone(false);
       reset();
     }
   };
 
   useEffect(() => setFocusOnLastLine, [lines]);
-  useEffect(() => addShellLine(questionList.next().value), [questionList]);
+  useEffect(() => addShellLine(queryList.next().value), [queryList]);
   useEffect(() => {
-    if (isQuestionDone) request(formValue);
-  }, [isQuestionDone]);
+    if (isQueryDone) request(formValue);
+  }, [isQueryDone]);
 
   // const
   return (
