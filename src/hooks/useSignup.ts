@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { usersApi } from '@/apis';
-import { LoginRequestBody } from '@/apis/dto';
+import { LoginRequestBody } from '@/types';
 import {
   NETWORK_ERROR,
   signupError,

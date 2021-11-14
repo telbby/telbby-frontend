@@ -1,5 +1,4 @@
-import { LoginRequestBody } from '../../dto/auth';
-import { UpdateInfoResponseBody } from '../../dto/users';
+import { LoginRequestBody, UpdateInfoResponseBody } from '@/types';
 import Api from '../api';
 
 class UsersApi extends Api {

@@ -6,7 +6,7 @@ import {
   useSetRecoilState,
 } from 'recoil';
 
-import { User } from '@/apis/dto';
+import { User } from '@/types';
 
 const userState = atom<User | null>({
   key: 'userState',

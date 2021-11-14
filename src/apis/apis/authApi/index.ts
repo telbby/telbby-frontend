@@ -1,4 +1,4 @@
-import { AuthResponseBody, LoginRequestBody } from '../../dto/auth';
+import { AuthResponseBody, LoginRequestBody } from '@/types';
 import Api from '../api';
 
 class AuthApi extends Api {

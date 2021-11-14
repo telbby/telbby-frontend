@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { authApi } from '@/apis';
-import { LoginRequestBody } from '@/apis/dto';
+import { LoginRequestBody } from '@/types';
 import { useSetUserState } from '@/atoms/userState';
 import { NETWORK_ERROR, loginError, UNEXPECTED_ERROR } from '@/constants/error';
 import Uri from '@/constants/uri';
