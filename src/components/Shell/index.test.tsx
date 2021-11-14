@@ -36,9 +36,7 @@ describe('Shell Component', () => {
   it(`Shell Component에 Enter를 입력하면, 다음 요소를 렌더링합니다.`, () => {
     const shellType = 'login';
     const requestWhenQuestionDone = async () =>
-      new Promise((resolve) => {
-        setTimeout(() => resolve('Success'), 1000);
-      });
+      new Promise((resolve) => setTimeout(() => resolve('Success')));
     const { container } = render(
       <Shell
         type={shellType}
