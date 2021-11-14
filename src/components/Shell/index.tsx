@@ -9,7 +9,7 @@ import React, {
 import { SHELL_FORM_ELEMENT, SHELL_SUCCESS_MESSAGE } from '@/constants/shell';
 import useGenerator from '@/hooks/useGenerator';
 
-import ShellLine, { ShellLineProps } from '../ShellLine';
+import ShellLine, { ShellLineProps, ShellLineType } from '../ShellLine';
 import * as S from './style';
 
 export type FormElementType = ShellLineProps & {
@@ -26,7 +26,7 @@ type Props = {
 
 const Shell = ({ type, requestWhenQuestionDone }: Props): ReactElement => {
   const FIRST_LINE: FormElementType = {
-    type: 'default',
+    type: ShellLineType.Default,
     content: `telbby init v0.1.0 - ${type.replace('-', ' ')}`,
   };
   const [lines, setLines] = useState<readonly FormElementType[]>([FIRST_LINE]);
@@ -82,7 +82,7 @@ const Shell = ({ type, requestWhenQuestionDone }: Props): ReactElement => {
       nextProps = getNextLineProps();
       addFormValue(currentQuestion, inputValue);
     } else {
-      nextProps = { type: 'error', content: message };
+      nextProps = { type: ShellLineType.Error, content: message };
       reset();
     }
 
@@ -92,9 +92,12 @@ const Shell = ({ type, requestWhenQuestionDone }: Props): ReactElement => {
   const request = async (data: { [key: string]: string | number }) => {
     try {
       await requestWhenQuestionDone(data);
-      addShellLine({ type: 'default', content: SHELL_SUCCESS_MESSAGE });
+      addShellLine({
+        type: ShellLineType.Default,
+        content: SHELL_SUCCESS_MESSAGE,
+      });
     } catch (error) {
-      addShellLine({ type: 'error', content: error.message });
+      addShellLine({ type: ShellLineType.Error, content: error.message });
       setIsQuestionDone(false);
       reset();
     }

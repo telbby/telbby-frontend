@@ -4,8 +4,15 @@ import { MAX_SHELL_INPUT_LENGTH } from '@/constants/shell';
 
 import * as S from './style';
 
+export enum ShellLineType {
+  Question = 'question',
+  Config = 'config',
+  Error = 'error',
+  Default = 'default',
+}
+
 export type ShellLineProps = {
-  type: 'question' | 'config' | 'error' | 'default';
+  type: ShellLineType;
   content: string;
   disabled?: boolean;
 };
@@ -16,8 +23,10 @@ const ShellLine = ({
   disabled,
 }: ShellLineProps): ReactElement => {
   const isPassword = content === 'password';
-  const isReadLine = ['question', 'config'].includes(type);
-  const isError = type === 'error';
+  const isReadLine = [ShellLineType.Question, ShellLineType.Config].includes(
+    type,
+  );
+  const isError = type === ShellLineType.Error;
 
   return (
     <label htmlFor={content}>
@@ -49,6 +58,7 @@ const ShellLine = ({
             disabled={disabled}
             data-testid="shell-line-input"
             autoComplete="off"
+            alt="input"
           />
         </>
       )}
