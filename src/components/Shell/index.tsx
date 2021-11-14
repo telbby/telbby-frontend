@@ -6,7 +6,11 @@ import React, {
   useState,
 } from 'react';
 
-import { SHELL_FORM_ELEMENT, SHELL_SUCCESS_MESSAGE } from '@/constants/shell';
+import {
+  SHELL_FIRST_LINE_PREFIX,
+  SHELL_FORM_ELEMENT,
+  SHELL_SUCCESS_MESSAGE,
+} from '@/constants/shell';
 import useGenerator from '@/hooks/useGenerator';
 
 import ShellLine, { ShellLineProps, ShellLineType } from '../ShellLine';
@@ -27,7 +31,7 @@ type Props = {
 const Shell = ({ type, requestWhenQuestionDone }: Props): ReactElement => {
   const FIRST_LINE: FormElementType = {
     type: ShellLineType.Default,
-    content: `telbby init v0.1.0 - ${type.replace('-', ' ')}`,
+    content: `${SHELL_FIRST_LINE_PREFIX} - ${type.replace('-', ' ')}`,
   };
   const [lines, setLines] = useState<readonly FormElementType[]>([FIRST_LINE]);
   const [formValue, setFormValue] = useState({});

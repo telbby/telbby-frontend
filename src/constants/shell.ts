@@ -4,6 +4,7 @@ import { ShellLineType } from '@/components/ShellLine';
 export const SHELL_SUCCESS_MESSAGE =
   'Congrats! service has been added to telbby.';
 
+export const SHELL_FIRST_LINE_PREFIX = 'telbby init v0.1.0';
 export const SHELL_ERROR_USER_ACCESS_DENIED = 'Access denied';
 export const SHELL_ERROR_USER_SIGNUP_DENIED = 'Signup denied';
 export const MAX_SHELL_INPUT_LENGTH = 15;
@@ -51,10 +52,22 @@ export const SHELL_FORM_ELEMENT: Record<
     },
   ],
   'service-settings': [
-    { type: 'config', content: 'service name', formKey: 'name' },
-    { type: 'config', content: 'service description', formKey: 'descriptions' },
-    { type: 'config', content: 'service domain', formKey: 'domain' },
-    { type: 'config', content: 'color theme', formKey: 'theme' },
-    { type: 'config', content: 'first question', formKey: 'first-question' },
+    { type: ShellLineType.Config, content: 'service name', formKey: 'name' },
+    {
+      type: ShellLineType.Config,
+      content: 'service description',
+      formKey: 'descriptions',
+    },
+    {
+      type: ShellLineType.Config,
+      content: 'service domain',
+      formKey: 'domain',
+    },
+    { type: ShellLineType.Config, content: 'color theme', formKey: 'theme' },
+    {
+      type: ShellLineType.Config,
+      content: 'first question',
+      formKey: 'first-question',
+    },
   ],
 };
