@@ -11,7 +11,6 @@ export const formStyle = ({
   height,
 }: FormStyleProps): SerializedStyles => css`
   box-sizing: border-box;
-  overflow-y: scroll;
   width: ${width}px;
   height: ${height}px;
   padding: 28px 30px;
@@ -37,7 +36,8 @@ export const formStyle = ({
 
 export const fieldsetStyle = css`
   all: unset;
-
+  height: 100%;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
 

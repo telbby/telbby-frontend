@@ -8,6 +8,7 @@ import {
   ErrorMessageStyle,
   ErrorTypeStyle,
   InputStyle,
+  ReadLineMessageStyle,
 } from './style';
 
 export enum ShellLineType {
@@ -25,10 +26,11 @@ export type ShellLineProps = {
 
 const ShellReadLine = ({ type, message, disabled }: ShellLineProps) => {
   const isPassword = message === 'password';
+
   return (
     <>
       <span css={DefaultTypeStyle}>{type} </span>
-      <label htmlFor="readline" css={DefaultMessageStyle}>
+      <label htmlFor="readline" css={ReadLineMessageStyle}>
         {`${message}: `}
       </label>
       <input
