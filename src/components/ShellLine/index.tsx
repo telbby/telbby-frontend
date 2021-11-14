@@ -30,7 +30,21 @@ const ShellLine = ({
 
   return (
     <label htmlFor={content}>
-      {!isReadLine && (
+      {isReadLine ? (
+        <>
+          <span css={S.Type}>{type} </span>
+          <span css={S.DefaultContent}>{content}: </span>
+          <input
+            type={isPassword ? 'password' : 'text'}
+            css={S.Input}
+            maxLength={MAX_SHELL_INPUT_LENGTH}
+            disabled={disabled}
+            data-testid="shell-line-input"
+            autoComplete="off"
+            alt="input"
+          />
+        </>
+      ) : (
         <>
           {isError && <span css={S.ErrorType}>ERROR: </span>}
           <span css={isError ? S.ErrorContent : S.DefaultContent}>
@@ -45,21 +59,6 @@ const ShellLine = ({
               data-testid="shell-line-input"
             />
           )}
-        </>
-      )}
-      {isReadLine && (
-        <>
-          <span css={S.Type}>{type} </span>
-          <span css={S.DefaultContent}>{content}: </span>
-          <input
-            type={isPassword ? 'password' : 'text'}
-            css={S.Input}
-            maxLength={MAX_SHELL_INPUT_LENGTH}
-            disabled={disabled}
-            data-testid="shell-line-input"
-            autoComplete="off"
-            alt="input"
-          />
         </>
       )}
     </label>
