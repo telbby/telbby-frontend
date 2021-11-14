@@ -1,10 +1,19 @@
 import { SerializedStyles, Theme, css } from '@emotion/react';
 
-export const formStyle = (theme: Theme): SerializedStyles => css`
+type FormStyleProps = {
+  theme: Theme;
+  width?: number;
+  height?: number;
+};
+export const formStyle = ({
+  theme,
+  width,
+  height,
+}: FormStyleProps): SerializedStyles => css`
   box-sizing: border-box;
   overflow-y: scroll;
-  width: calc(100% - 200px);
-  height: 247px;
+  width: ${width}px;
+  height: ${height}px;
   padding: 28px 30px;
   margin: 0 auto;
 

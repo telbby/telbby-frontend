@@ -14,7 +14,7 @@ import {
 import useArrayIterator from '@/hooks/useArrayIterator';
 
 import ShellLine, { ShellLineProps, ShellLineType } from '../ShellLine';
-import * as S from './style';
+import { fieldsetStyle, formStyle } from './style';
 
 export type FormElementType = ShellLineProps & {
   formKey?: string;
@@ -26,9 +26,16 @@ type Props = {
   requestWhenQuestionDone: (param: {
     [key: string]: string | number;
   }) => Promise<unknown>;
+  width: number;
+  height: number;
 };
 
-const Shell = ({ type, requestWhenQuestionDone }: Props): ReactElement => {
+const Shell = ({
+  type,
+  requestWhenQuestionDone,
+  width,
+  height,
+}: Props): ReactElement => {
   const FIRST_LINE: FormElementType = {
     type: ShellLineType.Default,
     content: `${SHELL_FIRST_LINE_PREFIX} - ${type.replace('-', ' ')}`,
@@ -115,6 +122,7 @@ const Shell = ({ type, requestWhenQuestionDone }: Props): ReactElement => {
     if (isQuestionDone) request(formValue);
   }, [isQuestionDone]);
 
+  // const
   return (
     <div
       role="button"
@@ -122,8 +130,8 @@ const Shell = ({ type, requestWhenQuestionDone }: Props): ReactElement => {
       onKeyPress={handleEnter}
       onClick={setFocusOnLastLine}
     >
-      <form css={S.formStyle}>
-        <fieldset ref={fieldsetRef} css={S.fieldsetStyle}>
+      <form css={(theme) => formStyle({ theme, width, height })}>
+        <fieldset ref={fieldsetRef} css={fieldsetStyle}>
           <legend>Telbby Service Shell: </legend>
           {lines.map(({ type: lineType, content, disabled }, index) => (
             <ShellLine

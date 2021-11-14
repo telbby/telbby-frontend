@@ -17,6 +17,8 @@ describe('Shell Component', () => {
       <Shell
         type={shellType}
         requestWhenQuestionDone={requestWhenQuestionDone}
+        width={789}
+        height={208}
       />,
     );
 
@@ -41,6 +43,8 @@ describe('Shell Component', () => {
       <Shell
         type={shellType}
         requestWhenQuestionDone={requestWhenQuestionDone}
+        width={789}
+        height={208}
       />,
     );
 

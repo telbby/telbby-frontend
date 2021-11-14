@@ -5,6 +5,11 @@ import Jumbotron from '@/components/common/Jumbotron';
 import Layout from '@/components/common/Layout';
 
 const HomePage: FC = () => {
+  /**
+   * FIXME:
+   * 가상 API 요청을 위해 만든 코드입니다.
+   * 추후 API 연동을 할 때 지워주면 됩니다.
+   */
   const requestWhenQuestionDone = async () =>
     new Promise((resolve, reject) => {
       setTimeout(
@@ -13,7 +18,6 @@ const HomePage: FC = () => {
         1000,
       );
     });
-
   return (
     <Layout>
       <Jumbotron
@@ -26,6 +30,8 @@ const HomePage: FC = () => {
       <Shell
         type="services"
         requestWhenQuestionDone={requestWhenQuestionDone}
+        width={789}
+        height={208}
       />
     </Layout>
   );
