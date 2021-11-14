@@ -11,12 +11,12 @@ describe('Shell Component', () => {
     그러나, 두번째 요소는 렌더링하지 않습니다.
   `, () => {
     const shellType = 'login';
-    const requestWhenQuestionDone = () =>
+    const requestWhenQueryDone = () =>
       new Promise((resolve) => setTimeout(() => resolve('Success')));
     const { container } = render(
       <Shell
         type={shellType}
-        requestWhenQuestionDone={requestWhenQuestionDone}
+        requestWhenQueryDone={requestWhenQueryDone}
         width={789}
         height={208}
       />,
@@ -35,12 +35,12 @@ describe('Shell Component', () => {
   });
   it(`Shell Component에 Enter를 입력하면, 다음 요소를 렌더링합니다.`, () => {
     const shellType = 'login';
-    const requestWhenQuestionDone = async () =>
+    const requestWhenQueryDone = async () =>
       new Promise((resolve) => setTimeout(() => resolve('Success')));
     const { container } = render(
       <Shell
         type={shellType}
-        requestWhenQuestionDone={requestWhenQuestionDone}
+        requestWhenQueryDone={requestWhenQueryDone}
         width={789}
         height={208}
       />,

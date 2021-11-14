@@ -23,7 +23,7 @@ export type FormElementType = ShellLineProps & {
 
 type Props = {
   type: keyof typeof SHELL_FORM_ELEMENT;
-  requestWhenQuestionDone: (param: {
+  requestWhenQueryDone: (param: {
     [key: string]: string | number;
   }) => Promise<unknown>;
   width: number;
@@ -32,7 +32,7 @@ type Props = {
 
 const Shell = ({
   type,
-  requestWhenQuestionDone,
+  requestWhenQueryDone,
   width,
   height,
 }: Props): ReactElement => {
@@ -104,7 +104,7 @@ const Shell = ({
 
   const request = async (data: { [key: string]: string | number }) => {
     try {
-      await requestWhenQuestionDone(data);
+      await requestWhenQueryDone(data);
       addShellLine({
         type: ShellLineType.Default,
         message: SHELL_SUCCESS_MESSAGE,
@@ -122,7 +122,6 @@ const Shell = ({
     if (isQueryDone) request(formValue);
   }, [isQueryDone]);
 
-  // const
   return (
     <div
       role="button"

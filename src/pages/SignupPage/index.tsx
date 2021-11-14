@@ -1,20 +1,15 @@
 import React, { FC } from 'react';
 
+import { userApi } from '@/apis';
 import Shell from '@/components/Shell';
 import Jumbotron from '@/components/common/Jumbotron';
 import Logo from '@/components/common/Logo';
+import { LoginRequestBody } from '@/types';
 
 import { footerStyle, headerStyle, layoutStyle } from './style';
 
 const SignupPage: FC = () => {
-  const requestWhenQuestionDone = async () =>
-    new Promise((resolve, reject) => {
-      setTimeout(
-        // () => resolve('Success'),
-        () => reject(new Error('Not valid domain. Telbby is great you know?')),
-        1000,
-      );
-    });
+  const requestSignup = (body: LoginRequestBody) => userApi.signup(body);
   return (
     <div css={layoutStyle}>
       <header css={headerStyle}>
@@ -24,7 +19,7 @@ const SignupPage: FC = () => {
       <main>
         <Shell
           type="signup"
-          requestWhenQuestionDone={requestWhenQuestionDone}
+          requestWhenQueryDone={requestSignup}
           width={789}
           height={247}
         />
