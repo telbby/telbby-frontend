@@ -26,9 +26,9 @@ describe('SigninPage 테스트', () => {
     ).toBeInTheDocument();
   });
 
-  it(`footer에 안내문과 함께 /signin으로 보내는 링크가 있어야 합니다.`, () => {
+  it(`footer에 안내문과 함께 /signup으로 보내는 링크가 있어야 합니다.`, () => {
     render(signupPageContainer);
     expect(screen.queryByText('Don’t have an account?')).toBeInTheDocument();
-    expect(screen.getByRole('link')).toHaveAttribute('href', '/signin');
+    expect(screen.getByRole('link')).toHaveAttribute('href', '/signup');
   });
 });
