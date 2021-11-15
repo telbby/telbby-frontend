@@ -35,7 +35,6 @@ export const inputStyle = (theme: Theme): SerializedStyles => css`
   display: block;
   overflow: hidden;
   padding-left: 8px;
-  background-color: red;
 
   input {
     all: unset;
