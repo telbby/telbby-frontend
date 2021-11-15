@@ -43,15 +43,19 @@ const Shell = ({
     type: ShellLineType.Default,
     message: `${SHELL_FIRST_LINE_PREFIX} - ${type.replace('-', ' ')}`,
   };
+
   const [lines, setLines] = useState<readonly FormElementType[]>([firstLine]);
+
   const [formValue, setFormValue] = useState({});
 
   const [queryList, reset] = useArrayIterator<FormElementType>(
     SHELL_FORM_ELEMENT[type],
   );
+
   const [isQueryDone, setIsQueryDone] = useState<boolean>(false);
 
   const fieldsetRef = useRef<HTMLFieldSetElement>();
+
   const setFocusOnLastLine = useCallback(() => {
     if (!fieldsetRef.current) return;
 
@@ -79,9 +83,8 @@ const Shell = ({
     return value;
   };
 
-  const addShellLine = (props: ShellLineProps) => {
+  const addShellLine = (props: ShellLineProps) =>
     setLines((prev) => [...prev, props]);
-  };
 
   const handleEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key !== 'Enter') return;
@@ -138,15 +141,18 @@ const Shell = ({
       <form css={(theme) => formStyle({ theme, width, height })}>
         <fieldset ref={fieldsetRef} css={fieldsetStyle}>
           <legend>Telbby Service Shell: </legend>
-          {lines.map(({ type: lineType, message, disabled }, index) => (
-            <ShellLine
-              // eslint-disable-next-line react/no-array-index-key
-              key={`${index}lineType`}
-              type={lineType}
-              message={message}
-              disabled={disabled}
-            />
-          ))}
+          {lines.map(
+            ({ type: lineType, message, maxLength, disabled }, index) => (
+              <ShellLine
+                // eslint-disable-next-line react/no-array-index-key
+                key={`${index}lineType`}
+                type={lineType}
+                message={message}
+                maxLength={maxLength}
+                disabled={disabled}
+              />
+            ),
+          )}
         </fieldset>
       </form>
     </div>

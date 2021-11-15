@@ -1,7 +1,5 @@
 import React, { ReactElement } from 'react';
 
-import { USER_PW_MAX_LENGTH } from '@/constants/validation';
-
 import {
   defaultMessageStyle,
   defaultTypeStyle,
@@ -112,10 +110,6 @@ const ShellLine = ({
       )}
     </div>
   );
-};
-
-ShellLine.defaultProps = {
-  maxLength: USER_PW_MAX_LENGTH + 1,
 };
 
 export default ShellLine;

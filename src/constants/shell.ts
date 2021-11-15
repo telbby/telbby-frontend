@@ -2,6 +2,8 @@ import { FormElementType } from '@/components/Shell';
 import { ShellLineType } from '@/components/ShellLine';
 import { idValidator, pwValidator } from '@/utils/validation';
 
+import { USER_ID_MAX_LENGTH, USER_PW_MAX_LENGTH } from './validation';
+
 export const SHELL_SUCCESS_MESSAGE =
   'Congrats! service has been added to telbby.';
 
@@ -42,18 +44,21 @@ export const SHELL_FORM_ELEMENT: Record<
       message: 'username',
       formKey: 'userId',
       validation: userIdValidation,
+      maxLength: USER_ID_MAX_LENGTH,
     },
     {
       type: ShellLineType.Question,
       message: 'password',
       formKey: 'password',
       validation: passwordValidation,
+      maxLength: USER_PW_MAX_LENGTH,
     },
     {
       type: ShellLineType.Question,
       message: 'Sign in? [y/n]',
       validation: (val) =>
         yesOrNoValidation(val, SHELL_ERROR_USER_ACCESS_DENIED),
+      maxLength: 1,
     },
   ],
   signup: [
@@ -62,18 +67,21 @@ export const SHELL_FORM_ELEMENT: Record<
       message: 'username',
       formKey: 'userId',
       validation: userIdValidation,
+      maxLength: USER_ID_MAX_LENGTH,
     },
     {
       type: ShellLineType.Question,
       message: 'password',
       formKey: 'password',
       validation: passwordValidation,
+      maxLength: USER_PW_MAX_LENGTH,
     },
     {
       type: ShellLineType.Question,
       message: 'Would you like to join? [y/n]',
       validation: (val) =>
         yesOrNoValidation(val, SHELL_ERROR_USER_SIGNUP_DENIED),
+      maxLength: 1,
     },
   ],
   services: [
