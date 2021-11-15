@@ -11,16 +11,20 @@ type IntroTitleProps = {
 const IntroTitle: FC<IntroTitleProps> = ({ title, descList }) => {
   return (
     <>
-      <h2 css={titleStyle}>
-        {Array.isArray(title)
-          ? title.map((line) => <div key={nanoid()}>{line}</div>)
-          : title}
-      </h2>
-      <div css={descriptionStyle}>
-        {descList.map((desc) => (
-          <p key={nanoid()}>{desc}</p>
-        ))}
-      </div>
+      {title && (
+        <h2 css={titleStyle}>
+          {Array.isArray(title)
+            ? title.map((line) => <div key={nanoid()}>{line}</div>)
+            : title}
+        </h2>
+      )}
+      {descList && (
+        <div css={descriptionStyle}>
+          {descList.map((desc) => (
+            <p key={nanoid()}>{desc}</p>
+          ))}
+        </div>
+      )}
     </>
   );
 };

@@ -5,6 +5,12 @@ import { render, screen } from '@testing-library/react';
 import IntroTitle from '.';
 
 describe('<IntroTitle/> component test', () => {
+  it('title prop이 없을 경우 heading 요소를 렌더링 하지 않아야 합니다.', () => {
+    render(<IntroTitle />);
+
+    expect(screen.queryByRole('heading')).toBeNull();
+  });
+
   it('prop으로 넘겨준 title 문자열을 heading으로 렌더링해야 합니다.', () => {
     const titleContent = 'title';
 
