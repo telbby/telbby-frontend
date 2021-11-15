@@ -4,12 +4,33 @@ import { userApi } from '@/apis';
 import Shell from '@/components/Shell';
 import Jumbotron from '@/components/common/Jumbotron';
 import Logo from '@/components/common/Logo';
+import {
+  NETWORK_ERROR,
+  UNEXPECTED_ERROR,
+  signupError,
+} from '@/constants/error';
 import { LoginRequestBody } from '@/types';
 
 import { footerStyle, headerStyle, layoutStyle } from './style';
 
 const SignupPage: FC = () => {
-  const requestSignup = (body: LoginRequestBody) => userApi.signup(body);
+  const requestSignup = async (body: LoginRequestBody) => {
+    try {
+      await userApi.signup(body);
+    } catch (error) {
+      let message: string;
+
+      if (!error.response) message = NETWORK_ERROR;
+      else {
+        const { status } = error.response;
+        message = status < 500 ? signupError[status] : UNEXPECTED_ERROR;
+      }
+
+      error.message = message;
+      throw new Error(error);
+    }
+  };
+
   return (
     <div css={layoutStyle}>
       <header css={headerStyle}>
