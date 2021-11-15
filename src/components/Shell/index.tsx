@@ -10,7 +10,6 @@ import {
   SHELL_FIRST_LINE_PREFIX,
   SHELL_FORM_ELEMENT,
   SHELL_SUCCESS_MESSAGE,
-  ValidationType,
 } from '@/constants/shell';
 import useArrayIterator from '@/hooks/useArrayIterator';
 
@@ -19,7 +18,10 @@ import { fieldsetStyle, formStyle } from './style';
 
 export type FormElementType = ShellLineProps & {
   formKey?: string;
-  validation?: ValidationType;
+  validation?: (
+    val: string,
+    message?: string,
+  ) => { isValid: boolean; message?: string };
 };
 
 type Props = {

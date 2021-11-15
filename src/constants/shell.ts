@@ -9,26 +9,21 @@ export const SHELL_FIRST_LINE_PREFIX = 'telbby init v0.1.0';
 export const SHELL_ERROR_USER_ACCESS_DENIED = 'Access denied';
 export const SHELL_ERROR_USER_SIGNUP_DENIED = 'Signup denied';
 
-export type ValidationType = (
-  val: string,
-  message?: string,
-) => { isValid: boolean; message?: string };
-
-const userIdValidation: ValidationType = (val) => {
+const userIdValidation: FormElementType['validation'] = (val) => {
   const [isValid, message] = idValidator(val);
   if (!isValid) return { isValid, message };
 
   return { isValid: true };
 };
 
-const passwordValidation: ValidationType = (val) => {
+const passwordValidation: FormElementType['validation'] = (val) => {
   const [isValid, message] = pwValidator(val);
   if (!isValid) return { isValid, message };
 
   return { isValid: true };
 };
 
-const yesOrNoValidation: ValidationType = (val, message) => {
+const yesOrNoValidation: FormElementType['validation'] = (val, message) => {
   if (val !== 'y') return { isValid: false, message };
 
   return { isValid: true };
