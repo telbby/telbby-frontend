@@ -3,12 +3,12 @@ import React, { ReactElement, useState } from 'react';
 import { USER_PW_MAX_LENGTH } from '@/constants/validation';
 
 import {
-  DefaultMessageStyle,
-  DefaultTypeStyle,
-  ErrorMessageStyle,
-  ErrorTypeStyle,
-  InputStyle,
-  ReadLineMessageStyle,
+  defaultMessageStyle,
+  defaultTypeStyle,
+  errorMessageStyle,
+  errorTypeStyle,
+  inputStyle,
+  readLineMessageStyle,
 } from './style';
 
 export enum ShellLineType {
@@ -32,13 +32,13 @@ const ShellReadLine = ({ type, message, disabled }: ShellLineProps) => {
 
   return (
     <>
-      <span css={DefaultTypeStyle}>{type} </span>
-      <label htmlFor="readline" css={ReadLineMessageStyle}>
+      <span css={defaultTypeStyle}>{type} </span>
+      <label htmlFor="readline" css={readLineMessageStyle}>
         {`${message}: `}
       </label>
       <input
         type={isPassword ? 'password' : 'text'}
-        css={(theme) => InputStyle({ theme, width: `${inputWidth}ch` })}
+        css={(theme) => inputStyle({ theme, width: `${inputWidth}ch` })}
         maxLength={USER_PW_MAX_LENGTH + 1}
         disabled={disabled}
         autoComplete="off"
@@ -53,17 +53,17 @@ const ShellPrintLine = ({ type, message, disabled }: ShellLineProps) => {
   const isError = type === ShellLineType.Error;
   return (
     <>
-      {isError && <span css={ErrorTypeStyle}>ERROR: </span>}
+      {isError && <span css={errorTypeStyle}>ERROR: </span>}
       <label
         htmlFor="printline"
-        css={isError ? ErrorMessageStyle : DefaultMessageStyle}
+        css={isError ? errorMessageStyle : defaultMessageStyle}
       >
         {message}
       </label>
       {!isError && (
         <input
           type="text"
-          css={(theme) => InputStyle({ theme })}
+          css={(theme) => inputStyle({ theme })}
           maxLength={0}
           disabled={disabled}
           id="printline"

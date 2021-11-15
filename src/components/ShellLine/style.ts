@@ -1,22 +1,22 @@
 import { SerializedStyles, Theme, css } from '@emotion/react';
 
-export const DefaultTypeStyle = (theme: Theme): SerializedStyles => css`
+export const defaultTypeStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorGray3};
 `;
 
-export const ErrorTypeStyle = (theme: Theme): SerializedStyles => css`
+export const errorTypeStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorError};
 `;
 
-export const DefaultMessageStyle = (theme: Theme): SerializedStyles => css`
+export const defaultMessageStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorGray2};
 `;
 
-export const ReadLineMessageStyle = (theme: Theme): SerializedStyles => css`
+export const readLineMessageStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorGray1};
 `;
 
-export const ErrorMessageStyle = (theme: Theme): SerializedStyles => css`
+export const errorMessageStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorGray3};
 `;
 
@@ -25,7 +25,7 @@ type InputStyleProp = {
   width?: string;
 };
 
-export const InputStyle = ({
+export const inputStyle = ({
   theme,
   width,
 }: InputStyleProp): SerializedStyles => css`
