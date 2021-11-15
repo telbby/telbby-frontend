@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 
 import { USER_PW_MAX_LENGTH } from '@/constants/validation';
 
@@ -9,6 +9,7 @@ import {
   errorTypeStyle,
   inputStyle,
   readLineMessageStyle,
+  shellLineContainerStyle,
 } from './style';
 
 export enum ShellLineType {
@@ -21,35 +22,43 @@ export enum ShellLineType {
 export type ShellLineProps = {
   type: ShellLineType;
   message: string;
+  maxLength?: number;
   disabled?: boolean;
 };
 
-const ShellReadLine = ({ type, message, disabled }: ShellLineProps) => {
+const ShellReadLine = ({
+  type,
+  message,
+  disabled,
+  maxLength,
+}: ShellLineProps) => {
   const isPassword = message === 'password';
-  const [inputWidth, setInputWidth] = useState(1);
-  const changeInputWidth = (e: { target: HTMLInputElement }) =>
-    setInputWidth(e.target.value.length);
 
   return (
     <>
-      <span css={defaultTypeStyle}>{type} </span>
+      <span css={defaultTypeStyle}>{type}</span>
       <label htmlFor="readline" css={readLineMessageStyle}>
-        {`${message}: `}
+        {`${message}:`}
       </label>
-      <input
-        type={isPassword ? 'password' : 'text'}
-        css={(theme) => inputStyle({ theme, width: `${inputWidth}ch` })}
-        maxLength={USER_PW_MAX_LENGTH + 1}
-        disabled={disabled}
-        autoComplete="off"
-        id="readline"
-        onChange={changeInputWidth}
-      />
+      <span css={inputStyle}>
+        <input
+          type={isPassword ? 'password' : 'text'}
+          maxLength={maxLength}
+          disabled={disabled}
+          autoComplete="off"
+          id="readline"
+        />
+      </span>
     </>
   );
 };
 
-const ShellPrintLine = ({ type, message, disabled }: ShellLineProps) => {
+const ShellPrintLine = ({
+  type,
+  message,
+  disabled,
+  maxLength,
+}: ShellLineProps) => {
   const isError = type === ShellLineType.Error;
   return (
     <>
@@ -61,13 +70,14 @@ const ShellPrintLine = ({ type, message, disabled }: ShellLineProps) => {
         {message}
       </label>
       {!isError && (
-        <input
-          type="text"
-          css={(theme) => inputStyle({ theme })}
-          maxLength={0}
-          disabled={disabled}
-          id="printline"
-        />
+        <span css={inputStyle}>
+          <input
+            type="text"
+            maxLength={maxLength}
+            disabled={disabled}
+            id="printline"
+          />
+        </span>
       )}
     </>
   );
@@ -76,6 +86,7 @@ const ShellPrintLine = ({ type, message, disabled }: ShellLineProps) => {
 const ShellLine = ({
   type,
   message,
+  maxLength,
   disabled,
 }: ShellLineProps): ReactElement => {
   const isReadLine = [ShellLineType.Question, ShellLineType.Config].includes(
@@ -83,14 +94,28 @@ const ShellLine = ({
   );
 
   return (
-    <div>
+    <div css={shellLineContainerStyle}>
       {isReadLine ? (
-        <ShellReadLine type={type} message={message} disabled={disabled} />
+        <ShellReadLine
+          type={type}
+          message={message}
+          disabled={disabled}
+          maxLength={maxLength}
+        />
       ) : (
-        <ShellPrintLine type={type} message={message} disabled={disabled} />
+        <ShellPrintLine
+          type={type}
+          message={message}
+          disabled={disabled}
+          maxLength={0}
+        />
       )}
     </div>
   );
+};
+
+ShellLine.defaultProps = {
+  maxLength: USER_PW_MAX_LENGTH + 1,
 };
 
 export default ShellLine;
