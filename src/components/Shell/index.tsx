@@ -41,11 +41,11 @@ const Shell = ({
   width,
   height,
 }: Props): ReactElement => {
-  const FIRST_LINE: FormElementType = {
+  const firstLine: FormElementType = {
     type: ShellLineType.Default,
     message: `${SHELL_FIRST_LINE_PREFIX} - ${type.replace('-', ' ')}`,
   };
-  const [lines, setLines] = useState<readonly FormElementType[]>([FIRST_LINE]);
+  const [lines, setLines] = useState<readonly FormElementType[]>([firstLine]);
   const [formValue, setFormValue] = useState({});
 
   const [queryList, reset] = useArrayIterator<FormElementType>(

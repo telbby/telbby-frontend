@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Uri from './constants/uri';
 import CountPage from './pages/CountPage';
 import HomePage from './pages/HomePage';
+import NotFoundPage from './pages/NotFoundPage';
 import SigninPage from './pages/SigninPage';
 import SignupPage from './pages/SignupPage';
 
@@ -14,6 +15,7 @@ const App: FC = () => {
       <Route path={Uri.count} exact component={CountPage} />
       <Route path={Uri.signup} exact component={SignupPage} />
       <Route path={Uri.signin} exact component={SigninPage} />
+      <Route component={NotFoundPage} />
     </Switch>
   );
 };
