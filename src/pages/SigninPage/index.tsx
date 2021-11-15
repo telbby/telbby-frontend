@@ -14,16 +14,12 @@ const SigninPage: FC = () => {
     try {
       await authApi.login(body);
     } catch (error) {
-      let message: string;
+      if (!error.response) throw new Error(NETWORK_ERROR);
 
-      if (!error.response) message = NETWORK_ERROR;
-      else {
-        const { status } = error.response;
-        message = status < 500 ? loginError[status] : UNEXPECTED_ERROR;
-      }
+      const { status } = error.response;
+      if (loginError[status]) throw new Error(loginError[status]);
 
-      error.message = message;
-      throw new Error(error);
+      throw new Error(UNEXPECTED_ERROR);
     }
   };
 

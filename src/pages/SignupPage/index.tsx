@@ -18,16 +18,12 @@ const SignupPage: FC = () => {
     try {
       await userApi.signup(body);
     } catch (error) {
-      let message: string;
+      if (!error.response) throw new Error(NETWORK_ERROR);
 
-      if (!error.response) message = NETWORK_ERROR;
-      else {
-        const { status } = error.response;
-        message = status < 500 ? signupError[status] : UNEXPECTED_ERROR;
-      }
+      const { status } = error.response;
+      if (signupError[status]) throw new Error(signupError[status]);
 
-      error.message = message;
-      throw new Error(error);
+      throw new Error(UNEXPECTED_ERROR);
     }
   };
 
