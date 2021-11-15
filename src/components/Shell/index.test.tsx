@@ -8,7 +8,7 @@ import { SHELL_FORM_ELEMENT } from '@/constants/shell';
 import Shell from '.';
 
 describe('Shell Component 테스트', () => {
-  const shellType = 'login';
+  const shellType = 'signin';
   const requestWhenQueryDone = () =>
     new Promise((resolve) => setTimeout(() => resolve('Success')));
   const ShellElement = (

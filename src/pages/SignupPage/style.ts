@@ -1,6 +1,6 @@
 import { SerializedStyles, Theme, css } from '@emotion/react';
 
-export const layoutStyle = css`
+export const layoutStyle = (theme: Theme): SerializedStyles => css`
   width: 100%;
   height: 100%;
   display: flex;
@@ -10,7 +10,7 @@ export const layoutStyle = css`
   background: linear-gradient(
     to bottom,
     rgba(0, 83, 191, 0.1) 50%,
-    #f4f7ff 50%
+    ${theme.colorBg} 50%
   );
 `;
 

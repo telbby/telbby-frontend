@@ -39,10 +39,10 @@ const yesOrNoValidation = (
 };
 
 export const SHELL_FORM_ELEMENT: Record<
-  'login' | 'signup' | 'services' | 'service-settings',
+  'signin' | 'signup' | 'services' | 'service-settings',
   FormElementType[]
 > = {
-  login: [
+  signin: [
     {
       type: ShellLineType.Question,
       message: 'username',
