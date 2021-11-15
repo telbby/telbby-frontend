@@ -7,6 +7,11 @@ import React, {
 } from 'react';
 
 import {
+  NETWORK_ERROR,
+  UNEXPECTED_ERROR,
+  signupError,
+} from '@/constants/error';
+import {
   SHELL_FIRST_LINE_PREFIX,
   SHELL_FORM_ELEMENT,
   SHELL_SUCCESS_MESSAGE,
@@ -110,7 +115,23 @@ const Shell = ({
         message: SHELL_SUCCESS_MESSAGE,
       });
     } catch (error) {
-      addShellLine({ type: ShellLineType.Error, message: error.message });
+      if (!error.response)
+        addShellLine({ type: ShellLineType.Error, message: NETWORK_ERROR });
+      else {
+        const { status } = error.response;
+        if (status < 500) {
+          addShellLine({
+            type: ShellLineType.Error,
+            message: signupError[status],
+          });
+        } else {
+          addShellLine({
+            type: ShellLineType.Error,
+            message: UNEXPECTED_ERROR,
+          });
+        }
+      }
+
       setIsQueryDone(false);
       reset();
     }

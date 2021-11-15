@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { MAX_SHELL_INPUT_LENGTH } from '@/constants/shell';
+import { USER_PW_MAX_LENGTH } from '@/constants/validation';
 
 import {
   DefaultMessageStyle,
@@ -36,7 +36,7 @@ const ShellReadLine = ({ type, message, disabled }: ShellLineProps) => {
       <input
         type={isPassword ? 'password' : 'text'}
         css={InputStyle}
-        maxLength={MAX_SHELL_INPUT_LENGTH}
+        maxLength={USER_PW_MAX_LENGTH + 1}
         disabled={disabled}
         autoComplete="off"
         id="readline"
