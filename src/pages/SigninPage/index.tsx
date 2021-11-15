@@ -26,6 +26,7 @@ const SigninPage: FC = () => {
       throw new Error(error);
     }
   };
+
   return (
     <div css={layoutStyle}>
       <header css={headerStyle}>

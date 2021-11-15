@@ -31,9 +31,7 @@ const yesOrNoValidation = (
   val: string,
   message: string,
 ): ReturnType<FormElementType['validation']> => {
-  if (!['y', 'n'].includes(val)) {
-    return { isValid: false, message };
-  }
+  if (val !== 'y') return { isValid: false, message };
 
   return { isValid: true };
 };
