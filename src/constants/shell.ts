@@ -9,28 +9,26 @@ export const SHELL_FIRST_LINE_PREFIX = 'telbby init v0.1.0';
 export const SHELL_ERROR_USER_ACCESS_DENIED = 'Access denied';
 export const SHELL_ERROR_USER_SIGNUP_DENIED = 'Signup denied';
 
-const userIdValidation = (
+export type ValidationType = (
   val: string,
-): ReturnType<FormElementType['validation']> => {
+  message?: string,
+) => { isValid: boolean; message?: string };
+
+const userIdValidation: ValidationType = (val) => {
   const [isValid, message] = idValidator(val);
   if (!isValid) return { isValid, message };
 
   return { isValid: true };
 };
 
-const passwordValidation = (
-  val: string,
-): ReturnType<FormElementType['validation']> => {
+const passwordValidation: ValidationType = (val) => {
   const [isValid, message] = pwValidator(val);
   if (!isValid) return { isValid, message };
 
   return { isValid: true };
 };
 
-const yesOrNoValidation = (
-  val: string,
-  message: string,
-): ReturnType<FormElementType['validation']> => {
+const yesOrNoValidation: ValidationType = (val, message) => {
   if (val !== 'y') return { isValid: false, message };
 
   return { isValid: true };
@@ -56,7 +54,7 @@ export const SHELL_FORM_ELEMENT: Record<
     {
       type: ShellLineType.Question,
       message: 'Sign in? [y/n]',
-      validation: (val: string): ReturnType<FormElementType['validation']> =>
+      validation: (val) =>
         yesOrNoValidation(val, SHELL_ERROR_USER_ACCESS_DENIED),
     },
   ],
@@ -76,7 +74,7 @@ export const SHELL_FORM_ELEMENT: Record<
     {
       type: ShellLineType.Question,
       message: 'Would you like to join? [y/n]',
-      validation: (val: string): ReturnType<FormElementType['validation']> =>
+      validation: (val) =>
         yesOrNoValidation(val, SHELL_ERROR_USER_SIGNUP_DENIED),
     },
   ],
