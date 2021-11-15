@@ -27,7 +27,8 @@ export type ShellLineProps = {
 const ShellReadLine = ({ type, message, disabled }: ShellLineProps) => {
   const isPassword = message === 'password';
   const [inputWidth, setInputWidth] = useState(1);
-  const changeInputWidth = (e) => setInputWidth(e.target.value.length);
+  const changeInputWidth = (e: { target: HTMLInputElement }) =>
+    setInputWidth(e.target.value.length);
 
   return (
     <>
