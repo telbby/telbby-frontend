@@ -19,7 +19,7 @@ describe('ShellLine Component', () => {
       <ShellLine type={props.type} message={props.message} />,
     );
 
-    expect(container).toHaveTextContent('config username:');
+    expect(container).toHaveTextContent('configusername:');
     expect(screen.getByRole('textbox')).toHaveAttribute('type', 'text');
   });
   it(`message가 password일 경우, <input type='password'/> 를 렌더링합니다.`, () => {
@@ -32,7 +32,7 @@ describe('ShellLine Component', () => {
       <ShellLine type={props.type} message={props.message} />,
     );
 
-    expect(container).toHaveTextContent('question password:');
+    expect(container).toHaveTextContent('questionpassword:');
     expect(screen.getByLabelText('password:')).toHaveAttribute(
       'type',
       'password',

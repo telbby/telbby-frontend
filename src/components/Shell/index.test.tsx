@@ -30,11 +30,9 @@ describe('Shell Component 테스트', () => {
     const { type: firstLineType, message: firstLineContent } = formElement[0];
     const { type: secondLineType, message: secondLineContent } = formElement[1];
 
-    expect(container).toHaveTextContent(
-      `${firstLineType} ${firstLineContent}:`,
-    );
+    expect(container).toHaveTextContent(`${firstLineType}${firstLineContent}:`);
     expect(container).not.toHaveTextContent(
-      `${secondLineType} ${secondLineContent}:`,
+      `${secondLineType}${secondLineContent}:`,
     );
   });
   it(`Shell Component에 Enter를 입력하면, 다음 요소를 렌더링합니다.`, () => {
@@ -43,7 +41,7 @@ describe('Shell Component 테스트', () => {
     const formElement = SHELL_FORM_ELEMENT[shellType];
     const { type: secondLineType, message: secondLineContent } = formElement[1];
     expect(container).not.toHaveTextContent(
-      `${secondLineType} ${secondLineContent}:`,
+      `${secondLineType}${secondLineContent}:`,
     );
 
     const inputs = screen.getAllByRole('textbox');
@@ -52,7 +50,7 @@ describe('Shell Component 테스트', () => {
     userEvent.type(lastInputElement, 'sampleId{enter}');
 
     expect(container).toHaveTextContent(
-      `${secondLineType} ${secondLineContent}:`,
+      `${secondLineType}${secondLineContent}:`,
     );
   });
 });
