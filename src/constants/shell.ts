@@ -1,5 +1,6 @@
 import { FormElementType } from '@/components/Shell';
 import { ShellLineType } from '@/components/ShellLine';
+import { idValidator, pwValidator } from '@/utils/validation';
 
 export const SHELL_SUCCESS_MESSAGE =
   'Congrats! service has been added to telbby.';
@@ -7,40 +8,78 @@ export const SHELL_SUCCESS_MESSAGE =
 export const SHELL_FIRST_LINE_PREFIX = 'telbby init v0.1.0';
 export const SHELL_ERROR_USER_ACCESS_DENIED = 'Access denied';
 export const SHELL_ERROR_USER_SIGNUP_DENIED = 'Signup denied';
-export const MAX_SHELL_INPUT_LENGTH = 15;
+
+const userIdValidation = (
+  val: string,
+): ReturnType<FormElementType['validation']> => {
+  const [isValid, message] = idValidator(val);
+  if (!isValid) return { isValid, message };
+
+  return { isValid: true };
+};
+
+const passwordValidation = (
+  val: string,
+): ReturnType<FormElementType['validation']> => {
+  const [isValid, message] = pwValidator(val);
+  if (!isValid) return { isValid, message };
+
+  return { isValid: true };
+};
+
+const yesOrNoValidation = (
+  val: string,
+  message: string,
+): ReturnType<FormElementType['validation']> => {
+  if (!['y', 'n'].includes(val)) {
+    return { isValid: false, message };
+  }
+
+  return { isValid: true };
+};
 
 export const SHELL_FORM_ELEMENT: Record<
   'login' | 'signup' | 'services' | 'service-settings',
   FormElementType[]
 > = {
   login: [
-    { type: ShellLineType.Question, message: 'username', formKey: 'userId' },
-    { type: ShellLineType.Question, message: 'password', formKey: 'password' },
+    {
+      type: ShellLineType.Question,
+      message: 'username',
+      formKey: 'userId',
+      validation: userIdValidation,
+    },
+    {
+      type: ShellLineType.Question,
+      message: 'password',
+      formKey: 'password',
+      validation: passwordValidation,
+    },
     {
       type: ShellLineType.Question,
       message: 'Sign in? [y/n]',
-      validation: (val: string): ReturnType<FormElementType['validation']> => {
-        if (!['y', 'n'].includes(val)) {
-          return { isValid: false, message: SHELL_ERROR_USER_ACCESS_DENIED };
-        }
-
-        return { isValid: true };
-      },
+      validation: (val: string): ReturnType<FormElementType['validation']> =>
+        yesOrNoValidation(val, SHELL_ERROR_USER_ACCESS_DENIED),
     },
   ],
   signup: [
-    { type: ShellLineType.Question, message: 'username', formKey: 'userId' },
-    { type: ShellLineType.Question, message: 'password', formKey: 'password' },
+    {
+      type: ShellLineType.Question,
+      message: 'username',
+      formKey: 'userId',
+      validation: userIdValidation,
+    },
+    {
+      type: ShellLineType.Question,
+      message: 'password',
+      formKey: 'password',
+      validation: passwordValidation,
+    },
     {
       type: ShellLineType.Question,
       message: 'Would you like to join? [y/n]',
-      validation: (val: string): ReturnType<FormElementType['validation']> => {
-        if (!['y', 'n'].includes(val)) {
-          return { isValid: false, message: SHELL_ERROR_USER_SIGNUP_DENIED };
-        }
-
-        return { isValid: true };
-      },
+      validation: (val: string): ReturnType<FormElementType['validation']> =>
+        yesOrNoValidation(val, SHELL_ERROR_USER_SIGNUP_DENIED),
     },
   ],
   services: [
