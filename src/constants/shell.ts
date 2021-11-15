@@ -23,8 +23,11 @@ const passwordValidation: FormElementType['validation'] = (val) => {
   return { isValid: true };
 };
 
-const yesOrNoValidation: FormElementType['validation'] = (val, message) => {
-  if (val !== 'y') return { isValid: false, message };
+const yesOrNoValidation: FormElementType['validation'] = (
+  val,
+  messageWhenInvalid,
+) => {
+  if (val !== 'y') return { isValid: false, message: messageWhenInvalid };
 
   return { isValid: true };
 };

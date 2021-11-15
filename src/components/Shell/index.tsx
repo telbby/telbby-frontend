@@ -20,7 +20,7 @@ export type FormElementType = ShellLineProps & {
   formKey?: string;
   validation?: (
     val: string,
-    message?: string,
+    messageWhenInvalid?: string,
   ) => { isValid: boolean; message?: string };
 };
 
