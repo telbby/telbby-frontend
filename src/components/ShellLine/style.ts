@@ -20,9 +20,17 @@ export const ErrorMessageStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorGray3};
 `;
 
-export const InputStyle = (theme: Theme): SerializedStyles => css`
+type InputStyleProp = {
+  theme: Theme;
+  width?: string;
+};
+
+export const InputStyle = ({
+  theme,
+  width,
+}: InputStyleProp): SerializedStyles => css`
   all: unset;
-  width: fit-content;
+  width: ${width ?? '1ch'};
   caret-color: ${theme.colorPrimary};
   color: ${theme.colorGray1};
 `;

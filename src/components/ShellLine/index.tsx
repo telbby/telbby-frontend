@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { USER_PW_MAX_LENGTH } from '@/constants/validation';
 
@@ -26,6 +26,8 @@ export type ShellLineProps = {
 
 const ShellReadLine = ({ type, message, disabled }: ShellLineProps) => {
   const isPassword = message === 'password';
+  const [inputWidth, setInputWidth] = useState(1);
+  const changeInputWidth = (e) => setInputWidth(e.target.value.length);
 
   return (
     <>
@@ -35,11 +37,12 @@ const ShellReadLine = ({ type, message, disabled }: ShellLineProps) => {
       </label>
       <input
         type={isPassword ? 'password' : 'text'}
-        css={InputStyle}
+        css={(theme) => InputStyle({ theme, width: `${inputWidth}ch` })}
         maxLength={USER_PW_MAX_LENGTH + 1}
         disabled={disabled}
         autoComplete="off"
         id="readline"
+        onChange={changeInputWidth}
       />
     </>
   );
@@ -59,7 +62,7 @@ const ShellPrintLine = ({ type, message, disabled }: ShellLineProps) => {
       {!isError && (
         <input
           type="text"
-          css={InputStyle}
+          css={(theme) => InputStyle({ theme })}
           maxLength={0}
           disabled={disabled}
           id="printline"
