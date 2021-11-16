@@ -1,9 +1,14 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+
+import { render } from '@testing-library/react';
 
 import App from './App';
 
-it(`should be 'Hello Hello`, () => {
-  render(<App />);
-  screen.getByText('Hello Hello');
+it(`App rendering test`, () => {
+  render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>,
+  );
 });

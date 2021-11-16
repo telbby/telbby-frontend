@@ -1,11 +1,8 @@
 import React, { FC } from 'react';
 
-import { css } from '@emotion/react';
 import { useCountValue, useSetCount } from '@/atoms/countState';
 
-const countValueStyle = css`
-  color: blue;
-`;
+import { countValueStyle } from './style';
 
 const CountPage: FC = () => {
   const count = useCountValue();
