@@ -2,6 +2,7 @@ import { SerializedStyles, Theme, css } from '@emotion/react';
 
 export const shellContainerStyle = css`
   width: fit-content;
+  outline: none;
 `;
 
 type FormStyleProps = {
