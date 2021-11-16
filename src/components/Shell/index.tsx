@@ -14,7 +14,7 @@ import {
 import useArrayIterator from '@/hooks/useArrayIterator';
 
 import ShellLine, { ShellLineProps, ShellLineType } from '../ShellLine';
-import { fieldsetStyle, formStyle } from './style';
+import { fieldsetStyle, formStyle, shellContainerStyle } from './style';
 
 export type FormElementType = ShellLineProps & {
   formKey?: string;
@@ -135,6 +135,7 @@ const Shell = ({
     <div
       role="button"
       tabIndex={0}
+      css={shellContainerStyle}
       onKeyPress={handleEnter}
       onClick={setFocusOnLastLine}
     >
