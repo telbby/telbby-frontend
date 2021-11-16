@@ -55,30 +55,32 @@ const ConfirmModal: FC<ConfirmModalProps> = ({
   }, [isOpen]);
 
   return (
-    <Overlay visible={isOpen} animation={false}>
-      <div css={modalWrapperStyle}>
-        <div ref={modalEl} css={modalInnerStyle}>
-          <div css={modalMessageStyle}>{message}</div>
+    isOpen && (
+      <Overlay>
+        <div css={modalWrapperStyle}>
+          <div ref={modalEl} css={modalInnerStyle}>
+            <div css={modalMessageStyle}>{message}</div>
 
-          <div css={modalButtonWrapperStyle}>
-            <button
-              type="button"
-              onClick={cancelAndClose}
-              css={modalCancelButtonStyle}
-            >
-              {cancelContent}
-            </button>
-            <button
-              type="button"
-              onClick={acceptAndClose}
-              css={modalAcceptButtonStyle}
-            >
-              {acceptContent}
-            </button>
+            <div css={modalButtonWrapperStyle}>
+              <button
+                type="button"
+                onClick={cancelAndClose}
+                css={modalCancelButtonStyle}
+              >
+                {cancelContent}
+              </button>
+              <button
+                type="button"
+                onClick={acceptAndClose}
+                css={modalAcceptButtonStyle}
+              >
+                {acceptContent}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </Overlay>
+      </Overlay>
+    )
   );
 };
 
