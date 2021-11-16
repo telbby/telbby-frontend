@@ -18,8 +18,6 @@ const ConfirmModalRoot: FC = () => {
     setConfirmModalState((prevState) => ({ ...prevState, isOpen: false }));
   }, []);
 
-  const emptyHandler = useCallback(() => {}, []);
-
   return (
     <ModalPortal>
       <ConfirmModal
@@ -27,8 +25,8 @@ const ConfirmModalRoot: FC = () => {
         message={message}
         cancelContent={cancelContent}
         acceptContent={acceptContent}
-        cancelHandler={cancelHandler ?? emptyHandler}
-        acceptHandler={acceptHandler ?? emptyHandler}
+        cancelHandler={cancelHandler}
+        acceptHandler={acceptHandler}
         closeHandler={closeHandler}
       />
     </ModalPortal>
