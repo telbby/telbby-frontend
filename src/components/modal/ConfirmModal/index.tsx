@@ -32,12 +32,12 @@ const ConfirmModal: FC<ConfirmModalProps> = ({
   const modalEl = useRef(null);
 
   const cancelAndClose = () => {
-    closeHandler();
+    if (closeHandler) closeHandler();
     if (cancelHandler) cancelHandler();
   };
 
   const acceptAndClose = () => {
-    closeHandler();
+    if (closeHandler) closeHandler();
     if (acceptHandler) acceptHandler();
   };
 
