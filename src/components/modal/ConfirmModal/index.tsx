@@ -11,13 +11,13 @@ import {
 } from './style';
 
 type ConfirmModalProps = {
-  isOpen: boolean;
-  message: string;
-  cancelContent: string;
-  acceptContent: string;
-  cancelHandler: () => void;
-  acceptHandler: () => void;
-  closeHandler: () => void;
+  isOpen?: boolean;
+  message?: string;
+  cancelContent?: string;
+  acceptContent?: string;
+  cancelHandler?: () => void;
+  acceptHandler?: () => void;
+  closeHandler?: () => void;
 };
 
 const ConfirmModal: FC<ConfirmModalProps> = ({
@@ -33,16 +33,16 @@ const ConfirmModal: FC<ConfirmModalProps> = ({
 
   const cancelAndClose = () => {
     closeHandler();
-    cancelHandler();
+    if (cancelHandler) cancelHandler();
   };
 
   const acceptAndClose = () => {
     closeHandler();
-    acceptHandler();
+    if (acceptHandler) acceptHandler();
   };
 
   const handleClickOutside = ({ target }) => {
-    if (isOpen && !modalEl.current.contains(target)) {
+    if (isOpen && closeHandler && !modalEl.current.contains(target)) {
       closeHandler();
     }
   };
@@ -52,7 +52,7 @@ const ConfirmModal: FC<ConfirmModalProps> = ({
       window.addEventListener('click', handleClickOutside);
     }
     return () => window.removeEventListener('click', handleClickOutside);
-  }, [isOpen]);
+  }, [isOpen, closeHandler]);
 
   return (
     isOpen && (
@@ -82,6 +82,16 @@ const ConfirmModal: FC<ConfirmModalProps> = ({
       </Overlay>
     )
   );
+};
+
+ConfirmModal.defaultProps = {
+  isOpen: false,
+  message: '',
+  cancelContent: 'cancel',
+  acceptContent: 'accept',
+  cancelHandler: null,
+  acceptHandler: null,
+  closeHandler: null,
 };
 
 export default ConfirmModal;
