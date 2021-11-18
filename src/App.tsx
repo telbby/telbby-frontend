@@ -8,13 +8,11 @@ import NotFoundPage from './pages/NotFoundPage';
 
 const App: FC = () => {
   return (
-    <>
-      <Switch>
-        <Route path={Uri.home} exact component={HomePage} />
-        <Route path={Uri.count} exact component={CountPage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-    </>
+    <Switch>
+      <Route path={Uri.home} exact component={HomePage} />
+      <Route path={Uri.count} exact component={CountPage} />
+      <Route component={NotFoundPage} />
+    </Switch>
   );
 };
 
