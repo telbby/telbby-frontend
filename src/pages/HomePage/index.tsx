@@ -30,8 +30,8 @@ const HomePage: FC = () => {
       <Shell
         type="services"
         requestWhenQuestionDone={requestWhenQuestionDone}
-        width={789}
-        height={208}
+        width="90%"
+        height="200px"
       />
     </Layout>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { fireEvent, render, screen } from '@testing-library/react';
+
 import { SHELL_FORM_ELEMENT } from '@/constants/shell';
 
 import Shell from '.';
@@ -17,8 +17,8 @@ describe('Shell Component', () => {
       <Shell
         type={shellType}
         requestWhenQuestionDone={requestWhenQuestionDone}
-        width={789}
-        height={208}
+        width="789px"
+        height="208px"
       />,
     );
 
@@ -41,8 +41,8 @@ describe('Shell Component', () => {
       <Shell
         type={shellType}
         requestWhenQuestionDone={requestWhenQuestionDone}
-        width={789}
-        height={208}
+        width="789px"
+        height="208px"
       />,
     );
 

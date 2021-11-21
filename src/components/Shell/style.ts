@@ -2,8 +2,8 @@ import { SerializedStyles, Theme, css } from '@emotion/react';
 
 type FormStyleProps = {
   theme?: Theme;
-  width?: number;
-  height?: number;
+  width?: string;
+  height?: string;
 };
 
 export const formWrapperStyle = ({
@@ -11,8 +11,8 @@ export const formWrapperStyle = ({
   height,
 }: FormStyleProps): SerializedStyles => css`
   box-sizing: border-box;
-  width: ${width}px;
-  height: ${height}px;
+  width: ${width};
+  height: ${height};
   padding: 20px 24px;
   margin: 0 auto;
   box-shadow: 1px 3px 20px 3px rgba(0, 83, 191, 0.1);
