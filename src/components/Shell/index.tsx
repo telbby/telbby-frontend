@@ -14,7 +14,7 @@ import {
 import useArrayIterator from '@/hooks/useArrayIterator';
 
 import ShellLine, { ShellLineProps, ShellLineType } from '../ShellLine';
-import { fieldsetStyle, formStyle } from './style';
+import { fieldsetStyle, formStyle, formWrapperStyle } from './style';
 
 export type FormElementType = ShellLineProps & {
   formKey?: string;
@@ -128,8 +128,9 @@ const Shell = ({
       tabIndex={0}
       onKeyPress={handleEnter}
       onClick={setFocusOnLastLine}
+      css={formWrapperStyle({ width, height })}
     >
-      <form css={(theme) => formStyle({ theme, width, height })}>
+      <form css={formStyle}>
         <fieldset ref={fieldsetRef} css={fieldsetStyle}>
           <legend>Telbby Service Shell: </legend>
           {lines.map(({ type: lineType, message, disabled }, index) => (
