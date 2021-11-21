@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 
-import { columnCenterStyle } from '@/styles';
+import emptyImg from '@/assets/images/empty.png';
 
 import ServiceItem from '../ServiceItem';
-import { headerStyle, wrapperStyle } from './style';
+import { emptyStyle, headerStyle, listStyle, wrapperStyle } from './style';
 
 const dummy = [
   {
@@ -41,19 +41,28 @@ const dummy = [
 const ServiceList: FC = () => {
   return (
     <section css={wrapperStyle}>
-      <h2 css={headerStyle}>Services</h2>
-      <div css={columnCenterStyle}>
-        {dummy.map((service) => {
-          return (
-            <ServiceItem
-              key={service.id}
-              name={service.name}
-              domain={service.domain || ''}
-              clientId={service.clientId}
-            />
-          );
-        })}
-      </div>
+      {dummy && dummy.length > 0 ? (
+        <>
+          <h2 css={headerStyle}>Services</h2>
+          <div css={listStyle}>
+            {dummy.map((service) => {
+              return (
+                <ServiceItem
+                  key={service.id}
+                  name={service.name}
+                  domain={service.domain || ''}
+                  clientId={service.clientId}
+                />
+              );
+            })}
+          </div>
+        </>
+      ) : (
+        <div css={emptyStyle}>
+          <img src={emptyImg} alt="empty" />
+          <p>There are no services</p>
+        </div>
+      )}
     </section>
   );
 };
