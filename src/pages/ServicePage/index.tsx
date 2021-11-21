@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import Shell from '@/components/Shell';
 import Jumbotron from '@/components/common/Jumbotron';
 import Layout from '@/components/common/Layout';
+import ServiceList from '@/components/service/ServiceList';
 
 import { servicePageStyle } from './style';
 
@@ -31,6 +32,7 @@ const ServicePage: FC = () => {
           width="90%"
           height="200px"
         />
+        <ServiceList />
       </div>
     </Layout>
   );
