@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { authApi } from '@/apis';
 import Shell from '@/components/Shell';
@@ -10,9 +11,12 @@ import { LoginRequestBody } from '@/types';
 import { footerStyle, headerStyle, layoutStyle } from './style';
 
 const SigninPage: FC = () => {
+  const { push } = useHistory();
+
   const requestSignin = async (body: LoginRequestBody) => {
     try {
       await authApi.login(body);
+      push('/services');
     } catch (error) {
       if (!error.response) throw new Error(NETWORK_ERROR);
 
