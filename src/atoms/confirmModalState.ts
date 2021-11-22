@@ -6,7 +6,7 @@ import {
   useRecoilState,
 } from 'recoil';
 
-type ConfirmModalStateType = {
+export type ConfirmModalStateType = {
   isOpen: boolean;
   message: string;
   cancelContent: string;
