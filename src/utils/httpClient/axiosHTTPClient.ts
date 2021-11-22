@@ -39,7 +39,13 @@ class AxiosHTTPClient extends HTTPClient {
   }
 
   setHeader(key: string, value: string): void {
-    this.defaultRequestConfig.headers[key] = value;
+    this.defaultRequestConfig = {
+      ...this.defaultRequestConfig,
+      headers: {
+        ...this.defaultRequestConfig.headers,
+        [key]: value,
+      },
+    };
   }
 
   getHeader(): RequestHeaders {
