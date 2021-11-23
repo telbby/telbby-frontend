@@ -9,11 +9,15 @@ import {
 export type SnackbarStateType = {
   isOpen: boolean;
   message: string;
+  color: string;
+  backgroundColor: string;
 };
 
 const initialState: SnackbarStateType = {
   isOpen: false,
   message: '',
+  color: '#fff',
+  backgroundColor: '#000',
 };
 
 const snackbarState = atom({

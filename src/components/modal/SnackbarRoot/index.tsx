@@ -6,11 +6,16 @@ import Snackbar from '@/components/modal/Snackbar';
 
 const SnackbarRoot: FC = () => {
   const snackbarState = useSnackbarStateValue();
-  const { isOpen, message } = snackbarState;
+  const { isOpen, message, color, backgroundColor } = snackbarState;
 
   return (
     <ModalPortal>
-      <Snackbar isOpen={isOpen} message={message} />
+      <Snackbar
+        isOpen={isOpen}
+        message={message}
+        color={color}
+        backgroundColor={backgroundColor}
+      />
     </ModalPortal>
   );
 };

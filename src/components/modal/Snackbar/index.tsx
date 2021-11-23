@@ -9,9 +9,16 @@ import {
 type SnackbarProps = {
   isOpen?: boolean;
   message?: string;
+  color?: string;
+  backgroundColor?: string;
 };
 
-const Snackbar: FC<SnackbarProps> = ({ isOpen, message }) => {
+const Snackbar: FC<SnackbarProps> = ({
+  isOpen,
+  message,
+  color,
+  backgroundColor,
+}) => {
   const [isShowing, setIsShowing] = useState(false);
   const visibleStyle =
     isOpen && isShowing ? snackbarShowStyle : snackbarHideStyle;
@@ -21,7 +28,7 @@ const Snackbar: FC<SnackbarProps> = ({ isOpen, message }) => {
 
   return (
     <div
-      css={[snackbarWrapperStyle, visibleStyle]}
+      css={[snackbarWrapperStyle, visibleStyle, { color, backgroundColor }]}
       onTransitionEnd={hideMessageAfterFadeOutAnimation}
     >
       {isShowing ? message : ''}
@@ -32,6 +39,8 @@ const Snackbar: FC<SnackbarProps> = ({ isOpen, message }) => {
 Snackbar.defaultProps = {
   isOpen: false,
   message: '',
+  color: '#fff',
+  backgroundColor: '#000',
 };
 
 export default Snackbar;
