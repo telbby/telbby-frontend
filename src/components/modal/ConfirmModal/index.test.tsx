@@ -84,7 +84,7 @@ describe('<ConfirmModal/> component test', () => {
         <div>{otherElementContent}</div>
         <ConfrimModal
           isOpen
-          closeHandler={() => {
+          closeModal={() => {
             isCalledCloseHandler = true;
           }}
         />
