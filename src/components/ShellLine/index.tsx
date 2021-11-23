@@ -24,6 +24,8 @@ export type ShellLineProps = {
   disabled?: boolean;
 };
 
+// FIXME: 현재 ShellReadLine은 id 중복 문제가 발생할 수 있습니다.
+// 때문에, 추후 `nanoid` 등을 사용해 독립적인 id를 부여해야 합니다.
 const ShellReadLine = ({
   type,
   message,
@@ -44,7 +46,7 @@ const ShellReadLine = ({
           maxLength={maxLength}
           disabled={disabled}
           autoComplete="off"
-          aria-labelledby="readline"
+          id="readline"
         />
       </span>
     </>
