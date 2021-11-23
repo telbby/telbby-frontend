@@ -31,15 +31,13 @@ const ConfirmModal: FC<ConfirmModalProps> = ({
 }) => {
   const modalEl = useRef(null);
 
-  const cancelAndClose = () => {
+  const modalButtonHandlerWithClose = (handler: () => void) => {
     if (closeModal) closeModal();
-    if (cancelHandler) cancelHandler();
+    if (handler) handler();
   };
 
-  const acceptAndClose = () => {
-    if (closeModal) closeModal();
-    if (acceptHandler) acceptHandler();
-  };
+  const cancelAndClose = () => modalButtonHandlerWithClose(cancelHandler);
+  const acceptAndClose = () => modalButtonHandlerWithClose(acceptHandler);
 
   const handleClickOutside = ({ target }) => {
     if (isOpen && closeModal && !modalEl.current.contains(target)) {
