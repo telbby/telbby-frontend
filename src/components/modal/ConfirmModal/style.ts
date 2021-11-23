@@ -1,12 +1,16 @@
 import { css, Theme, SerializedStyles } from '@emotion/react';
 
 export const modalWrapperStyle = css`
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0.1);
 `;
 
 export const modalInnerStyle = (theme: Theme): SerializedStyles => css`
@@ -18,6 +22,7 @@ export const modalInnerStyle = (theme: Theme): SerializedStyles => css`
   border-radius: 12px;
   background-color: ${theme.colorWhite};
   cursor: default;
+  overflow: hidden;
 `;
 
 export const modalMessageStyle = (theme: Theme): SerializedStyles => css`

@@ -1,6 +1,5 @@
 import React, { FC, useRef, useEffect } from 'react';
 
-import Overlay from '@/components/modal/Overlay';
 import {
   modalWrapperStyle,
   modalInnerStyle,
@@ -54,30 +53,28 @@ const ConfirmModal: FC<ConfirmModalProps> = ({
 
   return (
     isOpen && (
-      <Overlay>
-        <div css={modalWrapperStyle}>
-          <div ref={modalEl} css={modalInnerStyle}>
-            <div css={modalMessageStyle}>{message}</div>
+      <div css={modalWrapperStyle}>
+        <div ref={modalEl} css={modalInnerStyle}>
+          <div css={modalMessageStyle}>{message}</div>
 
-            <div css={modalButtonWrapperStyle}>
-              <button
-                type="button"
-                onClick={cancelAndClose}
-                css={modalCancelButtonStyle}
-              >
-                {cancelContent}
-              </button>
-              <button
-                type="button"
-                onClick={acceptAndClose}
-                css={modalAcceptButtonStyle}
-              >
-                {acceptContent}
-              </button>
-            </div>
+          <div css={modalButtonWrapperStyle}>
+            <button
+              type="button"
+              onClick={cancelAndClose}
+              css={modalCancelButtonStyle}
+            >
+              {cancelContent}
+            </button>
+            <button
+              type="button"
+              onClick={acceptAndClose}
+              css={modalAcceptButtonStyle}
+            >
+              {acceptContent}
+            </button>
           </div>
         </div>
-      </Overlay>
+      </div>
     )
   );
 };
