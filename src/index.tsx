@@ -8,6 +8,7 @@ import { ThemeProvider } from '@emotion/react';
 import App from './App';
 import ConfirmModalRoot from './components/modal/ConfirmModalRoot';
 import GlobalStyle from './styles/global';
+import SnackbarRoot from './components/modal/SnackbarRoot';
 import theme from './styles/theme';
 
 ReactDOM.render(
@@ -17,6 +18,7 @@ ReactDOM.render(
         <GlobalStyle />
         <App />
         <ConfirmModalRoot />
+        <SnackbarRoot />
       </ThemeProvider>
     </RecoilRoot>
   </BrowserRouter>,
