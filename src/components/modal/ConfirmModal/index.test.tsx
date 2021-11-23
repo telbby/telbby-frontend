@@ -2,30 +2,30 @@ import React from 'react';
 
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import ConfrimModal from '.';
+import ConfirmModal from '.';
 
 describe('<ConfirmModal/> component test', () => {
   it('모달이 열렸을 때, prop으로 받은 메시지를 렌더링해야 합니다.', () => {
     const message = 'message';
-    render(<ConfrimModal isOpen message={message} />);
+    render(<ConfirmModal isOpen message={message} />);
     expect(screen.queryByText(message)).toBeInTheDocument();
   });
 
   it('모달이 열리지 않으면 렌더링되지 않아야 합니다.', () => {
     const message = 'message';
-    render(<ConfrimModal isOpen={false} message={message} />);
+    render(<ConfirmModal isOpen={false} message={message} />);
     expect(screen.queryByText(message)).toBeNull();
   });
 
   it('확인 버튼 내용을 바꿀 수 있어야 합니다.', () => {
     const acceptButtonContent = 'diff-accept-button';
-    render(<ConfrimModal isOpen acceptContent={acceptButtonContent} />);
+    render(<ConfirmModal isOpen acceptContent={acceptButtonContent} />);
     expect(screen.queryByText(acceptButtonContent)).toBeInTheDocument();
   });
 
   it('취소 버튼 내용을 바꿀 수 있어야 합니다.', () => {
     const cancelButtonContent = 'diff-cancel-button';
-    render(<ConfrimModal isOpen cancelContent={cancelButtonContent} />);
+    render(<ConfirmModal isOpen cancelContent={cancelButtonContent} />);
     expect(screen.queryByText(cancelButtonContent)).toBeInTheDocument();
   });
 
@@ -34,7 +34,7 @@ describe('<ConfirmModal/> component test', () => {
     let isCalledAcceptHandler = false;
 
     render(
-      <ConfrimModal
+      <ConfirmModal
         isOpen
         acceptContent={acceptButtonContent}
         acceptHandler={() => {
@@ -57,7 +57,7 @@ describe('<ConfirmModal/> component test', () => {
     let isCalledCancelHandler = false;
 
     render(
-      <ConfrimModal
+      <ConfirmModal
         isOpen
         acceptContent={cancelButtonContent}
         acceptHandler={() => {
@@ -82,7 +82,7 @@ describe('<ConfirmModal/> component test', () => {
     render(
       <>
         <div>{otherElementContent}</div>
-        <ConfrimModal
+        <ConfirmModal
           isOpen
           closeModal={() => {
             isCalledCloseHandler = true;
