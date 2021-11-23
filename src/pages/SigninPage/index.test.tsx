@@ -12,9 +12,13 @@ describe('SigninPage 테스트', () => {
     </MemoryRouter>
   );
 
-  it(`로그인 문구와 로고를 렌더링해야 합니다.`, () => {
+  it(`로그인 문구를 렌더링해야 합니다.`, () => {
     render(signupPageContainer);
     expect(screen.getByRole('heading')).toHaveTextContent('Sign in to telbby');
+  });
+
+  it(`로고를 렌더링해야 합니다.`, () => {
+    render(signupPageContainer);
     expect(screen.getByAltText('logo'));
   });
 
