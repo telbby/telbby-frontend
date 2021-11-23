@@ -12,8 +12,7 @@ export const snackbarWrapperStyle = css`
   text-align: center;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 
-  transition: all 0.6s ease;
-  transition-delay: 0.1s;
+  transition: 0.6s;
   transform: translate(-50%, 0);
 `;
 
