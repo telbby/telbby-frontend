@@ -17,7 +17,7 @@ type ConfirmModalProps = {
   acceptContent?: string;
   cancelHandler?: () => void;
   acceptHandler?: () => void;
-  closeHandler?: () => void;
+  closeModal?: () => void;
 };
 
 const ConfirmModal: FC<ConfirmModalProps> = ({
@@ -27,23 +27,23 @@ const ConfirmModal: FC<ConfirmModalProps> = ({
   acceptContent,
   cancelHandler,
   acceptHandler,
-  closeHandler,
+  closeModal,
 }) => {
   const modalEl = useRef(null);
 
   const cancelAndClose = () => {
-    if (closeHandler) closeHandler();
+    if (closeModal) closeModal();
     if (cancelHandler) cancelHandler();
   };
 
   const acceptAndClose = () => {
-    if (closeHandler) closeHandler();
+    if (closeModal) closeModal();
     if (acceptHandler) acceptHandler();
   };
 
   const handleClickOutside = ({ target }) => {
-    if (isOpen && closeHandler && !modalEl.current.contains(target)) {
-      closeHandler();
+    if (isOpen && closeModal && !modalEl.current.contains(target)) {
+      closeModal();
     }
   };
 
@@ -52,7 +52,7 @@ const ConfirmModal: FC<ConfirmModalProps> = ({
       window.addEventListener('click', handleClickOutside);
     }
     return () => window.removeEventListener('click', handleClickOutside);
-  }, [isOpen, closeHandler]);
+  }, [isOpen, closeModal]);
 
   return (
     isOpen && (
@@ -91,7 +91,7 @@ ConfirmModal.defaultProps = {
   acceptContent: 'accept',
   cancelHandler: null,
   acceptHandler: null,
-  closeHandler: null,
+  closeModal: null,
 };
 
 export default ConfirmModal;

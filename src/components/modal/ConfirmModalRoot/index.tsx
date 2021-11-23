@@ -14,7 +14,7 @@ const ConfirmModalRoot: FC = () => {
     acceptHandler,
   } = confirmModalState;
 
-  const closeHandler = useCallback(() => {
+  const closeModal = useCallback(() => {
     setConfirmModalState((prevState) => ({ ...prevState, isOpen: false }));
   }, []);
 
@@ -27,7 +27,7 @@ const ConfirmModalRoot: FC = () => {
         acceptContent={acceptContent}
         cancelHandler={cancelHandler}
         acceptHandler={acceptHandler}
-        closeHandler={closeHandler}
+        closeModal={closeModal}
       />
     </ModalPortal>
   );
