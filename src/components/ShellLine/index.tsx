@@ -44,7 +44,7 @@ const ShellReadLine = ({
           maxLength={maxLength}
           disabled={disabled}
           autoComplete="off"
-          id="readline"
+          aria-labelledby="readline"
         />
       </span>
     </>
