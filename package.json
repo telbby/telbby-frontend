@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "dev": "env-cmd webpack serve --mode development --config ./config/webpack.config.js",
-    "build": "env-cmd webpack --mode production --progress ./config/webpack.config.js",
+    "build": "env-cmd webpack --mode production --progress --config ./config/webpack.config.js",
     "lint": "yarn eslint --ext .tsx --ext .ts .",
     "lint:fix": "yarn eslint --ext .tsx --ext .ts . --fix",
     "prettier:write": "yarn prettier --write .",

@@ -6,6 +6,7 @@ import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from '@emotion/react';
 
 import App from './App';
+import ConfirmModalRoot from './components/modal/ConfirmModalRoot';
 import GlobalStyle from './styles/global';
 import theme from './styles/theme';
 
@@ -15,6 +16,7 @@ ReactDOM.render(
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <App />
+        <ConfirmModalRoot />
       </ThemeProvider>
     </RecoilRoot>
   </BrowserRouter>,

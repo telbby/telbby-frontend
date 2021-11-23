@@ -9,6 +9,7 @@ const theme = {
   colorGray1: '#7F8086',
   colorGray2: '#9196AA',
   colorGray3: '#C4C4C4',
+  colorGray4: '#EFEFEF',
   colorIndigo: '#465172',
   colorBrown: '#554545',
   colorSuccess: '#6DCCA3',
