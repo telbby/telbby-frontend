@@ -13,7 +13,6 @@ export const snackbarWrapperStyle = css`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 
   transition: 0.6s;
-  transform: translate(-50%, 0);
 `;
 
 export const snackbarHideStyle = css`
