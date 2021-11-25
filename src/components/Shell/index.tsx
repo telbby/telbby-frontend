@@ -145,6 +145,7 @@ const Shell = ({
           {lines.map(
             ({ type: lineType, message, maxLength, disabled }, index) => (
               <ShellLine
+                // FIXME: #23 이 머지되면 nanoid 패키지에서 id를 관리하도록 수정해야 합니다.
                 // eslint-disable-next-line react/no-array-index-key
                 key={`${index}lineType`}
                 type={lineType}
