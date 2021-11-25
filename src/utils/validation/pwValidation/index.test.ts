@@ -1,19 +1,20 @@
-import { WARNING_PW_EMPTY, WARNING_PW_LENGTH } from '@/constants/validation';
-
 import { isPwValid, pwValidator } from '.';
 
+const WARNING_PW_EMPTY = 'Please enter your password';
+const WARNING_PW_LENGTH = '`The password must be 10 ~ 35 characters long';
+
 describe('pwValidator() 함수 테스트', () => {
-  it(`공백문자열은 거짓과 해당하는 경고 문자열을 반환해야 합니다.`, () => {
+  it('공백문자열은 거짓과 해당하는 경고 문자열을 반환해야 합니다.', () => {
     const result = pwValidator('');
     expect(result[0]).toBe(false);
     expect(result[1]).toBe(WARNING_PW_EMPTY);
   });
-  it(`10자보다 길이가 짧을 경우 거짓과 해당하는 경고 문자열을 반환해야 합니다.`, () => {
+  it('10자보다 길이가 짧을 경우 거짓과 해당하는 경고 문자열을 반환해야 합니다.', () => {
     const result = pwValidator('1');
     expect(result[0]).toBe(false);
     expect(result[1]).toBe(WARNING_PW_LENGTH);
   });
-  it(`35자보다 길이가 길 경우 거짓과 해당하는 경고 문자열을 반환해야 합니다.`, () => {
+  it('35자보다 길이가 길 경우 거짓과 해당하는 경고 문자열을 반환해야 합니다.', () => {
     const MAX_LENGTH = 35;
     const result = pwValidator('1'.repeat(MAX_LENGTH + 1));
     expect(result[0]).toBe(false);
