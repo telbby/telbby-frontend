@@ -14,7 +14,7 @@ const useSnackbar = (
   showMessage: (message: string, config: ShowSnackbarType) => void;
   setConfig: (config: ShowSnackbarType) => void;
 } => {
-  const [timerDuration, setTimerDuration] = useState(
+  const [showDuration, setShowDuration] = useState(
     initialConfig.duration ?? DEFAULT_SNACKBAR_SHOW_DURATION,
   );
   const [snackbarState, setSnackbarState] = useSnackbarState();
@@ -25,19 +25,22 @@ const useSnackbar = (
 
   const showMessage = (message: string, config: ShowSnackbarType) => {
     if (config.duration >= 0) {
-      setTimerDuration(config.duration);
+      setShowDuration(config.duration);
     }
     setConfig({ ...config, message, isOpen: true });
   };
 
   useEffect(() => {
+    const timerDuration = showDuration + SNACKBAR_ANIMATION_DURATION;
+
     if (timer.current) clearTimeout(timer.current);
     if (!snackbarState.isOpen) return;
 
-    timer.current = setTimeout(() => {
-      setConfig({ isOpen: false });
-    }, timerDuration + SNACKBAR_ANIMATION_DURATION);
-  }, [snackbarState]);
+    timer.current = setTimeout(
+      () => setConfig({ isOpen: false }),
+      timerDuration,
+    );
+  }, [snackbarState, showDuration]);
 
   useEffect(() => {
     if (initialConfig) setConfig(initialConfig);
