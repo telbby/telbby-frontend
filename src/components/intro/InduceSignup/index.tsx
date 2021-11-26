@@ -16,7 +16,7 @@ const InduceSignup: FC = () => {
       <div css={wrapperStyle}>
         <div>
           <p css={descriptionStyle}>Get user feedback with Telbby</p>
-          <h2 css={titleStyle}>Go to sign up quickly</h2>
+          <h2 css={titleStyle}>Try Our Service by Signing up in 10 Seconds!</h2>
         </div>
         <div>
           <Link to={Uri.signup}>

@@ -8,7 +8,7 @@ import InduceSignup from '.';
 
 describe('<InduceSignup/> component test', () => {
   it('회원가입을 유도할 수 있는 문구를 렌더링해야 합니다.', () => {
-    const title = 'Go to sign up quickly';
+    const title = 'Try Our Service by Signing up in 10 Seconds!';
     const description = 'Get user feedback with Telbby';
 
     render(
