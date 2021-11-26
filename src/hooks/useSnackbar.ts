@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { SnackbarStateType, useSnackbarState } from '@/atoms/snackbarState';
 
 const SNACKBAR_ANIMATION_DURATION = 600;
-const DEFAULT_SNACKBAR_DURATION = 100;
+const DEFAULT_SNACKBAR_SHOW_DURATION = 100;
 
 type ShowSnackbarType = Partial<Omit<SnackbarStateType, 'isOpen'>> & {
   duration?: number;
@@ -15,7 +15,7 @@ const useSnackbar = (
   setConfig: (config: ShowSnackbarType) => void;
 } => {
   const [timerDuration, setTimerDuration] = useState(
-    initialConfig.duration ?? DEFAULT_SNACKBAR_DURATION,
+    initialConfig.duration ?? DEFAULT_SNACKBAR_SHOW_DURATION,
   );
   const [snackbarState, setSnackbarState] = useSnackbarState();
   const timer = useRef(null);
