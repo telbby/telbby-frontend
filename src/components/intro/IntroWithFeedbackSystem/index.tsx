@@ -14,7 +14,7 @@ const IntroWithFeedbackSystem: FC = () => {
       </div>
       <div css={titleWrapperStyle}>
         <IntroTitle
-          title={['Check a Lot of Feedback', 'at Once!']}
+          title={['Check a Lot of Feedback', 'at Once']}
           descList={['Telbby helps you communicate easily with users.']}
         />
       </div>

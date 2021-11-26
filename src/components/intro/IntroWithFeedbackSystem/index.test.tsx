@@ -6,7 +6,7 @@ import IntroWithFeedbackSystem from '.';
 
 describe('<IntroWithFeedbackSystem/> component test', () => {
   it('서비스 소개 제목을 렌더링해야 합니다.', () => {
-    const titleList = ['Check a Lot of Feedback', 'at Once!'];
+    const titleList = ['Check a Lot of Feedback', 'at Once'];
     const titleContent = titleList.reduce((acc, cur) => acc + cur, '');
 
     render(<IntroWithFeedbackSystem />);
