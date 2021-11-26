@@ -21,12 +21,21 @@ export const titleStyle = (theme: Theme): SerializedStyles => css`
   font-size: 40px;
 `;
 
-export const goSignupLinkStyle = (theme: Theme): SerializedStyles => css`
+export const goSignupStyle = (theme: Theme): SerializedStyles => css`
   background-color: ${theme.colorSubLight};
   color: ${theme.colorWhite};
   font-size: 25px;
+  font-weight: bold;
   margin-top: 40px;
   padding: 10px 100px;
+  border: none;
+  outline: none;
   border-radius: 10px;
   display: inline-block;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+  transition: 0.3s background-color;
+
+  :hover {
+    background-color: ${theme.colorSub};
+  }
 `;

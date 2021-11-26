@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import IntroSection from '@/components/intro/IntroSection';
 import {
   descriptionStyle,
-  goSignupLinkStyle,
+  goSignupStyle,
   titleStyle,
   wrapperStyle,
 } from './style';
@@ -20,7 +20,9 @@ const InduceSignup: FC = () => {
         </div>
         <div>
           <Link to={Uri.signup}>
-            <span css={goSignupLinkStyle}>GO</span>
+            <button type="button" css={goSignupStyle}>
+              GO
+            </button>
           </Link>
         </div>
       </div>
