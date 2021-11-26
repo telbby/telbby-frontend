@@ -6,7 +6,7 @@ import IntroWithClientUI from '.';
 
 describe('<IntroWithClientUI/> component test', () => {
   it('서비스 소개 제목을 렌더링해야 합니다.', () => {
-    const titleList = ['To get', 'user feedback easily'];
+    const titleList = ['To Get', 'User Feedback Easily'];
     const titleContent = titleList.reduce((acc, cur) => acc + cur, '');
 
     render(<IntroWithClientUI />);
@@ -18,7 +18,7 @@ describe('<IntroWithClientUI/> component test', () => {
 
   it('서비스 소개 내용을 렌더링해야 합니다.', () => {
     const desc =
-      'With Telby, you can easily build a user feedback system for any project.';
+      'With Telbby, you can easily build a user feedback system for any project.';
 
     render(<IntroWithClientUI />);
 

@@ -16,9 +16,9 @@ const IntroWithClientUI: FC = () => {
       <div css={backgroundBannerStyle} aria-hidden />
       <div css={titleWrapperStyle}>
         <IntroTitle
-          title={['To get', 'user feedback easily']}
+          title={['To Get', 'User Feedback Easily']}
           descList={[
-            'With Telby, you can easily build a user feedback system for any project.',
+            'With Telbby, you can easily build a user feedback system for any project.',
           ]}
         />
       </div>
