@@ -12,7 +12,7 @@ export const imageWrapperStyle = (theme: Theme): SerializedStyles => css`
   padding: 50px 0;
 
   img {
-    width: 125%;
+    width: 150%;
 
     ${theme.media?.medium} {
       width: 100%;

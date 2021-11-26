@@ -3,7 +3,7 @@ import { css, SerializedStyles, Theme } from '@emotion/react';
 export const introSectionStyle = (theme: Theme): SerializedStyles => css`
   display: flex;
   justify-content: space-between;
-  padding: 20px 12%;
+  padding: 20px 3.6%;
   margin: 100px 0;
   position: relative;
   z-index: 0;
