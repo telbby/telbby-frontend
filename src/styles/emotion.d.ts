@@ -20,5 +20,15 @@ declare module '@emotion/react' {
     fontBasic: string;
     fontCoding: string;
     fontCodingBold: string;
+
+    media: {
+      xxlarge: string;
+      xlarge: string;
+      large: string;
+      medium: string;
+      small: string;
+      xsmall: string;
+      custom: (maxWidth: number) => string;
+    };
   }
 }

@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles, Theme } from '@emotion/react';
 
 export const titleWrapperStyle = css`
   width: 100%;
@@ -6,7 +6,7 @@ export const titleWrapperStyle = css`
   margin-top: auto;
 `;
 
-export const imageWrapperStyle = css`
+export const imageWrapperStyle = (theme: Theme): SerializedStyles => css`
   width: 100%;
   text-align: center;
   padding: 50px 0;
@@ -14,7 +14,7 @@ export const imageWrapperStyle = css`
   img {
     width: 125%;
 
-    @media (max-width: 1000px) {
+    ${theme.media.medium} {
       width: 100%;
     }
   }
