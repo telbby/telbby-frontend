@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import Shell from '@/components/Shell';
 import Jumbotron from '@/components/common/Jumbotron';
-import IntroWithClientUi from '@/components/intro/IntroWithClientUI';
+import IntroWithClientUI from '@/components/intro/IntroWithClientUI';
 import IntroWithFeedbacks from '@/components/intro/IntroWithFeedbackSystem';
 import InduceSignup from '@/components/intro/InduceSignup';
 import Layout from '@/components/common/Layout';
@@ -36,7 +36,7 @@ const HomePage: FC = () => {
         width={789}
         height={208}
       />
-      <IntroWithClientUi />
+      <IntroWithClientUI />
       <IntroWithFeedbacks />
       <InduceSignup />
     </Layout>
