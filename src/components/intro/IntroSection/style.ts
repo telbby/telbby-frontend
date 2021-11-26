@@ -8,7 +8,7 @@ export const introSectionStyle = (theme: Theme): SerializedStyles => css`
   position: relative;
   z-index: 0;
 
-  ${theme.media.medium} {
+  ${theme.media?.medium} {
     flex-direction: column;
   }
 `;
