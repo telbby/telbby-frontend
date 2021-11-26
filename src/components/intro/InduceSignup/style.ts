@@ -13,7 +13,7 @@ export const wrapperStyle = (theme: Theme): SerializedStyles => css`
 
 export const descriptionStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorPrimary};
-  font-size: 25px;
+  font-size: 24px;
 `;
 
 export const titleStyle = (theme: Theme): SerializedStyles => css`
