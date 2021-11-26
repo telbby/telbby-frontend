@@ -5,15 +5,11 @@ import {
   useSetRecoilState,
   useRecoilState,
 } from 'recoil';
+import { ConfirmModalProps } from '@/components/modal/ConfirmModal';
 
-export type ConfirmModalStateType = {
-  isOpen: boolean;
-  message: string;
-  cancelContent: string;
-  acceptContent: string;
-  cancelHandler: () => void;
-  acceptHandler: () => void;
-};
+export type ConfirmModalStateType = Required<
+  Omit<ConfirmModalProps, 'closeModal'>
+>;
 
 const initialState: ConfirmModalStateType = {
   isOpen: false,

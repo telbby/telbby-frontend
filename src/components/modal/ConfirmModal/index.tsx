@@ -9,7 +9,7 @@ import {
   modalCancelButtonStyle,
 } from './style';
 
-type ConfirmModalProps = {
+export type ConfirmModalProps = {
   isOpen?: boolean;
   message?: string;
   cancelContent?: string;
@@ -19,7 +19,9 @@ type ConfirmModalProps = {
   closeModal?: () => void;
 };
 
-const ConfirmModal: FC<ConfirmModalProps> = ({
+const ConfirmModal: FC<ConfirmModalProps> & {
+  defaultProps: Partial<ConfirmModalProps>;
+} = ({
   isOpen,
   message,
   cancelContent,
