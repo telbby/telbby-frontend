@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 
 import Shell from '@/components/Shell';
 import Jumbotron from '@/components/common/Jumbotron';
+import IntroSection from '../IntroSection';
+import { introMainWrapperStyle, jumbotronWrapperStyle } from './style';
 
 const IntroMain: FC = () => {
   /**
@@ -19,22 +21,28 @@ const IntroMain: FC = () => {
     });
 
   return (
-    <>
-      <Jumbotron
-        title="Talk"
-        descList={[
-          'Thinking about project feedback?',
-          'Here telbby will listen.',
-        ]}
-      />
-      {/* @TODO 입력폼에 대한 기능 추가가 필요합니다 */}
-      <Shell
-        type="services"
-        requestWhenQuestionDone={requestWhenQuestionDone}
-        width={789}
-        height={208}
-      />
-    </>
+    <IntroSection>
+      <div css={introMainWrapperStyle}>
+        <div css={jumbotronWrapperStyle}>
+          <Jumbotron
+            title="Talk"
+            descList={[
+              'Thinking about project feedback?',
+              'Here telbby will listen.',
+            ]}
+          />
+        </div>
+        {
+          /* @TODO 입력폼에 대한 기능 추가가 필요합니다 */
+          <Shell
+            type="services"
+            requestWhenQuestionDone={requestWhenQuestionDone}
+            width={789}
+            height={208}
+          />
+        }
+      </div>
+    </IntroSection>
   );
 };
 
