@@ -5,13 +5,9 @@ import {
   useSetRecoilState,
   useRecoilState,
 } from 'recoil';
+import { SnackbarProps } from '@/components/modal/Snackbar';
 
-export type SnackbarStateType = {
-  isOpen: boolean;
-  message: string;
-  color: string;
-  backgroundColor: string;
-};
+export type SnackbarStateType = Required<SnackbarProps>;
 
 const initialState: SnackbarStateType = {
   isOpen: false,
