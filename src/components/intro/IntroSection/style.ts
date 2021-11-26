@@ -1,6 +1,7 @@
-import { css, SerializedStyles, Theme } from '@emotion/react';
+import { css } from '@emotion/react';
+import media from '@/styles/media';
 
-export const introSectionStyle = (theme: Theme): SerializedStyles => css`
+export const introSectionStyle = css`
   display: flex;
   justify-content: space-between;
   padding: 20px 3.6%;
@@ -8,7 +9,7 @@ export const introSectionStyle = (theme: Theme): SerializedStyles => css`
   position: relative;
   z-index: 0;
 
-  ${theme.media?.medium} {
+  ${media.medium} {
     flex-direction: column;
   }
 `;

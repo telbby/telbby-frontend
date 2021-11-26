@@ -1,5 +1,3 @@
-import media from './media';
-
 const theme = {
   colorPrimary: '#4A7AFF',
   colorPrimaryDark: '#0053BF',
@@ -20,8 +18,6 @@ const theme = {
   fontBasic: '"Noto Sans KR", sans-serif',
   fontCoding: '"D2Coding", monospace',
   fontCodingBold: '"D2CodingBold", monospace',
-
-  media,
 };
 
 export default theme;
