@@ -8,8 +8,8 @@ import React, {
 
 import {
   SHELL_FIRST_LINE_PREFIX,
-  SHELL_FORM_ELEMENT,
   SHELL_SUCCESS_MESSAGE,
+  shellFormElement,
 } from '@/constants/shell';
 import useArrayIterator from '@/hooks/useArrayIterator';
 
@@ -25,7 +25,7 @@ export type FormElementType = ShellLineProps & {
 };
 
 type Props = {
-  type: keyof typeof SHELL_FORM_ELEMENT;
+  type: keyof typeof shellFormElement;
   requestWhenQueryDone: (param: {
     [key: string]: string | number;
   }) => Promise<unknown>;
@@ -49,7 +49,7 @@ const Shell = ({
   const [formValue, setFormValue] = useState({});
 
   const [queryList, reset] = useArrayIterator<FormElementType>(
-    SHELL_FORM_ELEMENT[type],
+    shellFormElement[type],
   );
 
   const [isQueryDone, setIsQueryDone] = useState<boolean>(false);

@@ -48,7 +48,7 @@ const emptyValidation: FormElementType['validation'] = (
   return { isValid: true };
 };
 
-export const SHELL_FORM_ELEMENT: Record<
+export const shellFormElement: Record<
   'signin' | 'signup' | 'services' | 'service-settings',
   FormElementType[]
 > = {

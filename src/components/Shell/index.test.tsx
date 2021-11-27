@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { SHELL_FORM_ELEMENT } from '@/constants/shell';
+import { shellFormElement } from '@/constants/shell';
 
 import Shell from '.';
 
@@ -25,7 +25,7 @@ describe('Shell Component 테스트', () => {
   `, () => {
     const { container } = render(shellComponent);
 
-    const formElement = SHELL_FORM_ELEMENT[shellType];
+    const formElement = shellFormElement[shellType];
     const { type: firstLineType, message: firstLineContent } = formElement[0];
     const { type: secondLineType, message: secondLineContent } = formElement[1];
 
@@ -37,7 +37,7 @@ describe('Shell Component 테스트', () => {
   it(`Shell Component에 Enter를 입력하면, 다음 요소를 렌더링합니다.`, () => {
     const { container } = render(shellComponent);
 
-    const formElement = SHELL_FORM_ELEMENT[shellType];
+    const formElement = shellFormElement[shellType];
     const { type: secondLineType, message: secondLineContent } = formElement[1];
     expect(container).not.toHaveTextContent(
       `${secondLineType}${secondLineContent}:`,
