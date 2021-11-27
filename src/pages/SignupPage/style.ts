@@ -26,7 +26,7 @@ export const headerStyle = css`
 export const footerStyle = (theme: Theme): SerializedStyles => css`
   margin-top: 26px;
   color: ${theme.colorGray3};
-  font-family: ${theme.fontCodingBold};
+  font-family: ${theme.fontCoding};
   font-size: 22px;
   line-height: 38px;
 
