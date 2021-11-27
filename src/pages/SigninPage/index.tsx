@@ -6,6 +6,7 @@ import Shell from '@/components/Shell';
 import Jumbotron from '@/components/common/Jumbotron';
 import Logo from '@/components/common/Logo';
 import { NETWORK_ERROR, UNEXPECTED_ERROR, loginError } from '@/constants/error';
+import Uri from '@/constants/uri';
 import { LoginRequestBody } from '@/types';
 
 import { footerStyle, headerStyle, layoutStyle } from './style';
@@ -16,7 +17,7 @@ const SigninPage: FC = () => {
   const requestSignin = async (body: LoginRequestBody) => {
     try {
       await authApi.login(body);
-      push('/services');
+      push(Uri.services);
     } catch (error) {
       if (!error.response) throw new Error(NETWORK_ERROR);
 
