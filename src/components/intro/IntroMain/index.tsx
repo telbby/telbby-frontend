@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import Shell from '@/components/Shell';
 import Jumbotron from '@/components/common/Jumbotron';
+
 import IntroSection from '../IntroSection';
 import { introMainWrapperStyle, jumbotronWrapperStyle } from './style';
 
@@ -11,7 +12,7 @@ const IntroMain: FC = () => {
    * 가상 API 요청을 위해 만든 코드입니다.
    * 추후 API 연동을 할 때 지워주면 됩니다.
    */
-  const requestWhenQuestionDone = async () =>
+  const requestWhenQueryDone = async () =>
     new Promise((resolve, reject) => {
       setTimeout(
         // () => resolve('Success'),
@@ -35,8 +36,8 @@ const IntroMain: FC = () => {
         {
           /* @TODO 입력폼에 대한 기능 추가가 필요합니다 */
           <Shell
-            type="services"
-            requestWhenQuestionDone={requestWhenQuestionDone}
+            type="service"
+            requestWhenQueryDone={requestWhenQueryDone}
             width={789}
             height={208}
           />

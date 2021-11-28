@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 
+import Layout from '@/components/common/Layout';
+import InduceSignup from '@/components/intro/InduceSignup';
+import IntroMain from '@/components/intro/IntroMain';
 import IntroWithClientUI from '@/components/intro/IntroWithClientUI';
 import IntroWithFeedbacks from '@/components/intro/IntroWithFeedbackSystem';
-import InduceSignup from '@/components/intro/InduceSignup';
-import Layout from '@/components/common/Layout';
-import IntroMain from '@/components/intro/IntroMain';
 
 const HomePage: FC = () => {
   return (
