@@ -36,7 +36,7 @@ const IntroMain: FC = () => {
         {
           /* @TODO 입력폼에 대한 기능 추가가 필요합니다 */
           <Shell
-            type="services"
+            type="service"
             requestWhenQueryDone={requestWhenQueryDone}
             width={789}
             height={208}

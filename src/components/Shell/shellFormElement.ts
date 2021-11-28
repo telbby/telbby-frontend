@@ -1,20 +1,15 @@
 import { FormElementType } from '@/components/Shell';
 import { ShellLineType } from '@/components/ShellLine';
-import { idValidator, pwValidator } from '@/utils/validation';
-
 import {
   USER_ID_MAX_LENGTH,
   USER_PW_MAX_LENGTH,
   WARNING_ID_EMPTY,
   WARNING_PW_EMPTY,
-} from './validation';
+} from '@/constants/validation';
+import { idValidator, pwValidator } from '@/utils/validation';
 
-export const SHELL_SUCCESS_MESSAGE =
-  'Congrats! service has been added to telbby.';
-
-export const SHELL_FIRST_LINE_PREFIX = 'telbby init v0.1.0';
-export const SHELL_ERROR_USER_ACCESS_DENIED = 'Access denied';
-export const SHELL_ERROR_USER_SIGNUP_DENIED = 'Signup denied';
+const SHELL_ERROR_USER_ACCESS_DENIED = 'Access denied';
+const SHELL_ERROR_USER_SIGNUP_DENIED = 'Signup denied';
 
 const idValidation: FormElementType['validation'] = (val) => {
   const [isValid, message] = idValidator(val);
@@ -48,8 +43,8 @@ const emptyValidation: FormElementType['validation'] = (
   return { isValid: true };
 };
 
-export const shellFormElement: Record<
-  'signin' | 'signup' | 'services' | 'service-settings',
+const shellFormElement: Record<
+  'signin' | 'signup' | 'service' | 'service-settings',
   FormElementType[]
 > = {
   signin: [
@@ -98,7 +93,7 @@ export const shellFormElement: Record<
       maxLength: 1,
     },
   ],
-  services: [
+  service: [
     { type: ShellLineType.Question, message: 'service name', formKey: 'name' },
     {
       type: ShellLineType.Question,
@@ -126,3 +121,5 @@ export const shellFormElement: Record<
     },
   ],
 };
+
+export default shellFormElement;

@@ -6,14 +6,10 @@ import React, {
   useState,
 } from 'react';
 
-import {
-  SHELL_FIRST_LINE_PREFIX,
-  SHELL_SUCCESS_MESSAGE,
-  shellFormElement,
-} from '@/constants/shell';
 import useArrayIterator from '@/hooks/useArrayIterator';
 
 import ShellLine, { ShellLineProps, ShellLineType } from '../ShellLine';
+import shellFormElement from './shellFormElement';
 import { fieldsetStyle, formStyle, shellContainerStyle } from './style';
 
 export type FormElementType = ShellLineProps & {
@@ -39,6 +35,10 @@ const Shell = ({
   width,
   height,
 }: Props): ReactElement => {
+  const SHELL_SUCCESS_MESSAGE = 'Congrats! service has been added to telbby.';
+
+  const SHELL_FIRST_LINE_PREFIX = 'telbby init v0.1.0';
+
   const firstLine: FormElementType = {
     type: ShellLineType.Default,
     message: `${SHELL_FIRST_LINE_PREFIX} - ${type.replace('-', ' ')}`,
