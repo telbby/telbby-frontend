@@ -1,18 +1,20 @@
 import React, { FC } from 'react';
 
-import Jumbotron from '@/components/common/Jumbotron';
 import Layout from '@/components/common/Layout';
+import InduceSignup from '@/components/intro/InduceSignup';
+import IntroMain from '@/components/intro/IntroMain';
+import IntroWithClientUI from '@/components/intro/IntroWithClientUI';
+import IntroWithFeedbacks from '@/components/intro/IntroWithFeedbackSystem';
 
-const HomePage: FC = () => (
-  <Layout>
-    <Jumbotron
-      title="Talk"
-      descList={[
-        'Thinking about project feedback?',
-        'Here telbby will listen.',
-      ]}
-    />
-  </Layout>
-);
+const HomePage: FC = () => {
+  return (
+    <Layout>
+      <IntroMain />
+      <IntroWithClientUI />
+      <IntroWithFeedbacks />
+      <InduceSignup />
+    </Layout>
+  );
+};
 
 export default HomePage;
