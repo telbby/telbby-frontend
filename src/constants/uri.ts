@@ -3,7 +3,7 @@ enum Uri {
   signin = '/signin',
   signup = '/signup',
   count = '/count',
-  services = '/services',
+  service = '/service',
 }
 
 export default Uri;

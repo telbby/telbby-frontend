@@ -17,7 +17,7 @@ const SigninPage: FC = () => {
   const requestSignin = async (body: LoginRequestBody) => {
     try {
       await authApi.login(body);
-      push(Uri.services);
+      push(Uri.service);
     } catch (error) {
       if (!error.response) throw new Error(NETWORK_ERROR);
 
