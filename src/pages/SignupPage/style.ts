@@ -24,7 +24,7 @@ export const headerStyle = css`
 `;
 
 export const footerStyle = (theme: Theme): SerializedStyles => css`
-  margin-top: 26px;
+  margin: 26px 0 60px;
   color: ${theme.colorGray3};
   font-family: ${theme.fontCoding};
   font-size: 22px;
