@@ -6,49 +6,56 @@ import React, {
   useState,
 } from 'react';
 
-import {
-  SHELL_FIRST_LINE_PREFIX,
-  SHELL_FORM_ELEMENT,
-  SHELL_SUCCESS_MESSAGE,
-} from '@/constants/shell';
 import useArrayIterator from '@/hooks/useArrayIterator';
 
 import ShellLine, { ShellLineProps, ShellLineType } from '../ShellLine';
-import { fieldsetStyle, formStyle, formWrapperStyle } from './style';
+import shellFormElement from './shellFormElement';
+import { fieldsetStyle, formStyle, shellContainerStyle } from './style';
 
 export type FormElementType = ShellLineProps & {
   formKey?: string;
-  validation?: (param?: unknown) => { isValid: boolean; message?: string };
+  validation?: (
+    val: string,
+    messageWhenInvalid?: string,
+  ) => { isValid: boolean; message?: string };
 };
 
 type Props = {
-  type: keyof typeof SHELL_FORM_ELEMENT;
-  requestWhenQuestionDone: (param: {
+  type: keyof typeof shellFormElement;
+  requestWhenQueryDone: (param: {
     [key: string]: string | number;
   }) => Promise<unknown>;
-  width: string;
-  height: string;
+  width: number;
+  height: number;
 };
 
 const Shell = ({
   type,
-  requestWhenQuestionDone,
+  requestWhenQueryDone,
   width,
   height,
 }: Props): ReactElement => {
+  const SHELL_SUCCESS_MESSAGE = 'Congrats! service has been added to telbby.';
+
+  const SHELL_FIRST_LINE_PREFIX = 'telbby init v0.1.0';
+
   const firstLine: FormElementType = {
     type: ShellLineType.Default,
     message: `${SHELL_FIRST_LINE_PREFIX} - ${type.replace('-', ' ')}`,
   };
+
   const [lines, setLines] = useState<readonly FormElementType[]>([firstLine]);
+
   const [formValue, setFormValue] = useState({});
 
   const [queryList, reset] = useArrayIterator<FormElementType>(
-    SHELL_FORM_ELEMENT[type],
+    shellFormElement[type],
   );
+
   const [isQueryDone, setIsQueryDone] = useState<boolean>(false);
 
   const fieldsetRef = useRef<HTMLFieldSetElement>();
+
   const setFocusOnLastLine = useCallback(() => {
     if (!fieldsetRef.current) return;
 
@@ -76,9 +83,8 @@ const Shell = ({
     return value;
   };
 
-  const addShellLine = (props: ShellLineProps) => {
+  const addShellLine = (props: ShellLineProps) =>
     setLines((prev) => [...prev, props]);
-  };
 
   const handleEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key !== 'Enter') return;
@@ -104,13 +110,16 @@ const Shell = ({
 
   const request = async (data: { [key: string]: string | number }) => {
     try {
-      await requestWhenQuestionDone(data);
+      await requestWhenQueryDone(data);
       addShellLine({
         type: ShellLineType.Default,
         message: SHELL_SUCCESS_MESSAGE,
       });
     } catch (error) {
-      addShellLine({ type: ShellLineType.Error, message: error.message });
+      addShellLine({
+        type: ShellLineType.Error,
+        message: error.message,
+      });
       setIsQueryDone(false);
       reset();
     }
@@ -126,22 +135,26 @@ const Shell = ({
     <div
       role="button"
       tabIndex={0}
+      css={shellContainerStyle}
       onKeyPress={handleEnter}
       onClick={setFocusOnLastLine}
-      css={formWrapperStyle({ width, height })}
     >
-      <form css={formStyle}>
+      <form css={(theme) => formStyle({ theme, width, height })}>
         <fieldset ref={fieldsetRef} css={fieldsetStyle}>
           <legend>Telbby Service Shell: </legend>
-          {lines.map(({ type: lineType, message, disabled }, index) => (
-            <ShellLine
-              // eslint-disable-next-line react/no-array-index-key
-              key={`${index}lineType`}
-              type={lineType}
-              message={message}
-              disabled={disabled}
-            />
-          ))}
+          {lines.map(
+            ({ type: lineType, message, maxLength, disabled }, index) => (
+              <ShellLine
+                // FIXME: #23 이 머지되면 nanoid 패키지에서 id를 관리하도록 수정해야 합니다.
+                // eslint-disable-next-line react/no-array-index-key
+                key={`${index}lineType`}
+                type={lineType}
+                message={message}
+                maxLength={maxLength}
+                disabled={disabled}
+              />
+            ),
+          )}
         </fieldset>
       </form>
     </div>

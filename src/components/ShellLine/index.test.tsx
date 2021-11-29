@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { render, screen } from '@testing-library/react';
-import {
-  SHELL_ERROR_USER_ACCESS_DENIED,
-  SHELL_SUCCESS_MESSAGE,
-} from '@/constants/shell';
 
 import ShellLine, { ShellLineProps, ShellLineType } from './index';
 
 describe('ShellLine Component', () => {
+  const SHELL_SUCCESS_MESSAGE = 'Congrats! service has been added to telbby.';
+
+  const SHELL_ERROR_USER_ACCESS_DENIED = 'Access denied';
+
   it(`question, config 타입의 ShellLine은 message를 렌더링합니다. input='text'도 함께 출력합니다.`, () => {
     const props: ShellLineProps = {
       type: ShellLineType.Config,
@@ -19,7 +19,8 @@ describe('ShellLine Component', () => {
       <ShellLine type={props.type} message={props.message} />,
     );
 
-    expect(container).toHaveTextContent('config username:');
+    expect(container).toHaveTextContent('config');
+    expect(container).toHaveTextContent('username:');
     expect(screen.getByRole('textbox')).toHaveAttribute('type', 'text');
   });
   it(`message가 password일 경우, <input type='password'/> 를 렌더링합니다.`, () => {
@@ -32,7 +33,8 @@ describe('ShellLine Component', () => {
       <ShellLine type={props.type} message={props.message} />,
     );
 
-    expect(container).toHaveTextContent('question password:');
+    expect(container).toHaveTextContent('question');
+    expect(container).toHaveTextContent('password:');
     expect(screen.getByLabelText('password:')).toHaveAttribute(
       'type',
       'password',

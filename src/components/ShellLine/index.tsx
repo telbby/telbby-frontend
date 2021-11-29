@@ -1,13 +1,13 @@
 import React, { ReactElement } from 'react';
 
-import { MAX_SHELL_INPUT_LENGTH } from '@/constants/shell';
-
 import {
-  DefaultMessageStyle,
-  DefaultTypeStyle,
-  ErrorMessageStyle,
-  ErrorTypeStyle,
-  InputStyle,
+  defaultMessageStyle,
+  defaultTypeStyle,
+  errorMessageStyle,
+  errorTypeStyle,
+  inputStyle,
+  readLineMessageStyle,
+  shellLineContainerStyle,
 } from './style';
 
 export enum ShellLineType {
@@ -20,48 +20,64 @@ export enum ShellLineType {
 export type ShellLineProps = {
   type: ShellLineType;
   message: string;
+  maxLength?: number;
   disabled?: boolean;
 };
 
-const ShellReadLine = ({ type, message, disabled }: ShellLineProps) => {
+// FIXME: 현재 ShellReadLine은 id 중복 문제가 발생할 수 있습니다.
+// 때문에, 추후 `nanoid` 등을 사용해 독립적인 id를 부여해야 합니다.
+const ShellReadLine = ({
+  type,
+  message,
+  disabled,
+  maxLength,
+}: ShellLineProps) => {
   const isPassword = message === 'password';
+
   return (
     <>
-      <span css={DefaultTypeStyle}>{type} </span>
-      <label htmlFor="readline" css={DefaultMessageStyle}>
-        {`${message}: `}
+      <span css={defaultTypeStyle}>{type}</span>
+      <label htmlFor="readline" css={readLineMessageStyle}>
+        {`${message}:`}
       </label>
-      <input
-        type={isPassword ? 'password' : 'text'}
-        css={InputStyle}
-        maxLength={MAX_SHELL_INPUT_LENGTH}
-        disabled={disabled}
-        autoComplete="off"
-        id="readline"
-      />
+      <span css={inputStyle}>
+        <input
+          type={isPassword ? 'password' : 'text'}
+          maxLength={maxLength}
+          disabled={disabled}
+          autoComplete="off"
+          id="readline"
+        />
+      </span>
     </>
   );
 };
 
-const ShellPrintLine = ({ type, message, disabled }: ShellLineProps) => {
+const ShellPrintLine = ({
+  type,
+  message,
+  disabled,
+  maxLength,
+}: ShellLineProps) => {
   const isError = type === ShellLineType.Error;
   return (
     <>
-      {isError && <span css={ErrorTypeStyle}>ERROR: </span>}
+      {isError && <span css={errorTypeStyle}>ERROR: </span>}
       <label
         htmlFor="printline"
-        css={isError ? ErrorMessageStyle : DefaultMessageStyle}
+        css={isError ? errorMessageStyle : defaultMessageStyle}
       >
         {message}
       </label>
       {!isError && (
-        <input
-          type="text"
-          css={InputStyle}
-          maxLength={0}
-          disabled={disabled}
-          id="printline"
-        />
+        <span css={inputStyle}>
+          <input
+            type="text"
+            maxLength={maxLength}
+            disabled={disabled}
+            id="printline"
+          />
+        </span>
       )}
     </>
   );
@@ -70,6 +86,7 @@ const ShellPrintLine = ({ type, message, disabled }: ShellLineProps) => {
 const ShellLine = ({
   type,
   message,
+  maxLength,
   disabled,
 }: ShellLineProps): ReactElement => {
   const isReadLine = [ShellLineType.Question, ShellLineType.Config].includes(
@@ -77,11 +94,21 @@ const ShellLine = ({
   );
 
   return (
-    <div>
+    <div css={shellLineContainerStyle}>
       {isReadLine ? (
-        <ShellReadLine type={type} message={message} disabled={disabled} />
+        <ShellReadLine
+          type={type}
+          message={message}
+          disabled={disabled}
+          maxLength={maxLength}
+        />
       ) : (
-        <ShellPrintLine type={type} message={message} disabled={disabled} />
+        <ShellPrintLine
+          type={type}
+          message={message}
+          disabled={disabled}
+          maxLength={0}
+        />
       )}
     </div>
   );

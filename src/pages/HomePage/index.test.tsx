@@ -11,7 +11,9 @@ it('should render proper Jumbotron', () => {
       <HomePage />
     </MemoryRouter>,
   );
-  expect(screen.getByRole('heading')).toHaveTextContent('Talk to telbby');
+  expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+    'Talk to telbby',
+  );
   expect(
     screen.queryByText('Thinking about project feedback?'),
   ).toBeInTheDocument();
