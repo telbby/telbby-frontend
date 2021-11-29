@@ -8,7 +8,6 @@ type FormStyleProps = {
 
 export const shellContainerStyle = css`
   outline: none;
-  margin: 0 auto;
 `;
 
 export const formStyle = ({
@@ -17,6 +16,7 @@ export const formStyle = ({
   height,
 }: FormStyleProps): SerializedStyles => css`
   box-sizing: border-box;
+  max-width: 100%;
   width: ${width};
   height: ${height};
   padding: 28px 30px;

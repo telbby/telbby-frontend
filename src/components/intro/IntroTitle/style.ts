@@ -3,8 +3,8 @@ import media from '@/styles/media';
 
 export const titleStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorIndigo};
-  font-size: 45px;
-  padding-bottom: 20px;
+  font-size: 42px;
+  padding-bottom: 5px;
 
   ${media.small} {
     font-size: 35px;
@@ -17,9 +17,9 @@ export const titleStyle = (theme: Theme): SerializedStyles => css`
 
 export const descriptionStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorGray2};
-  font-size: 20px;
+  font-size: 18px;
 
   ${media.xsmall} {
-    font-size: 18px;
+    font-size: 16px;
   }
 `;
