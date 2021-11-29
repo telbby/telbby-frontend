@@ -5,6 +5,7 @@ import Jumbotron from '@/components/common/Jumbotron';
 import Layout from '@/components/common/Layout';
 import ServiceList from '@/components/service/ServiceList';
 
+import { dummy } from './dummyData';
 import { servicePageStyle } from './style';
 
 const ServicePage: FC = () => {
@@ -13,7 +14,7 @@ const ServicePage: FC = () => {
    * 가상 API 요청을 위해 만든 코드입니다.
    * 추후 API 연동을 할 때 지워주면 됩니다.
    */
-  const requestWhenQuestionDone = async () =>
+  const requestWhenQueryDone = async () =>
     new Promise((resolve, reject) => {
       setTimeout(
         // () => resolve('Success'),
@@ -28,11 +29,11 @@ const ServicePage: FC = () => {
         <Jumbotron title="Add" />
         <Shell
           type="service"
-          requestWhenQueryDone={requestWhenQuestionDone}
+          requestWhenQueryDone={requestWhenQueryDone}
           width="90%"
           height="200px"
         />
-        <ServiceList />
+        <ServiceList serviceList={dummy} />
       </div>
     </Layout>
   );

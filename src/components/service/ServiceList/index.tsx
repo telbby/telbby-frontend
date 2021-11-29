@@ -5,47 +5,23 @@ import emptyImg from '@/assets/images/empty.png';
 import ServiceItem from '../ServiceItem';
 import { emptyStyle, headerStyle, listStyle, wrapperStyle } from './style';
 
-const dummy = [
-  {
-    id: 1,
-    name: 'telbby',
-    clientId: '12345678901234567890',
-    domain: 'telbby.com',
-  },
-  {
-    id: 2,
-    name: 'Kakao',
-    clientId: '12345678901234567891',
-    domain: 'kakao.com',
-  },
-  {
-    id: 3,
-    name: 'test',
-    clientId: '3wsqizhkpebg7kg6p08y',
-    domain: null,
-  },
-  {
-    id: 7,
-    name: 'Naver',
-    clientId: 'teneqm97egqn853o4wpo',
-    domain: 'naver.com',
-  },
-  {
-    id: 9,
-    name: 'test',
-    clientId: '5gmtkr9sekvjjovltgpl',
-    domain: 'test.com',
-  },
-];
+type ServiceListProps = {
+  serviceList: {
+    id: number;
+    name: string;
+    domain: string | null;
+    clientId: string;
+  }[];
+};
 
-const ServiceList: FC = () => {
+const ServiceList: FC<ServiceListProps> = ({ serviceList }) => {
   return (
     <section css={wrapperStyle}>
-      {dummy && dummy.length > 0 ? (
+      {serviceList && serviceList.length > 0 ? (
         <>
           <h2 css={headerStyle}>Services</h2>
           <div css={listStyle}>
-            {dummy.map((service) => {
+            {serviceList.map((service) => {
               return (
                 <ServiceItem
                   key={service.id}
