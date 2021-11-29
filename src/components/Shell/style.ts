@@ -1,5 +1,11 @@
 import { SerializedStyles, Theme, css } from '@emotion/react';
 
+export const shellContainerStyle = css`
+  width: fit-content;
+  outline: none;
+  margin: 0 auto;
+`;
+
 type FormStyleProps = {
   theme: Theme;
   width?: number;
@@ -11,7 +17,6 @@ export const formStyle = ({
   height,
 }: FormStyleProps): SerializedStyles => css`
   box-sizing: border-box;
-  overflow-y: scroll;
   width: ${width}px;
   height: ${height}px;
   padding: 28px 30px;
@@ -37,7 +42,8 @@ export const formStyle = ({
 
 export const fieldsetStyle = css`
   all: unset;
-
+  height: 100%;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
 
