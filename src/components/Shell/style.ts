@@ -1,24 +1,24 @@
 import { SerializedStyles, Theme, css } from '@emotion/react';
 
+type FormStyleProps = {
+  theme: Theme;
+  width?: string;
+  height?: string;
+};
+
 export const shellContainerStyle = css`
-  width: fit-content;
   outline: none;
   margin: 0 auto;
 `;
 
-type FormStyleProps = {
-  theme: Theme;
-  width?: number;
-  height?: number;
-};
 export const formStyle = ({
   theme,
   width,
   height,
 }: FormStyleProps): SerializedStyles => css`
   box-sizing: border-box;
-  width: ${width}px;
-  height: ${height}px;
+  width: ${width};
+  height: ${height};
   padding: 28px 30px;
   margin: 0 auto;
   box-shadow: 1px 3px 20px 3px rgba(0, 83, 191, 0.1);
@@ -26,12 +26,14 @@ export const formStyle = ({
   font-family: ${theme.fontCoding};
   color: ${theme.colorGray2};
   background-color: #fff;
-  font-size: 30px;
-  line-height: 38px;
+  font-size: 22px;
+  line-height: 32px;
+
   h1 {
     margin: 0;
     font-size: 30px;
   }
+
   p {
     margin: 0;
   }
@@ -43,6 +45,7 @@ export const fieldsetStyle = css`
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+
   legend {
     display: none;
   }

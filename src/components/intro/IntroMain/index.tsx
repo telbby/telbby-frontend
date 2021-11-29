@@ -38,8 +38,8 @@ const IntroMain: FC = () => {
           <Shell
             type="service"
             requestWhenQueryDone={requestWhenQueryDone}
-            width={789}
-            height={208}
+            width="789px"
+            height="208px"
           />
         }
       </div>

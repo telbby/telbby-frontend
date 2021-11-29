@@ -27,8 +27,8 @@ const ServicePage: FC = () => {
       <div css={servicePageStyle}>
         <Jumbotron title="Add" />
         <Shell
-          type="services"
-          requestWhenQuestionDone={requestWhenQuestionDone}
+          type="service"
+          requestWhenQueryDone={requestWhenQuestionDone}
           width="90%"
           height="200px"
         />

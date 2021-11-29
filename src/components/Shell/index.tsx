@@ -25,8 +25,8 @@ type Props = {
   requestWhenQueryDone: (param: {
     [key: string]: string | number;
   }) => Promise<unknown>;
-  width: number;
-  height: number;
+  width: string;
+  height: string;
 };
 
 const Shell = ({
