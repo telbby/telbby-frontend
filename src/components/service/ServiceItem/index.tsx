@@ -3,7 +3,13 @@ import React, { FC } from 'react';
 import removeImg from '@/assets/images/remove.png';
 import useConfirmModal from '@/hooks/useConfirmModal';
 
-import { itemBoxStyle, itemInfoStyle, removeButtonStyle } from './style';
+import {
+  itemBoxStyle,
+  itemInfoDetailStyle,
+  itemInfoStyle,
+  itemInfoTitleStyle,
+  removeButtonStyle,
+} from './style';
 
 type ServiceItemProps = {
   name: string;
@@ -21,11 +27,11 @@ const ServiceItem: FC<ServiceItemProps> = ({ name, domain, clientId }) => {
   return (
     <div css={itemBoxStyle}>
       <div css={itemInfoStyle}>
-        <div>
+        <div css={itemInfoTitleStyle}>
           <h3>{name}</h3>
           <span>{domain}</span>
         </div>
-        <div>Client ID : {clientId}</div>
+        <div css={itemInfoDetailStyle}>Client ID : {clientId}</div>
       </div>
       <button type="button" css={removeButtonStyle} onClick={openModal}>
         <img src={removeImg} alt="remove" />

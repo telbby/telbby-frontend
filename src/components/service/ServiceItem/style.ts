@@ -15,32 +15,32 @@ export const itemBoxStyle = (theme: Theme): SerializedStyles => css`
   align-items: center;
 `;
 
-export const itemInfoStyle = (theme: Theme): SerializedStyles => css`
+export const itemInfoStyle = css`
   display: flex;
   flex-direction: column;
+`;
 
-  div:first-child {
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: 6px;
+export const itemInfoTitleStyle = (theme: Theme): SerializedStyles => css`
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 6px;
 
-    h3 {
-      color: ${theme.colorPrimary};
-      font-size: 24px;
-      margin-right: 8px;
-    }
-
-    span {
-      color: ${theme.colorGray3};
-      font-size: 16px;
-      line-height: 24px;
-    }
+  h3 {
+    color: ${theme.colorPrimary};
+    font-size: 24px;
+    margin-right: 8px;
   }
 
-  div:nth-child(2) {
-    color: ${theme.colorGray1};
-    font-size: 14px;
+  span {
+    color: ${theme.colorGray3};
+    font-size: 16px;
+    line-height: 24px;
   }
+`;
+
+export const itemInfoDetailStyle = (theme: Theme): SerializedStyles => css`
+  color: ${theme.colorGray1};
+  font-size: 14px;
 `;
 
 export const removeButtonStyle = css`
