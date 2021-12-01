@@ -3,7 +3,7 @@ import { SerializedStyles, Theme, css } from '@emotion/react';
 export const itemBoxStyle = (theme: Theme): SerializedStyles => css`
   box-sizing: border-box;
   width: 90%;
-  min-height: 100px;
+  height: 100px;
   background: ${theme.colorWhite};
   box-shadow: 1px 3px 20px 3px rgba(0, 83, 191, 0.1);
   border-radius: 12px;
