@@ -1,0 +1,26 @@
+{
+  "jsc": {
+    "transform": {
+      "react": {
+        "runtime": "automatic",
+        "pragma": "React.createElement",
+        "pragmaFrag": "React.Fragment",
+        "throwIfNamespace": true,
+        "useBuiltins": false,
+        "importSource": "@emotion/react"
+      }
+    },
+    "parser": {
+      "syntax": "typescript",
+      "tsx": true,
+      "decorators": false,
+      "dynamicImport": false
+    }
+  },
+  "env": {
+    "targets": ">= 1%, not dead",
+    "mode": "usage",
+    "coreJs": 3
+  },
+  "minify": true
+}
