@@ -135,11 +135,11 @@ const Shell = ({
     <div
       role="button"
       tabIndex={0}
-      css={shellContainerStyle}
+      css={shellContainerStyle({ width, height })}
       onKeyPress={handleEnter}
       onClick={setFocusOnLastLine}
     >
-      <form css={(theme) => formStyle({ theme, width, height })}>
+      <form css={formStyle}>
         <fieldset ref={fieldsetRef} css={fieldsetStyle}>
           <legend>Telbby Service Shell: </legend>
           {lines.map(

@@ -1,24 +1,25 @@
 import { SerializedStyles, Theme, css } from '@emotion/react';
 
-type FormStyleProps = {
-  theme: Theme;
+type ShellContainerStyleProps = {
   width?: string;
   height?: string;
 };
 
-export const shellContainerStyle = css`
-  outline: none;
-`;
-
-export const formStyle = ({
-  theme,
+export const shellContainerStyle = ({
   width,
   height,
-}: FormStyleProps): SerializedStyles => css`
-  box-sizing: border-box;
-  max-width: 100%;
+}: ShellContainerStyleProps): SerializedStyles => css`
+  outline: none;
   width: ${width};
   height: ${height};
+  max-width: 100%;
+  margin: 0 auto;
+`;
+
+export const formStyle = (theme: Theme): SerializedStyles => css`
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
   padding: 28px 30px;
   margin: 0 auto;
   box-shadow: 1px 3px 20px 3px rgba(0, 83, 191, 0.1);
