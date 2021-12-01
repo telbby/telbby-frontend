@@ -4,6 +4,7 @@ export const wrapperStyle = css`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 18px;
 `;
 
 export const titleStyle = (theme: Theme): SerializedStyles => css`

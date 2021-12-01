@@ -3,7 +3,7 @@ import { SerializedStyles, Theme, css } from '@emotion/react';
 export const notFoundPageStyle = (theme: Theme): SerializedStyles => css`
   display: flex;
   flex-direction: column;
-  jusity-content: center;
+  justify-content: center;
   align-items: center;
   margin-top: 10%;
 
