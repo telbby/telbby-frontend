@@ -42,6 +42,7 @@ const resolveModule = (resolveFn, filePath) => {
 
 module.exports = {
   appPath: resolveApp('.'),
+  appSource: resolveApp('src'),
   appIndex: resolveModule(resolveApp, './src/index'),
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
