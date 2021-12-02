@@ -30,8 +30,10 @@ const SignupPage: FC = () => {
   return (
     <div css={layoutStyle}>
       <header css={headerStyle}>
-        <Logo onlyImg width="70px" />
-        <Jumbotron title="Join" />
+        <a href="/">
+          <Logo onlyImg width="70px" />
+          <Jumbotron title="Join" />
+        </a>
       </header>
       <main>
         <Shell

@@ -31,8 +31,10 @@ const SigninPage: FC = () => {
   return (
     <div css={layoutStyle}>
       <header css={headerStyle}>
-        <Logo onlyImg width="70px" />
-        <Jumbotron title="Sign in" />
+        <a href="/">
+          <Logo onlyImg width="70px" />
+          <Jumbotron title="Sign in" />
+        </a>
       </header>
       <main>
         <Shell
