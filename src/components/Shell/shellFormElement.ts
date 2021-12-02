@@ -1,5 +1,5 @@
 import { FormElementType } from '@/components/Shell';
-import { ShellLineType } from '@/components/ShellLine';
+import { ShellLineType } from '@/components/Shell/ShellLine';
 import {
   USER_ID_MAX_LENGTH,
   USER_PW_MAX_LENGTH,
