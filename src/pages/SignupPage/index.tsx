@@ -37,8 +37,8 @@ const SignupPage: FC = () => {
         <Shell
           type="signup"
           requestWhenQueryDone={requestSignup}
-          width={789}
-          height={247}
+          width="789px"
+          height="247px"
         />
       </main>
       <footer css={footerStyle}>

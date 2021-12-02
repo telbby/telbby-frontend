@@ -5,9 +5,4 @@ export const introMainWrapperStyle = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 40px 0;
-`;
-
-export const jumbotronWrapperStyle = css`
-  padding-bottom: 50px;
 `;

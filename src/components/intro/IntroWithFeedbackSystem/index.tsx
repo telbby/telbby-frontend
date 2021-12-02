@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 
 import feedbackSystemImage from '@/assets/images/intro-feedback-system.png';
-import IntroTitle from '@/components/intro/IntroTitle';
 import IntroSection from '@/components/intro/IntroSection';
+import IntroTitle from '@/components/intro/IntroTitle';
 
 import { imageWrapperStyle, titleWrapperStyle } from './style';
 

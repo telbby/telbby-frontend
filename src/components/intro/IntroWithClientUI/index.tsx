@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 
 import clientUiImage from '@/assets/images/intro-client-ui.png';
-import IntroTitle from '@/components/intro/IntroTitle';
 import IntroSection from '@/components/intro/IntroSection';
+import IntroTitle from '@/components/intro/IntroTitle';
 
 import {
+  backgroundBannerStyle,
   imageWrapperStyle,
   titleWrapperStyle,
-  backgroundBannerStyle,
 } from './style';
 
 const IntroWithClientUI: FC = () => {

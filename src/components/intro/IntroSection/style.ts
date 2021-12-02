@@ -4,7 +4,7 @@ import media from '@/styles/media';
 export const introSectionStyle = css`
   display: flex;
   justify-content: space-between;
-  padding: 20px 3.6%;
+  padding: 20px 5%;
   margin: 100px 0;
   position: relative;
   z-index: 0;

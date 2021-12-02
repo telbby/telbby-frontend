@@ -4,7 +4,7 @@ import Shell from '@/components/Shell';
 import Jumbotron from '@/components/common/Jumbotron';
 
 import IntroSection from '../IntroSection';
-import { introMainWrapperStyle, jumbotronWrapperStyle } from './style';
+import { introMainWrapperStyle } from './style';
 
 const IntroMain: FC = () => {
   /**
@@ -24,22 +24,20 @@ const IntroMain: FC = () => {
   return (
     <IntroSection>
       <div css={introMainWrapperStyle}>
-        <div css={jumbotronWrapperStyle}>
-          <Jumbotron
-            title="Talk"
-            descList={[
-              'Thinking about project feedback?',
-              'Here telbby will listen.',
-            ]}
-          />
-        </div>
+        <Jumbotron
+          title="Talk"
+          descList={[
+            'Thinking about project feedback?',
+            'Here telbby will listen.',
+          ]}
+        />
         {
           /* @TODO 입력폼에 대한 기능 추가가 필요합니다 */
           <Shell
             type="service"
             requestWhenQueryDone={requestWhenQueryDone}
-            width={789}
-            height={208}
+            width="789px"
+            height="208px"
           />
         }
       </div>
