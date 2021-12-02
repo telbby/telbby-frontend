@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 
-import Shell from '@/components/Shell';
 import Jumbotron from '@/components/common/Jumbotron';
 import Layout from '@/components/common/Layout';
+import Shell from '@/components/common/Shell';
 import ServiceList from '@/components/service/ServiceList';
 
 import { dummy } from './dummyData';
