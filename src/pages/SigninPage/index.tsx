@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { authApi } from '@/apis';
 import Shell from '@/components/Shell';
@@ -31,10 +31,10 @@ const SigninPage: FC = () => {
   return (
     <div css={layoutStyle}>
       <header css={headerStyle}>
-        <a href="/">
+        <Link to={Uri.home}>
           <Logo onlyImg width="70px" />
           <Jumbotron title="Sign in" />
-        </a>
+        </Link>
       </header>
       <main>
         <Shell
@@ -46,7 +46,7 @@ const SigninPage: FC = () => {
       </main>
       <footer css={footerStyle}>
         <p>
-          Don’t have an account? <a href="/signup">Sign Up</a>
+          Don’t have an account? <Link to={Uri.signup}>Sign Up</Link>
         </p>
       </footer>
     </div>
