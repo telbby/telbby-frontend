@@ -1,7 +1,9 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Router } from 'react-router-dom';
 
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import SignupPage from '.';
 
@@ -12,21 +14,31 @@ describe('SignupPage 테스트', () => {
     </MemoryRouter>
   );
 
-  it(`회원가입 유도 문구를 렌더링해야 합니다.`, () => {
+  it('회원가입 유도 문구를 렌더링해야 합니다.', () => {
     render(signupPageContainer);
     expect(screen.getByRole('heading')).toHaveTextContent('Join to telbby');
   });
 
-  it(`로고를 렌더링해야 합니다.`, () => {
+  it('로고를 렌더링해야 합니다.', () => {
     render(signupPageContainer);
     expect(screen.getByAltText('logo'));
   });
 
-  // FIXME: #23 이 머지된 이후 테스트 케이스를 수정해야 합니다.
-  //    - href 속성 체크 => 실제로 이동이 되는지 테스트
-  it(`footer에 안내문과 함께 /signin으로 보내는 링크가 있어야 합니다.`, () => {
+  it('footer에 "Already have an account?" 안내문을 렌더링해야 합니다.', () => {
     render(signupPageContainer);
     expect(screen.queryByText('Already have an account?')).toBeInTheDocument();
-    expect(screen.getByRole('link')).toHaveAttribute('href', '/signin');
+  });
+
+  it('Sign In 을 클릭하면 로그인 페이지로 이동해야 합니다.', () => {
+    const history = createMemoryHistory();
+
+    render(
+      <Router history={history}>
+        <SignupPage />
+      </Router>,
+    );
+
+    userEvent.click(screen.getByText('Sign In'));
+    expect(history.location.pathname).toBe('/signin');
   });
 });
