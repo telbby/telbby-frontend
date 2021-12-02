@@ -6,3 +6,7 @@ export const introMainWrapperStyle = css`
   flex-direction: column;
   justify-content: center;
 `;
+
+export const shellWrapperStyle = css`
+  margin-top: 40px;
+`;

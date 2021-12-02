@@ -4,7 +4,7 @@ import Shell from '@/components/Shell';
 import Jumbotron from '@/components/common/Jumbotron';
 
 import IntroSection from '../IntroSection';
-import { introMainWrapperStyle } from './style';
+import { introMainWrapperStyle, shellWrapperStyle } from './style';
 
 const IntroMain: FC = () => {
   /**
@@ -33,12 +33,14 @@ const IntroMain: FC = () => {
         />
         {
           /* @TODO 입력폼에 대한 기능 추가가 필요합니다 */
-          <Shell
-            type="service"
-            requestWhenQueryDone={requestWhenQueryDone}
-            width="789px"
-            height="208px"
-          />
+          <div css={shellWrapperStyle}>
+            <Shell
+              type="service"
+              requestWhenQueryDone={requestWhenQueryDone}
+              width="789px"
+              height="208px"
+            />
+          </div>
         }
       </div>
     </IntroSection>

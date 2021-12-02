@@ -18,3 +18,7 @@ export const notFoundPageStyle = (theme: Theme): SerializedStyles => css`
     margin-top: 5px;
   }
 `;
+
+export const notFoundImageStyle = css`
+  margin-top: 40px;
+`;

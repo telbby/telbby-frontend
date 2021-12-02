@@ -6,7 +6,7 @@ import Layout from '@/components/common/Layout';
 import ServiceList from '@/components/service/ServiceList';
 
 import { dummy } from './dummyData';
-import { servicePageStyle } from './style';
+import { servicePageStyle, shellWrapperStyle } from './style';
 
 const ServicePage: FC = () => {
   /**
@@ -27,12 +27,14 @@ const ServicePage: FC = () => {
     <Layout>
       <div css={servicePageStyle}>
         <Jumbotron title="Add" />
-        <Shell
-          type="service"
-          requestWhenQueryDone={requestWhenQueryDone}
-          width="90%"
-          height="200px"
-        />
+        <div css={shellWrapperStyle}>
+          <Shell
+            type="service"
+            requestWhenQueryDone={requestWhenQueryDone}
+            width="90%"
+            height="200px"
+          />
+        </div>
         <ServiceList serviceList={dummy} />
       </div>
     </Layout>
