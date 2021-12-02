@@ -4,15 +4,17 @@ export const wrapperStyle = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 18px;
 `;
 
-export const titleStyle = (theme: Theme): SerializedStyles => css`
+export const titleStyle = (
+  theme: Theme,
+  isDesclist: boolean,
+): SerializedStyles => css`
   font-family: ${theme.fontCodingBold};
   font-size: 50px;
   text-align: center;
   color: ${theme.colorGray1};
-  margin-bottom: 10px;
+  margin-bottom: ${isDesclist ? '10px' : ''};
 
   span {
     color: ${theme.colorPrimaryDark};

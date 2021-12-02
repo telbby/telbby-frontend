@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { wrapperStyle, titleStyle, descStyle } from './style';
+import { descStyle, titleStyle, wrapperStyle } from './style';
 
 type JumbotronProps = {
   title: string;
@@ -8,9 +8,11 @@ type JumbotronProps = {
 };
 
 const Jumbotron: FC<JumbotronProps> = ({ title, descList }) => {
+  const isDescList = descList !== null;
+
   return (
     <div css={wrapperStyle}>
-      <h1 css={titleStyle}>
+      <h1 css={(theme) => titleStyle(theme, isDescList)}>
         <span>{title}</span> to telbby
       </h1>
       {descList &&
