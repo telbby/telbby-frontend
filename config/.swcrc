@@ -3,10 +3,7 @@
     "transform": {
       "react": {
         "runtime": "automatic",
-        "pragma": "React.createElement",
-        "pragmaFrag": "React.Fragment",
         "throwIfNamespace": true,
-        "useBuiltins": false,
         "importSource": "@emotion/react"
       }
     },

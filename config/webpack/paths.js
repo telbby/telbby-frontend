@@ -47,6 +47,6 @@ module.exports = {
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
-  babelConfig: resolveApp('config/.babel.config.json'),
+  swcConfig: resolveApp('config/.swcrc'),
   publicUrlOrPath,
 };

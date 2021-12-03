@@ -29,11 +29,8 @@ module.exports = {
         use: [
           {
             loader: 'swc-loader',
-          },
-          {
-            loader: 'ts-loader',
             options: {
-              transpileOnly: true,
+              configFile: paths.swcConfig,
             },
           },
         ],
