@@ -13,14 +13,14 @@ abstract class HTTPClient {
     url: string,
     config?: HTTPRequestConfig<D>,
   ): Promise<HTTPResponse<R>> {
-    return this.request({ ...config, url, method: 'GET' });
+    return this.request<R, D>({ ...config, url, method: 'GET' });
   }
 
   async delete<R = unknown, D = unknown>(
     url: string,
     config?: HTTPRequestConfig<D>,
   ): Promise<HTTPResponse<R>> {
-    return this.request({ ...config, url, method: 'DELETE' });
+    return this.request<R, D>({ ...config, url, method: 'DELETE' });
   }
 
   async post<R = unknown, D = unknown>(
@@ -28,7 +28,7 @@ abstract class HTTPClient {
     data: D,
     config?: HTTPRequestConfig<D>,
   ): Promise<HTTPResponse<R>> {
-    return this.request({ ...config, url, data, method: 'POST' });
+    return this.request<R, D>({ ...config, url, data, method: 'POST' });
   }
 
   async put<R = unknown, D = unknown>(
@@ -36,7 +36,7 @@ abstract class HTTPClient {
     data: D,
     config?: HTTPRequestConfig<D>,
   ): Promise<HTTPResponse<R>> {
-    return this.request({ ...config, url, data, method: 'PUT' });
+    return this.request<R, D>({ ...config, url, data, method: 'PUT' });
   }
 }
 
