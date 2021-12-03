@@ -6,6 +6,7 @@ const mockedClient = {
   delete: jest.fn(),
   post: jest.fn(),
   put: jest.fn(),
+  patch: jest.fn(),
   getHeader: jest.fn(),
   setHeader: jest.fn(),
 };
