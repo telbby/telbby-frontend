@@ -38,6 +38,19 @@ abstract class HTTPClient {
   ): Promise<HTTPResponse<R>> {
     return this.request<R, D>({ ...config, url, data, method: 'PUT' });
   }
+
+  async patch<R = unknown, D = unknown>(
+    url: string,
+    data: Partial<D>,
+    config?: HTTPRequestConfig<D>,
+  ): Promise<HTTPResponse<R>> {
+    return this.request<R, Partial<D>>({
+      ...config,
+      url,
+      data,
+      method: 'PATCH',
+    });
+  }
 }
 
 export default HTTPClient;

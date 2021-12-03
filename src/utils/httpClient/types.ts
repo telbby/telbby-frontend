@@ -3,7 +3,7 @@ export interface HTTPResponse<D = unknown> {
   status: number;
 }
 
-export type HTTPMethod = 'GET' | 'DELETE' | 'POST' | 'PUT';
+export type HTTPMethod = 'GET' | 'DELETE' | 'POST' | 'PUT' | 'PATCH';
 
 export type RequestHeaders = Record<string, string>;
 

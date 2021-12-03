@@ -43,7 +43,14 @@ abstract class Api {
     data: D,
     config?: HTTPRequestConfig<D>,
   ): Promise<HTTPResponse<R>> {
-    return this.client.put(this.apiUrl, data, config);
+    return this.client.put<R, D>(this.apiUrl, data, config);
+  }
+
+  async patch<R = unknown, D = unknown>(
+    data: Partial<D>,
+    config?: HTTPRequestConfig<D>,
+  ): Promise<HTTPResponse<R>> {
+    return this.client.patch<R, D>(this.apiUrl, data, config);
   }
 }
 
