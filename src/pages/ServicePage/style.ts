@@ -5,6 +5,6 @@ export const servicePageStyle = css`
   padding: 0 12%;
 `;
 
-export const shellWrapperStyle = css`
-  margin-top: 23px;
+export const jumbotronWrapperStyle = css`
+  margin-bottom: 23px;
 `;

@@ -7,6 +7,6 @@ export const introMainWrapperStyle = css`
   justify-content: center;
 `;
 
-export const shellWrapperStyle = css`
-  margin-top: 40px;
+export const jumbotronWrapperStyle = css`
+  margin-bottom: 40px;
 `;
