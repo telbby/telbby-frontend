@@ -14,8 +14,7 @@ class AuthApi extends Api {
   }
 
   async login(reqData: LoginRequestBody): Promise<AuthResponseBody> {
-    const response = await this.client.post<AuthResponseBody>(
-      this.apiUrl,
+    const response = await this.post<AuthResponseBody, LoginRequestBody>(
       reqData,
     );
 
@@ -26,12 +25,12 @@ class AuthApi extends Api {
   }
 
   async logout(): Promise<void> {
-    await this.client.delete<void>(this.apiUrl);
+    await this.delete<void>();
     this.clearAccessToken();
   }
 
   async refresh(): Promise<AuthResponseBody> {
-    const response = await this.client.get<AuthResponseBody>(this.apiUrl);
+    const response = await this.get<AuthResponseBody>();
 
     const { access } = response.data;
     this.setAccessToken(access);

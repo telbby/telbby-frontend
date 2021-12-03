@@ -5,7 +5,7 @@ import {
 } from '@/utils/httpClient';
 
 abstract class Api {
-  protected apiUrl: string;
+  private apiUrl: string;
 
   protected client: HTTPClient;
 
