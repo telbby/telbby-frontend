@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import Jumbotron from '@/components/common/Jumbotron';
-import Shell from '@/components/common/Shell';
+import Shell from '@/components/shell/Shell';
 
 import IntroSection from '../IntroSection';
 import { introMainWrapperStyle } from './style';

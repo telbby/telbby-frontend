@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { authApi } from '@/apis';
 import Jumbotron from '@/components/common/Jumbotron';
 import Logo from '@/components/common/Logo';
-import Shell from '@/components/common/Shell';
+import Shell from '@/components/shell/Shell';
 import { NETWORK_ERROR, UNEXPECTED_ERROR, loginError } from '@/constants/error';
 import Uri from '@/constants/uri';
 import { LoginRequestBody } from '@/types';

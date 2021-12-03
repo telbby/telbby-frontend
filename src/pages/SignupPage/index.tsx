@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { userApi } from '@/apis';
 import Jumbotron from '@/components/common/Jumbotron';
 import Logo from '@/components/common/Logo';
-import Shell from '@/components/common/Shell';
+import Shell from '@/components/shell/Shell';
 import {
   NETWORK_ERROR,
   UNEXPECTED_ERROR,

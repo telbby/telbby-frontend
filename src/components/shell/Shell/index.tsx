@@ -8,7 +8,7 @@ import React, {
 
 import useArrayIterator from '@/hooks/useArrayIterator';
 
-import ShellLine, { ShellLineProps, ShellLineType } from './ShellLine';
+import ShellLine, { ShellLineProps, ShellLineType } from '../ShellLine';
 import shellFormElement from './shellFormElement';
 import { fieldsetStyle, formStyle, shellContainerStyle } from './style';
 
