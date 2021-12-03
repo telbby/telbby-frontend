@@ -8,13 +8,13 @@ export const wrapperStyle = css`
 
 export const titleStyle = (
   theme: Theme,
-  isDesclist: boolean,
+  hasDescList: boolean,
 ): SerializedStyles => css`
   font-family: ${theme.fontCodingBold};
   font-size: 50px;
   text-align: center;
   color: ${theme.colorGray1};
-  margin-bottom: ${isDesclist ? '10px' : ''};
+  margin-bottom: ${hasDescList ? '10px' : ''};
 
   span {
     color: ${theme.colorPrimaryDark};

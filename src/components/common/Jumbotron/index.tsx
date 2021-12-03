@@ -8,11 +8,11 @@ type JumbotronProps = {
 };
 
 const Jumbotron: FC<JumbotronProps> = ({ title, descList }) => {
-  const isDescList = descList !== null;
+  const hasDescList = descList !== null;
 
   return (
     <div css={wrapperStyle}>
-      <h1 css={(theme) => titleStyle(theme, isDescList)}>
+      <h1 css={(theme) => titleStyle(theme, hasDescList)}>
         <span>{title}</span> to telbby
       </h1>
       {descList &&
