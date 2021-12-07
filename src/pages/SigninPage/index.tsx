@@ -21,7 +21,7 @@ const SigninPage: FC = () => {
   const { push } = useHistory();
 
   const [
-    signupScript,
+    signinScript,
     addPrintLineCommand,
     addReadLineCommand,
     createPrintLineCommand,
@@ -92,7 +92,7 @@ const SigninPage: FC = () => {
         <Jumbotron title="Sign in" />
       </header>
       <main>
-        <Shell script={signupScript} width="789px" height="247px" />
+        <Shell script={signinScript} width="789px" height="247px" />
       </main>
       <footer css={footerStyle}>
         <p>
@@ -105,7 +105,7 @@ const SigninPage: FC = () => {
 
 export default SigninPage;
 
-// const signupScript: ScriptCommand[] = [
+// const signinScript: ScriptCommand[] = [
 //   {
 //     sequence: 0,
 //     nextSequence: 1,
