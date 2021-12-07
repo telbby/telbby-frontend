@@ -1,7 +1,3 @@
-// TODO: 해당 페이지는 `Save Without Formatting` 으로 저장된 상태입니다.
-// 그대로 저장하면 `한 줄 내 최대 글자 수` 규칙에 의해 줄이 변경됩니다.
-// 더 나은 방법을 고민중입니다.
-/* eslint-disable prettier/prettier */
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 
