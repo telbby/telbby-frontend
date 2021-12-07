@@ -38,7 +38,7 @@ abstract class Api {
   async get<R = unknown, D = unknown>(
     config?: ApiRequestConfig<D>,
   ): Promise<HTTPResponse<R>> {
-    const url = `${this.apiUrl}${config?.additionalUrl ?? ''}`;
+    const url = `${this.apiUrl}${config?.additionalUri ?? ''}`;
 
     const request = () => this.client.get<R, D>(url, config);
 
@@ -48,7 +48,7 @@ abstract class Api {
   async delete<R = unknown, D = unknown>(
     config?: ApiRequestConfig<D>,
   ): Promise<HTTPResponse<R>> {
-    const url = `${this.apiUrl}${config?.additionalUrl ?? ''}`;
+    const url = `${this.apiUrl}${config?.additionalUri ?? ''}`;
 
     const request = () => this.client.delete<R, D>(url, config);
 
@@ -59,7 +59,7 @@ abstract class Api {
     data: D,
     config?: ApiRequestConfig<D>,
   ): Promise<HTTPResponse<R>> {
-    const url = `${this.apiUrl}${config?.additionalUrl ?? ''}`;
+    const url = `${this.apiUrl}${config?.additionalUri ?? ''}`;
 
     const request = () => this.client.post<R, D>(url, data, config);
 
@@ -70,7 +70,7 @@ abstract class Api {
     data: D,
     config?: ApiRequestConfig<D>,
   ): Promise<HTTPResponse<R>> {
-    const url = `${this.apiUrl}${config?.additionalUrl ?? ''}`;
+    const url = `${this.apiUrl}${config?.additionalUri ?? ''}`;
 
     const request = () => this.client.put<R, D>(url, data, config);
 
@@ -81,7 +81,7 @@ abstract class Api {
     data: Partial<D>,
     config?: ApiRequestConfig<D>,
   ): Promise<HTTPResponse<R>> {
-    const url = `${this.apiUrl}${config?.additionalUrl ?? ''}`;
+    const url = `${this.apiUrl}${config?.additionalUri ?? ''}`;
 
     const request = () => this.client.patch<R, D>(url, data, config);
 
