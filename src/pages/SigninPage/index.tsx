@@ -1,3 +1,7 @@
+// TODO: 해당 페이지는 `Save Without Formatting` 으로 저장된 상태입니다.
+// 그대로 저장하면 `한 줄 내 최대 글자 수` 규칙에 의해 줄이 변경됩니다.
+// 더 나은 방법을 고민중입니다.
+/* eslint-disable prettier/prettier */
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -26,22 +30,14 @@ const SigninPage: FC = () => {
   const checkUserName = async (val: string) => {
     if (val.length) return { status: 'success', nextSequence: 2 } as const;
 
-    const errorLine = createPrintLineCommand(
-      1,
-      'error',
-      'Please enter your ID',
-    );
+    const errorLine = createPrintLineCommand(1, 'error', 'Please enter your ID');
     return { status: 'error', ...errorLine } as const;
   };
 
   const checkPassword = async (val: string) => {
     if (val.length) return { status: 'success', nextSequence: 3 } as const;
 
-    const errorLine = createPrintLineCommand(
-      2,
-      'error',
-      'Please enter your Password',
-    );
+    const errorLine = createPrintLineCommand(2, 'error', 'Please enter your Password');
     return { status: 'error', ...errorLine } as const;
   };
 
@@ -58,11 +54,7 @@ const SigninPage: FC = () => {
       } & PrintLineCommand)
   > => {
     if (val !== 'y') {
-      const errorLine = createPrintLineCommand(
-        1,
-        'error',
-        `Access denied for user ${body.userId}`,
-      );
+      const errorLine = createPrintLineCommand(1, 'error', `Access denied for user ${body.userId}`);
       return { status: 'error', ...errorLine } as const;
     }
 
@@ -77,11 +69,7 @@ const SigninPage: FC = () => {
 
       const { status } = error.response;
       if (loginError[status]) {
-        const errorLine = createPrintLineCommand(
-          1,
-          'error',
-          loginError[status],
-        );
+        const errorLine = createPrintLineCommand(1, 'error', loginError[status]);
         return { status: 'error', ...errorLine } as const;
       }
 
@@ -93,33 +81,9 @@ const SigninPage: FC = () => {
   };
 
   addPrintLineCommand(0, 1, '', 'telbby init v0.1.0');
-  addReadLineCommand(
-    1,
-    'question',
-    'username',
-    checkUserName,
-    null,
-    'userId',
-    30,
-  );
-  addReadLineCommand(
-    2,
-    'question',
-    'password',
-    checkPassword,
-    null,
-    'password',
-    35,
-  );
-  addReadLineCommand(
-    3,
-    'question',
-    'Sign in? [y/n]',
-    checkSigninForm,
-    'y',
-    null,
-    1,
-  );
+  addReadLineCommand(1, 'question','username', checkUserName, null, 'userId', 30);
+  addReadLineCommand(2, 'question', 'password', checkPassword, null, 'password', 35);
+  addReadLineCommand(3, 'question', 'Sign in? [y/n]', checkSigninForm, 'y', null, 1);
 
   return (
     <div css={layoutStyle}>
