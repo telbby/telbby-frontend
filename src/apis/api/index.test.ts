@@ -21,7 +21,7 @@ describe('Api 모듈의 silent refresh 테스트', () => {
 
   const mockedResponseBodyWhenSuccess = { ok: true };
 
-  it('get 요청에 대해 silent refresh가 수행되어야 합니다.', async () => {
+  it('get 요청에 대해 토큰 만료 시 silent refresh가 수행되어야 합니다.', async () => {
     let isSettedAccessToken = false;
     const mockedApi = new MockedApi(mockedClient, '/api/test');
 
@@ -47,7 +47,7 @@ describe('Api 모듈의 silent refresh 테스트', () => {
     expect(response.data).toBe(mockedResponseBodyWhenSuccess);
   });
 
-  it('delete 요청에 대해 silent refresh가 수행되어야 합니다.', async () => {
+  it('delete 요청에 대해 토큰 만료 시 silent refresh가 수행되어야 합니다.', async () => {
     let isSettedAccessToken = false;
     const mockedApi = new MockedApi(mockedClient, '/api/test');
 
@@ -73,7 +73,7 @@ describe('Api 모듈의 silent refresh 테스트', () => {
     expect(response.data).toBe(mockedResponseBodyWhenSuccess);
   });
 
-  it('post 요청에 대해 silent refresh가 수행되어야 합니다.', async () => {
+  it('post 요청에 대해 토큰 만료 시 silent refresh가 수행되어야 합니다.', async () => {
     let isSettedAccessToken = false;
     const mockedApi = new MockedApi(mockedClient, '/api/test');
 
@@ -99,7 +99,7 @@ describe('Api 모듈의 silent refresh 테스트', () => {
     expect(response.data).toBe(mockedResponseBodyWhenSuccess);
   });
 
-  it('put 요청에 대해 silent refresh가 수행되어야 합니다.', async () => {
+  it('put 요청에 대해 토큰 만료 시 silent refresh가 수행되어야 합니다.', async () => {
     let isSettedAccessToken = false;
     const mockedApi = new MockedApi(mockedClient, '/api/test');
 
@@ -125,7 +125,7 @@ describe('Api 모듈의 silent refresh 테스트', () => {
     expect(response.data).toBe(mockedResponseBodyWhenSuccess);
   });
 
-  it('patch 요청에 대해 silent refresh가 수행되어야 합니다.', async () => {
+  it('patch 요청에 대해 토큰 만료 시 silent refresh가 수행되어야 합니다.', async () => {
     let isSettedAccessToken = false;
     const mockedApi = new MockedApi(mockedClient, '/api/test');
 
