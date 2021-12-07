@@ -62,10 +62,10 @@ const useShellLine = (
   useEffect(() => {
     if (lines.length !== 0) return;
 
-    const command = getLineOnSequence(0);
+    const firstLine = getLineOnSequence(0);
 
-    if (command.type === 'readLine') addNewLines(command);
-    else addNewLines(command, getLineOnSequence(command.nextSequence));
+    if (firstLine.type === 'readLine') addNewLines(firstLine);
+    else addNewLines(firstLine, getLineOnSequence(firstLine.nextSequence));
   }, []);
 
   return [lines, executeCurrentLine];
