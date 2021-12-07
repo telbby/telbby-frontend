@@ -8,7 +8,7 @@ export type HTTPMethod = 'GET' | 'DELETE' | 'POST' | 'PUT' | 'PATCH';
 export type RequestHeaders = Record<string, string>;
 
 export interface HTTPRequestConfig<D = unknown> {
-  url: string;
+  url?: string;
   baseURL?: string;
   method?: HTTPMethod;
   data?: D;
