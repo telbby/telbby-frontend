@@ -6,7 +6,7 @@ import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { authApi } from '@/apis';
-import Shell from '@/components/ShellCopy';
+import Shell from '@/components/shell/ShellCopy';
 import Jumbotron from '@/components/common/Jumbotron';
 import Logo from '@/components/common/Logo';
 import { NETWORK_ERROR, UNEXPECTED_ERROR, loginError } from '@/constants/error';

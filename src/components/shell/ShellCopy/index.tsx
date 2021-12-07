@@ -2,8 +2,8 @@ import React, { ReactElement, useEffect } from 'react';
 
 import { ScriptCommand } from '@/types/shell';
 
-import useFocusOnLastInput from '../../hooks/useFocusOnLastInput';
-import useShellLine from '../../hooks/useShellLine';
+import useFocusOnLastInput from '../../../hooks/useFocusOnLastInput';
+import useShellLine from '../../../hooks/useShellLine';
 import ShellPrintLine from '../ShellPrintLine';
 import ShellReadLine from '../ShellReadLine';
 import { fieldsetStyle, formStyle, shellContainerStyle } from './style';
