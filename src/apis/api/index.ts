@@ -1,13 +1,6 @@
 import { AuthResponseBody } from '@/types';
-import {
-  HTTPClient,
-  HTTPRequestConfig,
-  HTTPResponse,
-} from '@/utils/httpClient';
-
-interface ApiRequestConfig<D> extends Omit<HTTPRequestConfig<D>, 'url'> {
-  additionalUrl?: string;
-}
+import { HTTPClient, HTTPResponse } from '@/utils/httpClient';
+import { ApiRequestConfig } from './type';
 
 abstract class Api {
   private readonly ACCESS_TOKEN_HEADER = 'Authorization';
@@ -96,4 +89,5 @@ abstract class Api {
   }
 }
 
+export * from './type';
 export default Api;
