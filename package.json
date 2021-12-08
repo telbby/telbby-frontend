@@ -15,9 +15,17 @@
     "precommit": "yarn lint-staged --config ./config/.lintstagedrc.json",
     "test": "jest --config ./config/jest.config.js",
     "test:watch": "jest --watchAll --config ./config/jest.config.js",
-    "test:coverage": "jest --coverage --config ./config/jest.config.js"
+    "test:coverage": "jest --coverage --config ./config/jest.config.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.4.8",
+    "@storybook/addon-essentials": "^6.4.8",
+    "@storybook/addon-links": "^6.4.8",
+    "@storybook/builder-webpack5": "^6.4.8",
+    "@storybook/manager-webpack5": "^6.4.8",
+    "@storybook/react": "^6.4.8",
     "@swc/core": "^1.2.115",
     "@swc/jest": "^0.2.11",
     "@testing-library/jest-dom": "^5.14.1",
@@ -32,6 +40,7 @@
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.29.3",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
+    "chromatic": "^6.2.0",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.4.0",
