@@ -1,22 +1,20 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import Logo from '../Logo';
-import Uri from '@/constants/uri';
 import { useUserState } from '@/atoms/userState';
-
-import {
-  navStyle,
-  yellowLineButtonStyle,
-  yellowFullButtonStyle,
-} from './style';
 import useConfirmModal from '@/hooks/useConfirmModal';
+import Uri from '@/constants/uri';
+import PrivateNavbar from '@/components/nav/PrivateNavbar';
+import PublicNavbar from '@/components/nav/PublicNavbar';
+import Logo from '@/components/common/Logo';
+
+import { navStyle } from './style';
 
 const Navbar: FC = () => {
   const [user, setUser] = useUserState();
   const [open] = useConfirmModal();
 
-  const onLogout = () => {
+  const logoutHandler = () => {
     const logout = () => setUser(null);
     open({ message: 'Do you want to logout?', acceptHandler: logout });
   };
@@ -28,28 +26,10 @@ const Navbar: FC = () => {
       </Link>
 
       <div>
-        {!user ? (
-          <>
-            <Link to={Uri.signin}>
-              <span css={yellowLineButtonStyle}>Sign in</span>
-            </Link>
-            <Link to={Uri.signup}>
-              <span css={yellowFullButtonStyle}>Register</span>
-            </Link>
-          </>
+        {user ? (
+          <PrivateNavbar logoutHandler={logoutHandler} />
         ) : (
-          <>
-            <Link to={Uri.service}>
-              <span css={yellowLineButtonStyle}>Service</span>
-            </Link>
-            <button
-              css={yellowFullButtonStyle}
-              type="button"
-              onClick={onLogout}
-            >
-              Logout
-            </button>
-          </>
+          <PublicNavbar />
         )}
       </div>
     </nav>
