@@ -16,7 +16,7 @@ const useShellLine = (
   const [formValue, setFormValue] = useState({});
 
   const injectUniqueID = (command: PrintLineCommand | ReadLineCommand) => {
-    return {  ...command, id: nanoid() };
+    return { ...command, id: nanoid() };
   };
 
   const findCommandOnSequence = (seq: number) => {
