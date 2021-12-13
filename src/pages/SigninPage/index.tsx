@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { authApi } from '@/apis';
+import { useSetUserState } from '@/atoms/userState';
 import Jumbotron from '@/components/common/Jumbotron';
 import Logo from '@/components/common/Logo';
 import ShellCommand from '@/components/shell/ShellCommand';
@@ -14,6 +15,7 @@ import { LoginRequestBody } from '@/types';
 import { footerStyle, headerStyle, layoutStyle } from './style';
 
 const SigninPage: FC = () => {
+  const setUserState = useSetUserState();
   const { push } = useHistory();
 
   return (
@@ -37,6 +39,7 @@ const SigninPage: FC = () => {
             maxLength={30}
             onEnter={async (val) => {
               if (!val.length) return reject(1, 'Please enter your ID');
+
               return resolve(2);
             }}
           />
@@ -48,6 +51,7 @@ const SigninPage: FC = () => {
             render={renderProps('readLine', 'question', 'password')}
             onEnter={async (val) => {
               if (!val.length) return reject(2, 'Please enter your Password');
+
               return resolve(3);
             }}
           />
@@ -62,7 +66,11 @@ const SigninPage: FC = () => {
 
               try {
                 await authApi.login(body);
+
+                setUserState((prev) => ({ ...prev, userId: body.userId }));
+
                 push(Uri.service);
+
                 return resolve();
               } catch (error) {
                 if (!error.response) return reject(1, NETWORK_ERROR);
