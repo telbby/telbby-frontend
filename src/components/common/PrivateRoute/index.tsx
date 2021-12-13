@@ -12,7 +12,7 @@ type PrivateRouteProps = {
 } & RouteProps;
 
 const PrivateRoute: FC<PrivateRouteProps> = ({
-  component,
+  component: Component,
   path,
   exact,
   isAccessible,
@@ -21,11 +21,11 @@ const PrivateRoute: FC<PrivateRouteProps> = ({
   const render = useCallback(
     (props: RouteComponentProps) =>
       isAccessible ? (
-        React.createElement(component, props)
+        <Component {...props} />
       ) : (
         <Redirect to={redirectUrl ?? '/'} />
       ),
-    [component, isAccessible, redirectUrl],
+    [Component, isAccessible, redirectUrl],
   );
 
   return <Route path={path} exact={exact} render={render} />;
