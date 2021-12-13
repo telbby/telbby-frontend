@@ -4,31 +4,31 @@ import {
   ShellLineEssentialType,
 } from './types';
 
-export type RenderPropsType = (
+type RenderPropsType = (
   type: ShellLineEssentialType['type'],
   prefix: string,
   message: string,
 ) => ShellLineEssentialType;
 
-export const renderProps: RenderPropsType = (type, prefix, message) => ({
+const renderProps: RenderPropsType = (type, prefix, message) => ({
   type,
   prefix,
   message,
 });
 
-export type ResolveType = (nextSequence?: number) => OnEnterSuccessType;
+type ResolveType = (nextSequence?: number) => OnEnterSuccessType;
 
-export const resolve: ResolveType = (nextSequence) => ({
+const resolve: ResolveType = (nextSequence) => ({
   status: 'success',
   nextSequence,
 });
 
-export type RejectType = (
+type RejectType = (
   goBackSequence: number,
   errorMessage?: string,
 ) => OnEnterErrorType;
 
-export const reject: RejectType = (goBackSequence, errorMessage) => ({
+const reject: RejectType = (goBackSequence, errorMessage) => ({
   status: 'error',
   nextSequence: goBackSequence,
   render: {
@@ -37,3 +37,5 @@ export const reject: RejectType = (goBackSequence, errorMessage) => ({
     message: errorMessage,
   },
 });
+
+export { renderProps, resolve, reject };
