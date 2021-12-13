@@ -10,12 +10,14 @@ import { fieldsetStyle, formStyle, shellContainerStyle } from './style';
 type ShellProps = {
   width: string;
   height: string;
+  legend?: string;
   children: ReactElement[];
 };
 
 const Shell = ({
   width,
   height,
+  legend,
   children: commands,
 }: ShellProps): ReactElement => {
   const [lines, executeCurrentCommand] = useShellLine(commands);
@@ -40,7 +42,7 @@ const Shell = ({
     >
       <form css={formStyle}>
         <fieldset ref={ref} css={fieldsetStyle}>
-          <legend>Telbby Service Shell: </legend>
+          {legend && <legend>{legend}</legend>}
           {lines.map((line) =>
             line.render.type === 'printLine' ? (
               <ShellPrintLine
@@ -61,6 +63,10 @@ const Shell = ({
       </form>
     </div>
   );
+};
+
+Shell.defaultProps = {
+  legend: '',
 };
 
 export default Shell;

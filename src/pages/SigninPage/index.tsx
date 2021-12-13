@@ -23,7 +23,7 @@ const SigninPage: FC = () => {
         <Jumbotron title="Sign in" />
       </header>
       <main>
-        <Shell width="789px" height="247px">
+        <Shell width="789px" height="247px" legend="Telbby Service Shell">
           <ShellCommand
             sequence={0}
             nextSequence={1}
