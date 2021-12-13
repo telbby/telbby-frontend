@@ -1,37 +1,27 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+import { createMemoryHistory } from 'history';
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import Navbar from '.';
-import Uri from '@/constants/uri';
 
-it('should have link to home page when click logo', () => {
-  render(
-    <MemoryRouter>
-      <Navbar />
-    </MemoryRouter>,
-  );
-  const linkDom = screen.getByRole('link', { name: 'logo telbby' });
-  expect(linkDom).toHaveAttribute('href', Uri.home);
-});
+describe('<Navbar/> component test', () => {
+  it('Logo를 클릭했을 때 홈으로 이동해야 합니다.', () => {
+    const history = createMemoryHistory();
+    history.replace('/other');
 
-it('should have link to sign in page when click Sign in button', () => {
-  render(
-    <MemoryRouter>
-      <Navbar />
-    </MemoryRouter>,
-  );
-  const linkDom = screen.getByRole('link', { name: 'Sign in' });
-  expect(linkDom).toHaveAttribute('href', Uri.signin);
-});
+    render(
+      <RecoilRoot>
+        <Router history={history}>
+          <Navbar />
+        </Router>
+      </RecoilRoot>,
+    );
 
-it('should have link to sign up page when click Register button', () => {
-  render(
-    <MemoryRouter>
-      <Navbar />
-    </MemoryRouter>,
-  );
-  const linkDom = screen.getByRole('link', { name: 'Register' });
-  expect(linkDom).toHaveAttribute('href', Uri.signup);
+    fireEvent.click(screen.getByRole('link', { name: 'logo telbby' }));
+
+    expect(history.location.pathname).toBe('/');
+  });
 });

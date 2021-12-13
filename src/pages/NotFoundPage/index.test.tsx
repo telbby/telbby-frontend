@@ -3,22 +3,27 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { render, screen } from '@testing-library/react';
 
+import { RecoilRoot } from 'recoil';
 import NotFoundPage from '.';
 
 it('should render proper Jumbotron', () => {
   render(
-    <MemoryRouter>
-      <NotFoundPage />
-    </MemoryRouter>,
+    <RecoilRoot>
+      <MemoryRouter>
+        <NotFoundPage />
+      </MemoryRouter>
+    </RecoilRoot>,
   );
   expect(screen.getByRole('heading')).toHaveTextContent('Back to telbby');
 });
 
 it('should render NotFoundPage contents', () => {
   render(
-    <MemoryRouter>
-      <NotFoundPage />
-    </MemoryRouter>,
+    <RecoilRoot>
+      <MemoryRouter>
+        <NotFoundPage />
+      </MemoryRouter>
+    </RecoilRoot>,
   );
   expect(
     screen.getByRole('img', { name: 'page-not-found' }),
