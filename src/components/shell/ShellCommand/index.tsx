@@ -1,20 +1,9 @@
 import { ReactElement, createElement } from 'react';
 
 import { ShellError } from '../constants';
-import { RejectType, RenderPropsType, ResolveType } from '../utils';
+import { ShellCommandType } from '../types';
 
-type ShellCommandProps = {
-  sequence: number;
-  nextSequence: number;
-  render: ReturnType<RenderPropsType>;
-  onEnter?: (
-    input?: string,
-    formData?: { [key: string]: string },
-  ) => Promise<ReturnType<ResolveType> | ReturnType<RejectType>>;
-  formKey?: string;
-  defaultValue?: string;
-  maxLength?: number;
-};
+type ShellCommandProps = ShellCommandType;
 
 const ShellCommand = ({ ...props }: ShellCommandProps): ReactElement => {
   if (!props.sequence) throw new Error(ShellError.emptySequence);

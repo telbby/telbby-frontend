@@ -1,12 +1,14 @@
+import {
+  OnEnterErrorType,
+  OnEnterSuccessType,
+  ShellLineEssentialType,
+} from './types';
+
 export type RenderPropsType = (
-  type: 'printLine' | 'readLine',
+  type: ShellLineEssentialType['type'],
   prefix: string,
   message: string,
-) => {
-  type: typeof type;
-  prefix: typeof prefix;
-  message: typeof message;
-};
+) => ShellLineEssentialType;
 
 export const renderProps: RenderPropsType = (type, prefix, message) => ({
   type,
@@ -14,10 +16,7 @@ export const renderProps: RenderPropsType = (type, prefix, message) => ({
   message,
 });
 
-export type ResolveType = (nextSequence: number) => {
-  status: 'success';
-  nextSequence: number;
-};
+export type ResolveType = (nextSequence: number) => OnEnterSuccessType;
 
 export const resolve: ResolveType = (nextSequence) => ({
   status: 'success',
@@ -27,15 +26,7 @@ export const resolve: ResolveType = (nextSequence) => ({
 export type RejectType = (
   goBackSequence: number,
   errorMessage?: string,
-) => {
-  status: 'error';
-  nextSequence: number;
-  render: {
-    type: 'printLine';
-    prefix: 'error';
-    message: string;
-  };
-};
+) => OnEnterErrorType;
 
 export const reject: RejectType = (goBackSequence, errorMessage) => ({
   status: 'error',
