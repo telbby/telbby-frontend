@@ -8,7 +8,7 @@ import {
 } from './style';
 
 type ShellReadLineProps = {
-  prefix: 'question' | 'config';
+  prefix: string;
   message: string;
   maxLength?: number;
 };

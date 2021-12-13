@@ -9,7 +9,7 @@ import {
 } from './style';
 
 type ShellPrintLineProps = {
-  prefix: '' | 'error';
+  prefix: string;
   message: string;
 };
 
