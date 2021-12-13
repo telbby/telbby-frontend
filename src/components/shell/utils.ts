@@ -16,7 +16,7 @@ export const renderProps: RenderPropsType = (type, prefix, message) => ({
   message,
 });
 
-export type ResolveType = (nextSequence: number) => OnEnterSuccessType;
+export type ResolveType = (nextSequence?: number) => OnEnterSuccessType;
 
 export const resolve: ResolveType = (nextSequence) => ({
   status: 'success',

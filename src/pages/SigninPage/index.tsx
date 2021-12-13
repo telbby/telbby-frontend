@@ -63,7 +63,7 @@ const SigninPage: FC = () => {
               try {
                 await authApi.login(body);
                 push(Uri.service);
-                return resolve(4);
+                return resolve();
               } catch (error) {
                 if (!error.response) return reject(1, NETWORK_ERROR);
 

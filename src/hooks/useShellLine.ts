@@ -47,7 +47,9 @@ const useShellLine = (
         getLineOnSequence(result.nextSequence),
       );
     } else {
-      addNewLines(getLineOnSequence(result.nextSequence));
+      if (result.nextSequence) {
+        addNewLines(getLineOnSequence(result.nextSequence));
+      }
 
       if (formKey) setValueOnForm(formKey, commandValue);
     }
