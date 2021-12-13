@@ -13,11 +13,4 @@ const ShellCommand = ({ ...props }: ShellCommandProps): ReactElement => {
   return createElement(null, props);
 };
 
-ShellCommand.defaultProps = {
-  onEnter: () => {},
-  formKey: '',
-  defaultValue: '',
-  maxLength: 0,
-};
-
 export default ShellCommand;
