@@ -1,9 +1,7 @@
-import { Line } from './types';
-
-type RenderPropsType = (
-  type: Line['type'],
-  prefix: Line['prefix'],
-  message: Line['message'],
+export type RenderPropsType = (
+  type: 'printLine' | 'readLine',
+  prefix: string,
+  message: string,
 ) => {
   type: typeof type;
   prefix: typeof prefix;
@@ -16,7 +14,7 @@ export const renderProps: RenderPropsType = (type, prefix, message) => ({
   message,
 });
 
-type ResolveType = (nextSequence: number) => {
+export type ResolveType = (nextSequence: number) => {
   status: 'success';
   nextSequence: number;
 };
@@ -26,7 +24,7 @@ export const resolve: ResolveType = (nextSequence) => ({
   nextSequence,
 });
 
-type RejectType = (
+export type RejectType = (
   goBackSequence: number,
   errorMessage?: string,
 ) => {
