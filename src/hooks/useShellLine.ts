@@ -1,46 +1,45 @@
 import { nanoid } from 'nanoid';
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
-import {
-  PrintLineCommand,
-  ReadLineCommand,
-  ScriptCommand,
-  ShellLine,
-} from '@/types/shell';
+import { ShellCommandType } from '@/components/shell/types';
+
+type LineType = Omit<ShellCommandType, 'sequence'> & {
+  id: string;
+};
 
 const useShellLine = (
-  script: readonly ScriptCommand[],
-): [ShellLine[], (value: string) => Promise<void>] => {
-  const [lines, setLines] = useState<ShellLine[]>([]);
+  commands: ReactElement[],
+): [LineType[], (input: string) => Promise<void>] => {
+  const [lines, setLines] = useState<LineType[]>([]);
 
-  const [formValue, setFormValue] = useState({});
+  const [form, setForm] = useState({});
 
-  const injectUniqueID = (command: PrintLineCommand | ReadLineCommand) => {
+  const injectUniqueID = (command: Omit<LineType, 'id'>) => {
     return { ...command, id: nanoid() };
   };
 
-  const findCommandOnSequence = (seq: number) => {
-    return script.find(({ sequence }) => sequence === seq);
-  };
-
   const getLineOnSequence = (seq: number) => {
-    return injectUniqueID(findCommandOnSequence(seq));
+    return injectUniqueID(commands[seq].props);
   };
 
-  const addNewLines = (...newLines: ShellLine[]) => {
+  const addNewLines = (...newLines: LineType[]) => {
     return setLines((prev) => [...prev, ...newLines]);
+  };
+
+  const setValueOnForm = (key: string, val: string | number) => {
+    return setForm((prev) => ({ ...prev, [key]: val }));
   };
 
   const executeCurrentLine = async (value: string) => {
     const currentLine = lines[lines.length - 1];
 
-    if (currentLine.type === 'printLine') return;
+    if (currentLine.render.type === 'printLine') return;
 
-    const { defaultValue, enterHandler, formKey } = currentLine;
+    const { defaultValue, onEnter, formKey } = currentLine;
 
     const commandValue = value || defaultValue;
 
-    const result = await enterHandler(commandValue, formValue);
+    const result = await onEnter(commandValue, form);
 
     if (result.status === 'error') {
       addNewLines(
@@ -50,12 +49,7 @@ const useShellLine = (
     } else {
       addNewLines(getLineOnSequence(result.nextSequence));
 
-      if (formKey) {
-        setFormValue((prev) => ({
-          ...prev,
-          [formKey]: commandValue,
-        }));
-      }
+      if (formKey) setValueOnForm(formKey, commandValue);
     }
   };
 
@@ -64,7 +58,7 @@ const useShellLine = (
 
     const firstLine = getLineOnSequence(0);
 
-    if (firstLine.type === 'readLine') addNewLines(firstLine);
+    if (firstLine.render.type === 'readLine') addNewLines(firstLine);
     else addNewLines(firstLine, getLineOnSequence(firstLine.nextSequence));
   }, []);
 

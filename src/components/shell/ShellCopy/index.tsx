@@ -1,21 +1,25 @@
 import React, { ReactElement, useEffect } from 'react';
 
-import { ScriptCommand } from '@/types/shell';
+import useShellLine from '@/hooks/useShellLine';
 
 import useFocusOnLastInput from '../../../hooks/useFocusOnLastInput';
-import useShellLine from '../../../hooks/useShellLine';
 import ShellPrintLine from '../ShellPrintLine';
 import ShellReadLine from '../ShellReadLine';
 import { fieldsetStyle, formStyle, shellContainerStyle } from './style';
 
 type ShellProps = {
-  script: readonly ScriptCommand[];
   width: string;
   height: string;
+  children: ReactElement[];
 };
 
-const Shell = ({ script, width, height }: ShellProps): ReactElement => {
-  const [lines, executeCurrentCommand] = useShellLine(script);
+const Shell = ({
+  width,
+  height,
+  children: commands,
+}: ShellProps): ReactElement => {
+  const [lines, executeCurrentCommand] = useShellLine(commands);
+
   const [ref, focusOnLastInput] = useFocusOnLastInput<HTMLFieldSetElement>();
 
   const handleEnter = (e: React.KeyboardEvent) => {
@@ -38,17 +42,17 @@ const Shell = ({ script, width, height }: ShellProps): ReactElement => {
         <fieldset ref={ref} css={fieldsetStyle}>
           <legend>Telbby Service Shell: </legend>
           {lines.map((line) =>
-            line.type === 'printLine' ? (
+            line.render.type === 'printLine' ? (
               <ShellPrintLine
                 key={line.id}
-                prefix={line.prefix}
-                message={line.message}
+                prefix={line.render.prefix}
+                message={line.render.message}
               />
             ) : (
               <ShellReadLine
                 key={line.id}
-                prefix={line.prefix}
-                message={line.message}
+                prefix={line.render.prefix}
+                message={line.render.message}
                 maxLength={line.maxLength}
               />
             ),
