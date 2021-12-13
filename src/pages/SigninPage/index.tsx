@@ -6,7 +6,7 @@ import Jumbotron from '@/components/common/Jumbotron';
 import Logo from '@/components/common/Logo';
 import ShellCommand from '@/components/shell/ShellCommand';
 import Shell from '@/components/shell/ShellCopy';
-import ShellReadLine from '@/components/shell/ShellReadLine';
+import { renderProps } from '@/components/shell/utils';
 import { NETWORK_ERROR, UNEXPECTED_ERROR, loginError } from '@/constants/error';
 import Uri from '@/constants/uri';
 import { LoginRequestBody } from '@/types';
@@ -27,20 +27,12 @@ const SigninPage: FC = () => {
           <ShellCommand
             sequence={0}
             nextSequence={1}
-            render={{
-              type: 'printLine',
-              prefix: '',
-              message: 'telbby init v0.1.0',
-            }}
+            render={renderProps('printLine', '', 'telbby init v0.1.0')}
           />
           <ShellCommand
             sequence={1}
             nextSequence={2}
-            render={{
-              type: 'readLine',
-              prefix: 'question',
-              message: 'username',
-            }}
+            render={renderProps('readLine', 'question', 'username')}
             formKey="userId"
             maxLength={30}
             onEnter={async (val) => {
@@ -48,11 +40,11 @@ const SigninPage: FC = () => {
                 return {
                   status: 'error',
                   nextSequence: 1,
-                  render: {
-                    type: 'printLine',
-                    prefix: 'error',
-                    message: 'Please enter your ID',
-                  },
+                  render: renderProps(
+                    'printLine',
+                    'error',
+                    'Please enter your ID',
+                  ),
                 };
               }
               return { status: 'success', nextSequence: 2 };
@@ -63,21 +55,17 @@ const SigninPage: FC = () => {
             nextSequence={3}
             formKey="password"
             maxLength={35}
-            render={{
-              type: 'readLine',
-              prefix: 'question',
-              message: 'password',
-            }}
+            render={renderProps('readLine', 'question', 'password')}
             onEnter={async (val) => {
               if (!val.length) {
                 return {
                   status: 'error',
                   nextSequence: 2,
-                  render: {
-                    type: 'printLine',
-                    prefix: 'error',
-                    message: 'Please enter your Password',
-                  },
+                  render: renderProps(
+                    'printLine',
+                    'error',
+                    'Please enter your Password',
+                  ),
                 };
               }
               return { status: 'success', nextSequence: 3 };
@@ -88,19 +76,13 @@ const SigninPage: FC = () => {
             nextSequence={4}
             defaultValue="y"
             maxLength={1}
-            render={
-              <ShellReadLine prefix="question" message="Sign in? [y/n]" />
-            }
+            render={renderProps('readLine', 'question', 'Sign in? [y/n]')}
             onEnter={async (val, body: LoginRequestBody) => {
               if (val !== 'y') {
                 return {
                   status: 'error',
                   nextSequence: 1,
-                  render: {
-                    type: 'printLine',
-                    prefix: 'error',
-                    message: 'Access denied',
-                  },
+                  render: renderProps('printLine', 'error', 'Access denied'),
                 };
               }
 
@@ -113,11 +95,7 @@ const SigninPage: FC = () => {
                   return {
                     status: 'error',
                     nextSequence: 1,
-                    render: {
-                      type: 'printLine',
-                      prefix: 'error',
-                      message: NETWORK_ERROR,
-                    },
+                    render: renderProps('printLine', 'error', NETWORK_ERROR),
                   };
                 }
 
@@ -126,22 +104,18 @@ const SigninPage: FC = () => {
                   return {
                     status: 'error',
                     nextSequence: 1,
-                    render: {
-                      type: 'printLine',
-                      prefix: 'error',
-                      message: loginError[status],
-                    },
+                    render: renderProps(
+                      'printLine',
+                      'error',
+                      loginError[status],
+                    ),
                   };
                 }
 
                 return {
                   status: 'error',
                   nextSequence: 1,
-                  render: {
-                    type: 'printLine',
-                    prefix: 'error',
-                    message: UNEXPECTED_ERROR,
-                  },
+                  render: renderProps('printLine', 'error', UNEXPECTED_ERROR),
                 };
               }
             }}
