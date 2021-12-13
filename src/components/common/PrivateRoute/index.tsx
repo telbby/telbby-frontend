@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 type PrivateRouteProps = {
-  isAccessible?: boolean;
+  isAccessible: boolean;
   redirectUrl?: string;
 } & RouteProps;
 
@@ -32,7 +32,6 @@ const PrivateRoute: FC<PrivateRouteProps> = ({
 };
 
 PrivateRoute.defaultProps = {
-  isAccessible: false,
   redirectUrl: '/',
 };
 
