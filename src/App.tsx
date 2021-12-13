@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import ErrorBoundary from './components/common/ErrorBoundary';
 import Uri from './constants/uri';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -16,28 +17,30 @@ const App: FC = () => {
   const isAuthenticated = !!user;
 
   return (
-    <Switch>
-      <Route path={Uri.home} exact component={HomePage} />
-      <PrivateRoute
-        path={Uri.service}
-        exact
-        component={ServicePage}
-        isAccessible={isAuthenticated}
-      />
-      <PrivateRoute
-        path={Uri.signup}
-        exact
-        component={SignupPage}
-        isAccessible={!isAuthenticated}
-      />
-      <PrivateRoute
-        path={Uri.signin}
-        exact
-        component={SigninPage}
-        isAccessible={!isAuthenticated}
-      />
-      <Route component={NotFoundPage} />
-    </Switch>
+    <ErrorBoundary>
+      <Switch>
+        <Route path={Uri.home} exact component={HomePage} />
+        <PrivateRoute
+          path={Uri.service}
+          exact
+          component={ServicePage}
+          isAccessible={isAuthenticated}
+        />
+        <PrivateRoute
+          path={Uri.signup}
+          exact
+          component={SignupPage}
+          isAccessible={!isAuthenticated}
+        />
+        <PrivateRoute
+          path={Uri.signin}
+          exact
+          component={SigninPage}
+          isAccessible={!isAuthenticated}
+        />
+        <Route component={NotFoundPage} />
+      </Switch>
+    </ErrorBoundary>
   );
 };
 
