@@ -1,6 +1,6 @@
 import { AuthResponseBody } from '@/types';
 import { HTTPClient, HTTPResponse } from '@/utils/httpClient';
-import { ApiRequestConfig } from './type';
+import { ApiRequestConfig } from './types';
 
 abstract class Api {
   private readonly ACCESS_TOKEN_HEADER = 'Authorization';
@@ -89,5 +89,5 @@ abstract class Api {
   }
 }
 
-export * from './type';
+export * from './types';
 export default Api;
