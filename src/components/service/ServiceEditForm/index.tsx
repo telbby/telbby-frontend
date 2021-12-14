@@ -4,6 +4,13 @@ import theme1Img from '@/assets/images/theme1.png';
 import theme2Img from '@/assets/images/theme2.png';
 import { ServiceInfo } from '@/types/service';
 
+import {
+  formBodyStyle,
+  formHeaderStyle,
+  inputFormStyle,
+  radioFormStyle,
+} from './style';
+
 type ServiceEditFormProps = {
   serviceInfo: ServiceInfo;
 };
@@ -21,22 +28,17 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
 
   return (
     <form>
-      <div>
-        <img
-          src={profileImg}
-          alt="service profile"
-          width="100px"
-          height="100px"
-        />
+      <div css={formHeaderStyle}>
+        <img src={profileImg} alt="service profile" />
         <div>
           <span>Client ID: {clientId}</span>
           <h1>{name}</h1>
         </div>
         <button type="submit">SAVE</button>
       </div>
-      <div>
-        <label htmlFor="service-name">
-          Name :{' '}
+      <div css={formBodyStyle}>
+        <label htmlFor="service-name" css={inputFormStyle}>
+          Name :
           <input
             value={name}
             type="text"
@@ -44,8 +46,8 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
             onChange={() => {}}
           />
         </label>
-        <label htmlFor="service-description">
-          Description :{' '}
+        <label htmlFor="service-description" css={inputFormStyle}>
+          Description :
           <input
             value={description}
             type="text"
@@ -53,8 +55,8 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
             onChange={() => {}}
           />
         </label>
-        <label htmlFor="service-domain">
-          Domain :{' '}
+        <label htmlFor="service-domain" css={inputFormStyle}>
+          Domain :
           <input
             value={domain}
             type="text"
@@ -62,16 +64,17 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
             onChange={() => {}}
           />
         </label>
-        <label htmlFor="service-first-question">
-          First Question :{' '}
+        <label htmlFor="service-first-question" css={inputFormStyle}>
+          First Question :
           <input
             value={firstQuestion}
             type="text"
             id="service-first-question"
+            placeholder="Give me a feedback"
             onChange={() => {}}
           />
         </label>
-        <fieldset>
+        <fieldset css={radioFormStyle}>
           <legend>Theme : </legend>
           <label htmlFor="theme-1">
             <input
@@ -83,6 +86,7 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
             />
             Color Theme 1
             <img src={theme1Img} alt="theme-1" />
+            <span />
           </label>
           <label htmlFor="theme-2">
             <input
@@ -94,6 +98,7 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
             />
             Color Theme 2
             <img src={theme2Img} alt="theme-1" />
+            <span />
           </label>
         </fieldset>
       </div>
