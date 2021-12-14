@@ -8,17 +8,24 @@ import Shell from '@/components/shell/Shell';
 import { NETWORK_ERROR, UNEXPECTED_ERROR, loginError } from '@/constants/error';
 import Uri from '@/constants/uri';
 import { LoginRequestBody } from '@/types';
+import { useSetUserState } from '@/atoms/userState';
 
 import { footerStyle, headerStyle, layoutStyle } from './style';
 
 const SigninPage: FC = () => {
+  const setUserState = useSetUserState();
   const { push } = useHistory();
 
   const requestSignin = async (body: LoginRequestBody) => {
     try {
       await authApi.login(body);
+
+      setUserState((prev) => ({ ...prev, userId: body.userId }));
+
       push(Uri.service);
     } catch (error) {
+      setUserState(null);
+
       if (!error.response) throw new Error(NETWORK_ERROR);
 
       const { status } = error.response;
