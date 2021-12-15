@@ -1,5 +1,6 @@
 import React, { FC, useCallback, useState } from 'react';
 
+import defaultProfileImg from '@/assets/images/logo.png';
 import theme1Img from '@/assets/images/theme1.png';
 import theme2Img from '@/assets/images/theme2.png';
 import { ServiceInfo } from '@/types/service';
@@ -33,6 +34,10 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
     firstQuestion,
     theme: theme.toString(),
   });
+  const [image, setImage] = useState({
+    preview: profileImg || defaultProfileImg,
+    raw: null,
+  });
 
   const onChange = useCallback(
     (e) => {
@@ -48,10 +53,29 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
     // TODO: 서비스 수정 API 연결
   };
 
+  const onChangeImgFile = (e) => {
+    if (e.target.files.length) {
+      setImage({
+        preview: URL.createObjectURL(e.target.files[0]),
+        raw: e.target.files[0],
+      });
+    }
+  };
+
   return (
     <form onSubmit={onSubmit}>
       <div css={formHeaderStyle}>
-        <img src={profileImg} alt="service profile" />
+        <label htmlFor="service-profile">
+          <input
+            accept="image/*"
+            type="file"
+            name="image"
+            id="service-profile"
+            style={{ display: 'none' }}
+            onChange={onChangeImgFile}
+          />
+          <img src={image.preview} alt="service profile" />
+        </label>
         <div>
           <span>Client ID: {clientId}</span>
           <h1>{name}</h1>

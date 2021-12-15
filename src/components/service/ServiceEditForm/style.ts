@@ -13,6 +13,7 @@ export const formHeaderStyle = (theme: Theme): SerializedStyles => css`
     border-radius: 50%;
     border: 2px solid ${theme.colorPrimary};
     object-fit: cover;
+    cursor: pointer;
   }
 
   > div {
