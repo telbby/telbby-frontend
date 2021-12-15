@@ -20,12 +20,12 @@
     "build-storybook": "build-storybook"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.4.8",
-    "@storybook/addon-essentials": "^6.4.8",
-    "@storybook/addon-links": "^6.4.8",
-    "@storybook/builder-webpack5": "^6.4.8",
-    "@storybook/manager-webpack5": "^6.4.8",
-    "@storybook/react": "^6.4.8",
+    "@storybook/addon-actions": "~6.3.12",
+    "@storybook/addon-essentials": "~6.3.12",
+    "@storybook/addon-links": "~6.3.12",
+    "@storybook/builder-webpack5": "~6.3.12",
+    "@storybook/manager-webpack5": "~6.3.12",
+    "@storybook/react": "~6.3.12",
     "@swc/core": "^1.2.115",
     "@swc/jest": "^0.2.11",
     "@testing-library/jest-dom": "^5.14.1",
