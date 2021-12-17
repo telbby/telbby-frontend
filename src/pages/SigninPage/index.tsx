@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { authApi } from '@/apis';
+import { useSetUserState } from '@/atoms/userState';
 import Jumbotron from '@/components/common/Jumbotron';
 import Logo from '@/components/common/Logo';
 import Shell from '@/components/shell/Shell';
 import { NETWORK_ERROR, UNEXPECTED_ERROR, loginError } from '@/constants/error';
 import Uri from '@/constants/uri';
 import { LoginRequestBody } from '@/types';
-import { useSetUserState } from '@/atoms/userState';
 
 import { footerStyle, headerStyle, layoutStyle } from './style';
 
@@ -38,8 +38,10 @@ const SigninPage: FC = () => {
   return (
     <div css={layoutStyle}>
       <header css={headerStyle}>
-        <Logo onlyImg width="70px" />
-        <Jumbotron title="Sign in" />
+        <Link to={Uri.home}>
+          <Logo onlyImg width="70px" />
+          <Jumbotron title="Sign in" />
+        </Link>
       </header>
       <main>
         <Shell
