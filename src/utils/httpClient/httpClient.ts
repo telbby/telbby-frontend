@@ -5,38 +5,69 @@ abstract class HTTPClient {
 
   abstract getHeader(): RequestHeaders;
 
-  abstract request<R = unknown, D = unknown>(
-    config: HTTPRequestConfig<D>,
-  ): Promise<HTTPResponse<R>>;
+  abstract request<ResponseBodyT = unknown, RequestBodyT = unknown>(
+    config: HTTPRequestConfig<RequestBodyT>,
+  ): Promise<HTTPResponse<ResponseBodyT>>;
 
-  async get<R = unknown, D = unknown>(
+  async get<ResponseBodyT = unknown, RequestBodyT = unknown>(
     url: string,
-    config?: HTTPRequestConfig<D>,
-  ): Promise<HTTPResponse<R>> {
-    return this.request({ ...config, url, method: 'GET' });
+    config?: HTTPRequestConfig<RequestBodyT>,
+  ): Promise<HTTPResponse<ResponseBodyT>> {
+    return this.request<ResponseBodyT, RequestBodyT>({
+      ...config,
+      url,
+      method: 'GET',
+    });
   }
 
-  async delete<R = unknown, D = unknown>(
+  async delete<ResponseBodyT = unknown, RequestBodyT = unknown>(
     url: string,
-    config?: HTTPRequestConfig<D>,
-  ): Promise<HTTPResponse<R>> {
-    return this.request({ ...config, url, method: 'DELETE' });
+    config?: HTTPRequestConfig<RequestBodyT>,
+  ): Promise<HTTPResponse<ResponseBodyT>> {
+    return this.request<ResponseBodyT, RequestBodyT>({
+      ...config,
+      url,
+      method: 'DELETE',
+    });
   }
 
-  async post<R = unknown, D = unknown>(
+  async post<ResponseBodyT = unknown, RequestBodyT = unknown>(
     url: string,
-    data: D,
-    config?: HTTPRequestConfig<D>,
-  ): Promise<HTTPResponse<R>> {
-    return this.request({ ...config, url, data, method: 'POST' });
+    data: RequestBodyT,
+    config?: HTTPRequestConfig<RequestBodyT>,
+  ): Promise<HTTPResponse<ResponseBodyT>> {
+    return this.request<ResponseBodyT, RequestBodyT>({
+      ...config,
+      url,
+      data,
+      method: 'POST',
+    });
   }
 
-  async put<R = unknown, D = unknown>(
+  async put<ResponseBodyT = unknown, RequestBodyT = unknown>(
     url: string,
-    data: D,
-    config?: HTTPRequestConfig<D>,
-  ): Promise<HTTPResponse<R>> {
-    return this.request({ ...config, url, data, method: 'PUT' });
+    data: RequestBodyT,
+    config?: HTTPRequestConfig<RequestBodyT>,
+  ): Promise<HTTPResponse<ResponseBodyT>> {
+    return this.request<ResponseBodyT, RequestBodyT>({
+      ...config,
+      url,
+      data,
+      method: 'PUT',
+    });
+  }
+
+  async patch<ResponseBodyT = unknown, RequestBodyT = unknown>(
+    url: string,
+    data: Partial<RequestBodyT>,
+    config?: HTTPRequestConfig<RequestBodyT>,
+  ): Promise<HTTPResponse<ResponseBodyT>> {
+    return this.request<ResponseBodyT, Partial<RequestBodyT>>({
+      ...config,
+      url,
+      data,
+      method: 'PATCH',
+    });
   }
 }
 
