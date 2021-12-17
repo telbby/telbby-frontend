@@ -4,11 +4,13 @@ import Jumbotron from '@/components/common/Jumbotron';
 import Layout from '@/components/common/Layout';
 import ServiceList from '@/components/service/ServiceList';
 import Shell from '@/components/shell/Shell';
+import useService from '@/hooks/useService';
 
-import { dummy } from './dummyData';
 import { servicePageStyle } from './style';
 
 const ServicePage: FC = () => {
+  const { serviceInfo } = useService();
+
   /**
    * FIXME:
    * 가상 API 요청을 위해 만든 코드입니다.
@@ -33,7 +35,10 @@ const ServicePage: FC = () => {
           width="90%"
           height="200px"
         />
-        <ServiceList serviceList={dummy} />
+        <ServiceList
+          serviceCount={serviceInfo.count}
+          serviceList={serviceInfo.serviceList}
+        />
       </div>
     </Layout>
   );
