@@ -47,7 +47,8 @@ const SignupPage: FC = () => {
       </main>
       <footer css={footerStyle}>
         <p>
-          Already have an account? <a href="/signin">Sign In</a>
+          Already have an account?
+          <Link to={Uri.signin}>Sign In</Link>
         </p>
       </footer>
     </div>
