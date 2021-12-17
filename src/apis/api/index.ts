@@ -22,9 +22,11 @@ abstract class Api {
     this.client.setHeader(this.ACCESS_TOKEN_HEADER, '');
   }
 
-  private async requestWithSilentRefresh<R = unknown>(
-    request: () => Promise<HTTPResponse<R & Partial<AuthResponseBody>>>,
-  ): Promise<HTTPResponse<R>> {
+  private async requestWithSilentRefresh<ResponseBodyT = unknown>(
+    request: () => Promise<
+      HTTPResponse<ResponseBodyT & Partial<AuthResponseBody>>
+    >,
+  ): Promise<HTTPResponse<ResponseBodyT>> {
     const response = await request();
 
     const { access = '', requestAgain = false } = response.data;
@@ -35,57 +37,62 @@ abstract class Api {
     return request();
   }
 
-  async get<R = unknown, D = unknown>(
-    config?: ApiRequestConfig<D>,
-  ): Promise<HTTPResponse<R>> {
+  async get<ResponseBodyT = unknown, RequestBodyT = unknown>(
+    config?: ApiRequestConfig<RequestBodyT>,
+  ): Promise<HTTPResponse<ResponseBodyT>> {
     const url = `${this.apiUrl}${config?.additionalUri ?? ''}`;
 
-    const request = () => this.client.get<R, D>(url, config);
+    const request = () =>
+      this.client.get<ResponseBodyT, RequestBodyT>(url, config);
 
-    return this.requestWithSilentRefresh<R>(request);
+    return this.requestWithSilentRefresh<ResponseBodyT>(request);
   }
 
-  async delete<R = unknown, D = unknown>(
-    config?: ApiRequestConfig<D>,
-  ): Promise<HTTPResponse<R>> {
+  async delete<ResponseBodyT = unknown, RequestBodyT = unknown>(
+    config?: ApiRequestConfig<RequestBodyT>,
+  ): Promise<HTTPResponse<ResponseBodyT>> {
     const url = `${this.apiUrl}${config?.additionalUri ?? ''}`;
 
-    const request = () => this.client.delete<R, D>(url, config);
+    const request = () =>
+      this.client.delete<ResponseBodyT, RequestBodyT>(url, config);
 
-    return this.requestWithSilentRefresh<R>(request);
+    return this.requestWithSilentRefresh<ResponseBodyT>(request);
   }
 
-  async post<R = unknown, D = unknown>(
-    data: D,
-    config?: ApiRequestConfig<D>,
-  ): Promise<HTTPResponse<R>> {
+  async post<ResponseBodyT = unknown, RequestBodyT = unknown>(
+    data: RequestBodyT,
+    config?: ApiRequestConfig<RequestBodyT>,
+  ): Promise<HTTPResponse<ResponseBodyT>> {
     const url = `${this.apiUrl}${config?.additionalUri ?? ''}`;
 
-    const request = () => this.client.post<R, D>(url, data, config);
+    const request = () =>
+      this.client.post<ResponseBodyT, RequestBodyT>(url, data, config);
 
-    return this.requestWithSilentRefresh<R>(request);
+    return this.requestWithSilentRefresh<ResponseBodyT>(request);
   }
 
-  async put<R = unknown, D = unknown>(
-    data: D,
-    config?: ApiRequestConfig<D>,
-  ): Promise<HTTPResponse<R>> {
+  async put<ResponseBodyT = unknown, RequestBodyT = unknown>(
+    data: RequestBodyT,
+    config?: ApiRequestConfig<RequestBodyT>,
+  ): Promise<HTTPResponse<ResponseBodyT>> {
     const url = `${this.apiUrl}${config?.additionalUri ?? ''}`;
 
-    const request = () => this.client.put<R, D>(url, data, config);
+    const request = () =>
+      this.client.put<ResponseBodyT, RequestBodyT>(url, data, config);
 
-    return this.requestWithSilentRefresh<R>(request);
+    return this.requestWithSilentRefresh<ResponseBodyT>(request);
   }
 
-  async patch<R = unknown, D = unknown>(
-    data: Partial<D>,
-    config?: ApiRequestConfig<D>,
-  ): Promise<HTTPResponse<R>> {
+  async patch<ResponseBodyT = unknown, RequestBodyT = unknown>(
+    data: Partial<RequestBodyT>,
+    config?: ApiRequestConfig<RequestBodyT>,
+  ): Promise<HTTPResponse<ResponseBodyT>> {
     const url = `${this.apiUrl}${config?.additionalUri ?? ''}`;
 
-    const request = () => this.client.patch<R, D>(url, data, config);
+    const request = () =>
+      this.client.patch<ResponseBodyT, RequestBodyT>(url, data, config);
 
-    return this.requestWithSilentRefresh<R>(request);
+    return this.requestWithSilentRefresh<ResponseBodyT>(request);
   }
 }
 

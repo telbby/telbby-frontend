@@ -1,5 +1,5 @@
-export interface HTTPResponse<D = unknown> {
-  data: D;
+export interface HTTPResponse<ResponseBodyT = unknown> {
+  data: ResponseBodyT;
   status: number;
 }
 
@@ -7,10 +7,10 @@ export type HTTPMethod = 'GET' | 'DELETE' | 'POST' | 'PUT' | 'PATCH';
 
 export type RequestHeaders = Record<string, string>;
 
-export interface HTTPRequestConfig<D = unknown> {
+export interface HTTPRequestConfig<RequestBodyT = unknown> {
   url?: string;
   baseURL?: string;
   method?: HTTPMethod;
-  data?: D;
+  data?: RequestBodyT;
   headers?: RequestHeaders;
 }
