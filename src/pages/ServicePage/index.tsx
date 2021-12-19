@@ -1,15 +1,29 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import Jumbotron from '@/components/common/Jumbotron';
 import Layout from '@/components/common/Layout';
+import Loader from '@/components/common/Loader';
 import ServiceList from '@/components/service/ServiceList';
 import Shell from '@/components/shell/Shell';
 import useService from '@/hooks/useService';
+import useSnackbar from '@/hooks/useSnackbar';
+import theme from '@/styles/theme';
 
 import { servicePageStyle } from './style';
 
 const ServicePage: FC = () => {
-  const { serviceInfo } = useService();
+  const { serviceInfo, isLoading, error } = useService();
+  const snackbar = useSnackbar({
+    backgroundColor: theme.colorPrimary,
+  });
+
+  useEffect(() => {
+    if (error) {
+      snackbar.showMessage('Failed to load the service list.', {
+        duration: 1500,
+      });
+    }
+  }, [error]);
 
   /**
    * FIXME:
@@ -27,6 +41,7 @@ const ServicePage: FC = () => {
 
   return (
     <Layout>
+      {isLoading && <Loader />}
       <div css={servicePageStyle}>
         <Jumbotron title="Add" />
         <Shell
