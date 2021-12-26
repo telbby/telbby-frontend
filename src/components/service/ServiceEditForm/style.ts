@@ -22,7 +22,7 @@ export const formHeaderStyle = (theme: Theme): SerializedStyles => css`
       font-size: 14px;
     }
 
-    h1 {
+    h2 {
       margin-top: 6px;
       color: ${theme.colorPrimary};
       font-family: ${theme.fontCodingBold};
@@ -40,7 +40,8 @@ export const formHeaderStyle = (theme: Theme): SerializedStyles => css`
     color: ${theme.colorWhite};
     font-size: 18px;
 
-    &:hover {
+    &:hover,
+    &:disabled {
       opacity: 0.8;
     }
   }
@@ -52,7 +53,10 @@ export const formBodyStyle = css`
   margin: 40px;
 `;
 
-export const inputFormStyle = (theme: Theme): SerializedStyles => css`
+export const inputFormStyle = (
+  theme: Theme,
+  isEdited: boolean,
+): SerializedStyles => css`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -67,18 +71,12 @@ export const inputFormStyle = (theme: Theme): SerializedStyles => css`
     background: none;
     border: none;
     border-bottom: 2px solid ${theme.colorGray2};
-    color: ${theme.colorGray1};
+    color: ${isEdited ? theme.colorGray2 : theme.colorGray3};
     font-weight: 600;
     font-size: 16px;
 
     &:focus {
       outline: none;
-      border-bottom: 2px solid ${theme.colorPrimary};
-      color: ${theme.colorPrimary};
-    }
-
-    &::placeholder {
-      color: ${theme.colorGray3};
     }
   }
 `;

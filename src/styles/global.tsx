@@ -33,6 +33,10 @@ const style = css`
   button {
     cursor: pointer;
     box-sizing: border-box;
+
+    &:disabled {
+      cursor: default;
+    }
   }
 
   a {

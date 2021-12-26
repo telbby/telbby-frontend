@@ -5,6 +5,6 @@ export const dummy = {
   description: '',
   domain: 'happy-music.com',
   profileImg: 'https://wallpaper.dog/large/20500932.jpg',
-  firstQuestion: '',
+  firstQuestion: 'Give me a feedback',
   theme: 1,
 };

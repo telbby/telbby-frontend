@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 
 import defaultProfileImg from '@/assets/images/logo.png';
 import theme1Img from '@/assets/images/theme1.png';
@@ -16,6 +16,19 @@ type ServiceEditFormProps = {
   serviceInfo: ServiceInfo;
 };
 
+type ServiceEditFormInput = {
+  name: string;
+  description: string;
+  domain: string;
+  firstQuestion: string;
+  theme: string;
+};
+
+type ImageInput = {
+  preview: string;
+  raw: File | null;
+};
+
 const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
   const {
     name,
@@ -27,17 +40,29 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
     profileImg,
   } = serviceInfo;
 
-  const [inputs, setInputs] = useState({
+  const [inputs, setInputs] = useState<ServiceEditFormInput>({
     name,
     description,
     domain,
     firstQuestion,
     theme: theme.toString(),
   });
-  const [image, setImage] = useState({
+  const [image, setImage] = useState<ImageInput>({
     preview: profileImg || defaultProfileImg,
     raw: null,
   });
+  const [isBtnActive, setIsBtnActive] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsBtnActive(
+      name !== inputs.name ||
+        description !== inputs.description ||
+        domain !== inputs.domain ||
+        firstQuestion !== inputs.firstQuestion ||
+        theme.toString() !== inputs.theme ||
+        profileImg !== image.preview,
+    );
+  }, [inputs, image]);
 
   const onChange = useCallback(
     (e) => {
@@ -78,12 +103,17 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
         </label>
         <div>
           <span>Client ID: {clientId}</span>
-          <h1>{name}</h1>
+          <h2>{inputs.name}</h2>
         </div>
-        <button type="submit">SAVE</button>
+        <button type="submit" disabled={!isBtnActive}>
+          SAVE
+        </button>
       </div>
       <div css={formBodyStyle}>
-        <label htmlFor="service-name" css={inputFormStyle}>
+        <label
+          htmlFor="service-name"
+          css={(cssTheme) => inputFormStyle(cssTheme, name !== inputs.name)}
+        >
           Name :
           <input
             value={inputs.name}
@@ -93,7 +123,12 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
             onChange={onChange}
           />
         </label>
-        <label htmlFor="service-description" css={inputFormStyle}>
+        <label
+          htmlFor="service-description"
+          css={(cssTheme) =>
+            inputFormStyle(cssTheme, description !== inputs.description)
+          }
+        >
           Description :
           <input
             value={inputs.description}
@@ -103,7 +138,10 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
             onChange={onChange}
           />
         </label>
-        <label htmlFor="service-domain" css={inputFormStyle}>
+        <label
+          htmlFor="service-domain"
+          css={(cssTheme) => inputFormStyle(cssTheme, domain !== inputs.domain)}
+        >
           Domain :
           <input
             value={inputs.domain}
@@ -113,13 +151,17 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
             onChange={onChange}
           />
         </label>
-        <label htmlFor="service-first-question" css={inputFormStyle}>
+        <label
+          htmlFor="service-first-question"
+          css={(cssTheme) =>
+            inputFormStyle(cssTheme, firstQuestion !== inputs.firstQuestion)
+          }
+        >
           First Question :
           <input
             value={inputs.firstQuestion}
             type="text"
             id="service-first-question"
-            placeholder="Give me a feedback"
             name="firstQuestion"
             onChange={onChange}
           />
