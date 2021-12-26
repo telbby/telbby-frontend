@@ -1,28 +1,36 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import Logo from '../Logo';
+import { useUserState } from '@/atoms/userState';
+import useConfirmModal from '@/hooks/useConfirmModal';
 import Uri from '@/constants/uri';
+import PrivateNavbar from '@/components/nav/PrivateNavbar';
+import PublicNavbar from '@/components/nav/PublicNavbar';
+import Logo from '@/components/common/Logo';
 
-import { navStyle, yellowLineButton, yellowFullButton } from './style';
+import { navStyle } from './style';
 
 const Navbar: FC = () => {
+  const [user, setUser] = useUserState();
+  const [open] = useConfirmModal();
+
+  const logoutHandler = () => {
+    const logout = () => setUser(null);
+    open({ message: 'Do you want to logout?', acceptHandler: logout });
+  };
+
   return (
     <nav css={navStyle}>
       <Link to={Uri.home}>
         <Logo />
       </Link>
+
       <div>
-        <Link to={Uri.signin}>
-          <button css={yellowLineButton} type="button">
-            Sign in
-          </button>
-        </Link>
-        <Link to={Uri.signup}>
-          <button css={yellowFullButton} type="button">
-            Register
-          </button>
-        </Link>
+        {user ? (
+          <PrivateNavbar logoutHandler={logoutHandler} />
+        ) : (
+          <PublicNavbar />
+        )}
       </div>
     </nav>
   );

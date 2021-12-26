@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { authApi } from '@/apis';
+import { useSetUserState } from '@/atoms/userState';
 import Jumbotron from '@/components/common/Jumbotron';
 import Logo from '@/components/common/Logo';
 import Shell from '@/components/shell/Shell';
@@ -12,13 +13,19 @@ import { LoginRequestBody } from '@/types';
 import { footerStyle, headerStyle, layoutStyle } from './style';
 
 const SigninPage: FC = () => {
+  const setUserState = useSetUserState();
   const { push } = useHistory();
 
   const requestSignin = async (body: LoginRequestBody) => {
     try {
       await authApi.login(body);
+
+      setUserState((prev) => ({ ...prev, userId: body.userId }));
+
       push(Uri.service);
     } catch (error) {
+      setUserState(null);
+
       if (!error.response) throw new Error(NETWORK_ERROR);
 
       const { status } = error.response;
@@ -31,8 +38,10 @@ const SigninPage: FC = () => {
   return (
     <div css={layoutStyle}>
       <header css={headerStyle}>
-        <Logo onlyImg width="70px" />
-        <Jumbotron title="Sign in" />
+        <Link to={Uri.home}>
+          <Logo onlyImg width="70px" />
+          <Jumbotron title="Sign in" />
+        </Link>
       </header>
       <main>
         <Shell
@@ -44,7 +53,8 @@ const SigninPage: FC = () => {
       </main>
       <footer css={footerStyle}>
         <p>
-          Don’t have an account? <a href="/signup">Sign Up</a>
+          Don’t have an account?
+          <Link to={Uri.signup}>Sign Up</Link>
         </p>
       </footer>
     </div>

@@ -37,6 +37,7 @@ module.exports = {
       1,
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
     ],
+    'react/jsx-props-no-spreading': 'off',
     'no-param-reassign': [
       'error',
       { props: true, ignorePropertyModificationsForRegex: ['^draft'] },
