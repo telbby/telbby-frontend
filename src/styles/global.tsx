@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
-import { Global, css } from '@emotion/react';
 
+import { Global, css } from '@emotion/react';
 import D2Coding from '@/assets/fonts/D2Coding.woff';
 import D2CodingBold from '@/assets/fonts/D2CodingBold.woff';
 
@@ -30,9 +30,13 @@ const style = css`
     background-color: #f4f7ff;
   }
 
-  button[type='button'] {
+  button {
     cursor: pointer;
     box-sizing: border-box;
+
+    &:disabled {
+      cursor: default;
+    }
   }
 
   a {

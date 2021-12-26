@@ -5,6 +5,7 @@ import ErrorBoundary from './components/common/ErrorBoundary';
 import Uri from './constants/uri';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
+import ServiceEditPage from './pages/ServiceEditPage';
 import ServicePage from './pages/ServicePage';
 import SigninPage from './pages/SigninPage';
 import SignupPage from './pages/SignupPage';
@@ -21,12 +22,6 @@ const App: FC = () => {
       <Switch>
         <Route path={Uri.home} exact component={HomePage} />
         <PrivateRoute
-          path={Uri.service}
-          exact
-          component={ServicePage}
-          isAccessible={isAuthenticated}
-        />
-        <PrivateRoute
           path={Uri.signup}
           exact
           component={SignupPage}
@@ -38,6 +33,13 @@ const App: FC = () => {
           component={SigninPage}
           isAccessible={!isAuthenticated}
         />
+        <PrivateRoute
+          path={Uri.service}
+          exact
+          component={ServicePage}
+          isAccessible={isAuthenticated}
+        />
+        <Route path={Uri.serviceEdit} exact component={ServiceEditPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </ErrorBoundary>
