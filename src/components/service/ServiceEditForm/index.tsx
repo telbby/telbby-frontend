@@ -71,7 +71,7 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
             type="file"
             name="image"
             id="service-profile"
-            style={{ display: 'none' }}
+            hidden
             onChange={onChangeImgFile}
           />
           <img src={image.preview} alt="service profile" />
