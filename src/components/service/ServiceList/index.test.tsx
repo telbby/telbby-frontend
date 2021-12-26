@@ -11,8 +11,13 @@ describe('<ServiceList/> component test', () => {
     const clientId = 'serviceClientId';
     const serviceList = [{ id: 1, name, domain, clientId }];
     const serviceCount = 1;
+
     render(
-      <ServiceList serviceCount={serviceCount} serviceList={serviceList} />,
+      <ServiceList
+        serviceCount={serviceCount}
+        serviceList={serviceList}
+        onDeleteServiceItem={() => {}}
+      />,
     );
 
     expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
@@ -24,7 +29,13 @@ describe('<ServiceList/> component test', () => {
   });
 
   it('serviceList가 빈 배열이면 서비스가 없다는 화면을 렌더링합니다.', () => {
-    render(<ServiceList serviceCount={0} serviceList={[]} />);
+    render(
+      <ServiceList
+        serviceCount={0}
+        serviceList={[]}
+        onDeleteServiceItem={() => {}}
+      />,
+    );
 
     expect(screen.getByRole('img', { name: 'empty' })).toBeInTheDocument();
     expect(screen.queryByText('There are no services')).toBeInTheDocument();
