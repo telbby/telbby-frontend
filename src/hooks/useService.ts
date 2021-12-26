@@ -8,6 +8,7 @@ const useService = (): {
   isLoading: boolean;
   error: string;
   serviceInfo: { count: number; serviceList: ServiceBasicInfo[] };
+  deleteService: (id: string) => Promise<void>;
 } => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -37,6 +38,23 @@ const useService = (): {
     }
   };
 
+  const deleteService = async (id: string) => {
+    try {
+      setIsLoading(true);
+
+      await serviceApi.deleteItem(id);
+    } catch (e) {
+      if (e.response) {
+        setError(UNEXPECTED_ERROR);
+      } else {
+        setError(NETWORK_ERROR);
+      }
+      throw e;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     getServiceListAndCount();
   }, []);
@@ -45,6 +63,7 @@ const useService = (): {
     isLoading,
     error,
     serviceInfo,
+    deleteService,
   };
 };
 

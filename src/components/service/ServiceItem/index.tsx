@@ -12,15 +12,30 @@ import {
 } from './style';
 
 type ServiceItemProps = {
+  id: number;
   name: string;
   domain: string;
   clientId: string;
+  onDeleteServiceItem: (id: string) => void;
 };
 
-const ServiceItem: FC<ServiceItemProps> = ({ name, domain, clientId }) => {
-  const [open] = useConfirmModal();
+const ServiceItem: FC<ServiceItemProps> = ({
+  id,
+  name,
+  domain,
+  clientId,
+  onDeleteServiceItem,
+}) => {
+  const { open, setConfirmModal } = useConfirmModal();
 
   const openModal = () => {
+    setConfirmModal({
+      acceptHandler: () => {
+        onDeleteServiceItem(id.toString());
+        window.location.reload();
+      },
+    });
+
     open({ message: `Do you really want to delete ${name} service?` });
   };
 

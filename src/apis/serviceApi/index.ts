@@ -8,6 +8,11 @@ class ServiceApi extends Api {
 
     return response.data;
   }
+
+  async deleteItem(id: string): Promise<void> {
+    const response = await this.delete({ additionalUri: `/${id}` });
+    console.log(response);
+  }
 }
 
 export default ServiceApi;

@@ -12,14 +12,14 @@ import theme from '@/styles/theme';
 import { servicePageStyle } from './style';
 
 const ServicePage: FC = () => {
-  const { serviceInfo, isLoading, error } = useService();
+  const { isLoading, error, serviceInfo, deleteService } = useService();
   const snackbar = useSnackbar({
     backgroundColor: theme.colorPrimary,
   });
 
   useEffect(() => {
     if (error) {
-      snackbar.showMessage('Failed to load the service list.', {
+      snackbar.showMessage(error, {
         duration: 1500,
       });
     }
@@ -53,6 +53,7 @@ const ServicePage: FC = () => {
         <ServiceList
           serviceCount={serviceInfo.count}
           serviceList={serviceInfo.serviceList}
+          onDeleteServiceItem={deleteService}
         />
       </div>
     </Layout>
