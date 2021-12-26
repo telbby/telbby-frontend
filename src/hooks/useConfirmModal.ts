@@ -1,13 +1,13 @@
 import {
-  useSetConfirmModalState,
   ConfirmModalStateType,
+  useSetConfirmModalState,
 } from '@/atoms/confirmModalState';
 
-const useConfirmModal = (): readonly [
-  open: (next?: Partial<ConfirmModalStateType>) => void,
-  close: (next?: Partial<ConfirmModalStateType>) => void,
-  setConfirmModal: (next?: Partial<ConfirmModalStateType>) => void,
-] => {
+const useConfirmModal = (): {
+  open: (next?: Partial<ConfirmModalStateType>) => void;
+  close: (next?: Partial<ConfirmModalStateType>) => void;
+  setConfirmModal: (next?: Partial<ConfirmModalStateType>) => void;
+} => {
   const setConfirmModalState = useSetConfirmModalState();
 
   const setConfirmModal = (next?: Partial<ConfirmModalStateType>) =>
@@ -19,7 +19,7 @@ const useConfirmModal = (): readonly [
   const close = (next?: Partial<ConfirmModalStateType>) =>
     setConfirmModalState((prev) => ({ ...prev, next, isOpen: false }));
 
-  return [open, close, setConfirmModal];
+  return { open, close, setConfirmModal };
 };
 
 export default useConfirmModal;
