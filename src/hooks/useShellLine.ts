@@ -14,11 +14,14 @@ const useShellLine = (
 
   const [form, setForm] = useState({});
 
+  let currentSequence = 0;
+
   const injectUniqueID = (command: Omit<LineType, 'id'>) => {
     return { ...command, id: nanoid() };
   };
 
   const getLineOnSequence = (seq: number) => {
+    currentSequence += 1;
     return injectUniqueID(commands[seq].props);
   };
 
@@ -48,20 +51,26 @@ const useShellLine = (
       );
     } else {
       if (result.nextSequence) {
-        addNewLines(getLineOnSequence(result.nextSequence));
+        currentSequence = result.nextSequence;
+        addNewLines(getLineOnSequence(currentSequence));
       }
 
-      if (formKey) setValueOnForm(formKey, commandValue);
+      if (formKey) {
+        setValueOnForm(formKey, commandValue);
+      }
     }
   };
 
   useEffect(() => {
     if (lines.length !== 0) return;
 
-    const firstLine = getLineOnSequence(0);
+    const firstLine = getLineOnSequence(currentSequence);
 
-    if (firstLine.render.type === 'readLine') addNewLines(firstLine);
-    else addNewLines(firstLine, getLineOnSequence(firstLine.nextSequence));
+    if (firstLine.render.type === 'readLine') {
+      addNewLines(firstLine);
+    } else {
+      addNewLines(firstLine, getLineOnSequence(currentSequence));
+    }
   }, []);
 
   return [lines, executeCurrentLine];

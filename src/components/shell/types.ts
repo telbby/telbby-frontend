@@ -20,14 +20,16 @@ export type OnEnterErrorType = {
 };
 
 export type ShellCommandType = {
-  sequence: number;
-  nextSequence: number;
   render: ShellLineEssentialType;
   onEnter?: (
     input?: string,
     formData?: { [key: string]: string },
-  ) => Promise<OnEnterErrorType | OnEnterSuccessType>;
+  ) =>
+    | Promise<OnEnterErrorType | OnEnterSuccessType>
+    | OnEnterErrorType
+    | OnEnterSuccessType;
   formKey?: string;
   defaultValue?: string;
   maxLength?: number;
+  nextSequence?: number;
 };
