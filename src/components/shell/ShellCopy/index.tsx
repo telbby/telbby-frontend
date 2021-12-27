@@ -1,10 +1,11 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement, cloneElement, useEffect } from 'react';
 
 import useShellLine from '@/hooks/useShellLine';
 
 import useFocusOnLastInput from '../../../hooks/useFocusOnLastInput';
 import ShellPrintLine from '../ShellPrintLine';
 import ShellReadLine from '../ShellReadLine';
+import { ShellCommandType } from '../types';
 import { fieldsetStyle, formStyle, shellContainerStyle } from './style';
 
 type ShellProps = {
@@ -63,6 +64,12 @@ const Shell = ({
       </form>
     </div>
   );
+};
+
+type ShellCommandProps = ShellCommandType;
+
+Shell.Command = ({ ...props }: ShellCommandProps) => {
+  return cloneElement(null, props);
 };
 
 Shell.defaultProps = {
