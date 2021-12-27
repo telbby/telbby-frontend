@@ -3,8 +3,7 @@ import Api from '../api';
 
 class UserApi extends Api {
   async signup(reqData: LoginRequestBody): Promise<UpdateInfoResponseBody> {
-    const response = await this.client.post<UpdateInfoResponseBody>(
-      this.apiUrl,
+    const response = await this.post<UpdateInfoResponseBody, LoginRequestBody>(
       reqData,
     );
 

@@ -15,9 +15,9 @@ class AxiosHTTPClient extends HTTPClient {
     this.defaultRequestConfig = defaultConfig;
   }
 
-  async request<R = unknown, D = unknown>(
-    config: HTTPRequestConfig<D>,
-  ): Promise<HTTPResponse<R>> {
+  async request<ResponseBodyT = unknown, RequestBodyT = unknown>(
+    config: HTTPRequestConfig<RequestBodyT>,
+  ): Promise<HTTPResponse<ResponseBodyT>> {
     try {
       const requestConfig = { ...this.defaultRequestConfig, ...config };
       const response = await this.client(requestConfig);
@@ -26,7 +26,7 @@ class AxiosHTTPClient extends HTTPClient {
 
       return { data, status };
     } catch (e) {
-      const httpErrorResponse: HTTPResponse<D> = {
+      const httpErrorResponse: HTTPResponse<ResponseBodyT> = {
         data: e.response?.data,
         status: e.response?.status,
       };

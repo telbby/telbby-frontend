@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { authApi } from '@/apis';
 import { useSetUserState } from '@/atoms/userState';
@@ -57,8 +57,10 @@ const SigninPage: FC = () => {
   return (
     <div css={layoutStyle}>
       <header css={headerStyle}>
-        <Logo onlyImg width="70px" />
-        <Jumbotron title="Sign in" />
+        <Link to={Uri.home}>
+          <Logo onlyImg width="70px" />
+          <Jumbotron title="Sign in" />
+        </Link>
       </header>
       <main>
         <Shell width="789px" height="247px" legend="Telbby Service Shell">
@@ -95,7 +97,8 @@ const SigninPage: FC = () => {
       </main>
       <footer css={footerStyle}>
         <p>
-          Don’t have an account? <a href="/signup">Sign Up</a>
+          Don’t have an account?
+          <Link to={Uri.signup}>Sign Up</Link>
         </p>
       </footer>
     </div>

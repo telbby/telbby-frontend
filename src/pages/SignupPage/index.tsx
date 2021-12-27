@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import { userApi } from '@/apis';
 import Jumbotron from '@/components/common/Jumbotron';
@@ -9,6 +10,7 @@ import {
   UNEXPECTED_ERROR,
   signupError,
 } from '@/constants/error';
+import Uri from '@/constants/uri';
 import { LoginRequestBody } from '@/types';
 
 import { footerStyle, headerStyle, layoutStyle } from './style';
@@ -30,8 +32,10 @@ const SignupPage: FC = () => {
   return (
     <div css={layoutStyle}>
       <header css={headerStyle}>
-        <Logo onlyImg width="70px" />
-        <Jumbotron title="Join" />
+        <Link to={Uri.home}>
+          <Logo onlyImg width="70px" />
+          <Jumbotron title="Join" />
+        </Link>
       </header>
       <main>
         <Shell
@@ -43,7 +47,8 @@ const SignupPage: FC = () => {
       </main>
       <footer css={footerStyle}>
         <p>
-          Already have an account? <a href="/signin">Sign In</a>
+          Already have an account?
+          <Link to={Uri.signin}>Sign In</Link>
         </p>
       </footer>
     </div>

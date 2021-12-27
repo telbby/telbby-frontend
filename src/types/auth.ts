@@ -5,4 +5,5 @@ export type LoginRequestBody = {
 
 export type AuthResponseBody = {
   access: string;
+  requestAgain?: boolean;
 };
