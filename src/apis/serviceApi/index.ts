@@ -10,8 +10,7 @@ class ServiceApi extends Api {
   }
 
   async deleteItem(id: string): Promise<void> {
-    const response = await this.delete({ additionalUri: `/${id}` });
-    console.log(response);
+    await this.delete({ additionalUri: `/${id}` });
   }
 }
 
