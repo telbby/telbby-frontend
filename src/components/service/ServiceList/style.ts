@@ -9,6 +9,10 @@ export const headerStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorPrimary};
   font-size: 26px;
   margin: 30px 0;
+
+  span {
+    font-size: 24px;
+  }
 `;
 
 export const listStyle = css`
