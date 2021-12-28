@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 
-import emptyImg from '@/assets/images/empty.png';
-
+import NoService from '../NoService';
 import ServiceItem from '../ServiceItem';
-import { emptyStyle, headerStyle, listStyle, wrapperStyle } from './style';
+import { headerStyle, listStyle, wrapperStyle } from './style';
 
 type ServiceListProps = {
   serviceCount: number;
@@ -44,10 +43,7 @@ const ServiceList: FC<ServiceListProps> = ({
           </div>
         </>
       ) : (
-        <div css={emptyStyle}>
-          <img src={emptyImg} alt="empty" />
-          <p>There are no services</p>
-        </div>
+        <NoService />
       )}
     </section>
   );
