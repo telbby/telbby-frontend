@@ -60,7 +60,7 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
         domain !== inputs.domain ||
         firstQuestion !== inputs.firstQuestion ||
         theme.toString() !== inputs.theme ||
-        profileImg !== image.preview,
+        image.raw !== null,
     );
   }, [inputs, image]);
 
