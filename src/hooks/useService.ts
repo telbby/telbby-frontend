@@ -49,7 +49,6 @@ const useService = (): {
       } else {
         setError(NETWORK_ERROR);
       }
-      throw e;
     } finally {
       setIsLoading(false);
     }
