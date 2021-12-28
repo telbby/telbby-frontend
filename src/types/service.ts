@@ -20,3 +20,22 @@ export type ServiceListAndCountResponseBody = {
   projectList: ServiceBasicInfo[];
   count: number;
 };
+
+export type ServiceInfoResponseBody = {
+  id: number;
+  name: string;
+  clientId: string;
+  description: string | null;
+  domain: string | null;
+  image: string | null;
+  question: string | null;
+  createdAt: string;
+  updatedAt: string;
+  theme: {
+    id: number;
+    name: string;
+  };
+  user: {
+    uid: string;
+  };
+};

@@ -1,25 +1,34 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Layout from '@/components/common/Layout';
+import Loader from '@/components/common/Loader';
+import NoService from '@/components/service/NoService';
 import ServiceEditForm from '@/components/service/ServiceEditForm';
-import { ServiceInfo } from '@/types/service';
-
-import { dummy } from './dummyData';
+import useServiceEdit from '@/hooks/useServiceEdit';
+import useSnackbar from '@/hooks/useSnackbar';
+import theme from '@/styles/theme';
 
 const ServiceEditPage: FC = () => {
-  const [serviceInfo, setServiceInfo] = useState<ServiceInfo>(null);
+  const { serviceId } = useParams<{ serviceId: string }>();
+  const { isLoading, error, serviceInfo } = useServiceEdit(serviceId);
+  const snackbar = useSnackbar({
+    backgroundColor: theme.colorPrimary,
+  });
 
   useEffect(() => {
-    setServiceInfo(dummy);
-  }, []);
+    if (error) {
+      snackbar.showMessage(error, {
+        duration: 1500,
+      });
+    }
+  }, [error]);
 
   return (
     <Layout>
-      {serviceInfo ? (
-        <ServiceEditForm serviceInfo={serviceInfo} />
-      ) : (
-        <div>Loading</div>
-      )}
+      {isLoading && <Loader />}
+      {serviceInfo && <ServiceEditForm serviceInfo={serviceInfo} />}
+      {error && <NoService />}
     </Layout>
   );
 };
