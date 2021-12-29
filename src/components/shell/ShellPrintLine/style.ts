@@ -5,13 +5,7 @@ export const shellLineContainerStyle = css`
   height: fit-content;
 `;
 
-export const defaultTypeStyle = (theme: Theme): SerializedStyles => css`
-  color: ${theme.colorGray3};
-  margin-right: 12px;
-  float: left;
-`;
-
-export const errorTypeStyle = (theme: Theme): SerializedStyles => css`
+export const errorPrefixStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorError};
   margin-right: 12px;
   float: left;
@@ -19,11 +13,6 @@ export const errorTypeStyle = (theme: Theme): SerializedStyles => css`
 
 export const defaultMessageStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorGray2};
-  float: left;
-`;
-
-export const readLineMessageStyle = (theme: Theme): SerializedStyles => css`
-  color: ${theme.colorGray1};
   float: left;
 `;
 
