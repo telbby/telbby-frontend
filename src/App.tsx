@@ -1,24 +1,48 @@
 import React, { FC } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import ErrorBoundary from './components/common/ErrorBoundary';
 import Uri from './constants/uri';
-import CountPage from './pages/CountPage';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
+import ServiceEditPage from './pages/ServiceEditPage';
 import ServicePage from './pages/ServicePage';
 import SigninPage from './pages/SigninPage';
 import SignupPage from './pages/SignupPage';
+import PrivateRoute from './components/common/PrivateRoute';
+import { useUserStateValue } from './atoms/userState';
 
 const App: FC = () => {
+  const user = useUserStateValue();
+
+  const isAuthenticated = !!user;
+
   return (
-    <Switch>
-      <Route path={Uri.home} exact component={HomePage} />
-      <Route path={Uri.count} exact component={CountPage} />
-      <Route path={Uri.service} exact component={ServicePage} />
-      <Route path={Uri.signup} exact component={SignupPage} />
-      <Route path={Uri.signin} exact component={SigninPage} />
-      <Route component={NotFoundPage} />
-    </Switch>
+    <ErrorBoundary>
+      <Switch>
+        <Route path={Uri.home} exact component={HomePage} />
+        <PrivateRoute
+          path={Uri.signup}
+          exact
+          component={SignupPage}
+          isAccessible={!isAuthenticated}
+        />
+        <PrivateRoute
+          path={Uri.signin}
+          exact
+          component={SigninPage}
+          isAccessible={!isAuthenticated}
+        />
+        <PrivateRoute
+          path={Uri.service}
+          exact
+          component={ServicePage}
+          isAccessible={isAuthenticated}
+        />
+        <Route path={Uri.serviceEdit} exact component={ServiceEditPage} />
+        <Route component={NotFoundPage} />
+      </Switch>
+    </ErrorBoundary>
   );
 };
 

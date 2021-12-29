@@ -3,13 +3,16 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { render, screen } from '@testing-library/react';
 
+import { RecoilRoot } from 'recoil';
 import ServicePage from '.';
 
 it('should render ServicePage contents', () => {
   render(
-    <MemoryRouter>
-      <ServicePage />
-    </MemoryRouter>,
+    <RecoilRoot>
+      <MemoryRouter>
+        <ServicePage />
+      </MemoryRouter>
+    </RecoilRoot>,
   );
 
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
