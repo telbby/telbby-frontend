@@ -40,6 +40,8 @@ const useShellLine = (
 
     const { defaultValue, onEnter, formKey } = currentLine;
 
+    if (!onEnter) return;
+
     const commandValue = value || defaultValue;
 
     const result = await onEnter(commandValue, form);

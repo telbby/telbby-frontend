@@ -14,6 +14,10 @@ export const defaultPrefixStyle = (theme: Theme): SerializedStyles => css`
 export const readLineMessageStyle = (theme: Theme): SerializedStyles => css`
   color: ${theme.colorGray1};
   float: left;
+
+  ::after {
+    content: ':';
+  }
 `;
 
 export const inputStyle = (theme: Theme): SerializedStyles => css`

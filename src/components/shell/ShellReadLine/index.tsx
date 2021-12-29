@@ -23,10 +23,11 @@ const ShellReadLine = ({
   return (
     <div css={shellLineContainerStyle}>
       <span css={defaultPrefixStyle}>{prefix}</span>
-      <span css={readLineMessageStyle}>{`${message}:`}</span>
+      <span css={readLineMessageStyle}>{message}</span>
       <span css={inputStyle}>
         <input
           type={isPassword ? 'password' : 'text'}
+          role={isPassword ? 'password' : 'textbox'}
           maxLength={maxLength}
           autoComplete="off"
         />

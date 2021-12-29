@@ -5,7 +5,7 @@ import { authApi } from '@/apis';
 import { useSetUserState } from '@/atoms/userState';
 import Jumbotron from '@/components/common/Jumbotron';
 import Logo from '@/components/common/Logo';
-import Shell from '@/components/shell/ShellCopy';
+import Shell from '@/components/shell/Shell';
 import { reject, renderProps, resolve } from '@/components/shell/helper';
 import { NETWORK_ERROR, UNEXPECTED_ERROR, loginError } from '@/constants/error';
 import Uri from '@/constants/uri';
