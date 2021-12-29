@@ -14,6 +14,7 @@ import {
 
 type ServiceEditFormProps = {
   serviceInfo: ServiceInfo;
+  updateServiceInfo: (formData: FormData) => void;
 };
 
 type ServiceEditFormInput = {
@@ -29,7 +30,10 @@ type ImageInput = {
   raw: File | null;
 };
 
-const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
+const ServiceEditForm: FC<ServiceEditFormProps> = ({
+  serviceInfo,
+  updateServiceInfo,
+}) => {
   const {
     name,
     clientId,
@@ -74,10 +78,6 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
     [inputs],
   );
 
-  const onSubmit = () => {
-    // TODO: 서비스 수정 API 연결
-  };
-
   const onChangeImgFile = (e) => {
     if (e.target.files.length) {
       setImage({
@@ -87,8 +87,23 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
     }
   };
 
+  const onClickSaveBtn = () => {
+    const formData = new FormData();
+    if (name !== inputs.name) formData.append('name', inputs.name);
+    if (description !== inputs.description)
+      formData.append('description', inputs.description);
+    if (domain !== inputs.domain) formData.append('domain', inputs.domain);
+    if (firstQuestion !== inputs.firstQuestion)
+      formData.append('question', inputs.firstQuestion);
+    if (theme.toString() !== inputs.theme)
+      formData.append('themeId', inputs.theme);
+    if (image.raw !== null) formData.append('image', image.raw);
+
+    updateServiceInfo(formData);
+  };
+
   return (
-    <form onSubmit={onSubmit}>
+    <form>
       <div css={formHeaderStyle}>
         <label htmlFor="service-profile">
           <input
@@ -105,7 +120,7 @@ const ServiceEditForm: FC<ServiceEditFormProps> = ({ serviceInfo }) => {
           <span>Client ID: {clientId}</span>
           <h2>{inputs.name}</h2>
         </div>
-        <button type="submit" disabled={!isBtnActive}>
+        <button type="button" disabled={!isBtnActive} onClick={onClickSaveBtn}>
           SAVE
         </button>
       </div>

@@ -23,6 +23,10 @@ class ServiceApi extends Api {
 
     return response.data;
   }
+
+  async updateInfo(id: string, formData: FormData): Promise<void> {
+    await this.patch<void, FormData>(formData, { additionalUri: `/${id}` });
+  }
 }
 
 export default ServiceApi;

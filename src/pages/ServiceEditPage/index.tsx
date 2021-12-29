@@ -11,15 +11,15 @@ import theme from '@/styles/theme';
 
 const ServiceEditPage: FC = () => {
   const { serviceId } = useParams<{ serviceId: string }>();
-  const { isLoading, error, serviceInfo } = useServiceEdit(serviceId);
-  const snackbar = useSnackbar({
-    backgroundColor: theme.colorPrimary,
-  });
+  const { isLoading, error, serviceInfo, updateServiceInfo } =
+    useServiceEdit(serviceId);
+  const snackbar = useSnackbar({});
 
   useEffect(() => {
     if (error) {
       snackbar.showMessage(error, {
         duration: 1500,
+        backgroundColor: theme.colorPrimary,
       });
     }
   }, [error]);
@@ -27,7 +27,12 @@ const ServiceEditPage: FC = () => {
   return (
     <Layout>
       {isLoading && <Loader />}
-      {serviceInfo && <ServiceEditForm serviceInfo={serviceInfo} />}
+      {serviceInfo && (
+        <ServiceEditForm
+          serviceInfo={serviceInfo}
+          updateServiceInfo={updateServiceInfo}
+        />
+      )}
       {error && <NoService />}
     </Layout>
   );

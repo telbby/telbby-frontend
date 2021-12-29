@@ -6,7 +6,10 @@ import {
   NOT_FOUND_ERROR,
   UNEXPECTED_ERROR,
 } from '@/constants/error';
+import styleTheme from '@/styles/theme';
 import { ServiceInfo } from '@/types';
+
+import useSnackbar from './useSnackbar';
 
 const useServiceEdit = (
   serviceId: string,
@@ -14,10 +17,13 @@ const useServiceEdit = (
   isLoading: boolean;
   error: string;
   serviceInfo: ServiceInfo;
+  updateServiceInfo: (formData: FormData) => void;
 } => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [serviceInfo, setServiceInfo] = useState<ServiceInfo | null>(null);
+
+  const snackbar = useSnackbar({});
 
   const getServiceInfo = async () => {
     try {
@@ -58,6 +64,27 @@ const useServiceEdit = (
     }
   };
 
+  const updateServiceInfo = async (formData: FormData) => {
+    try {
+      setIsLoading(true);
+
+      await serviceApi.updateInfo(serviceId, formData);
+
+      snackbar.showMessage('Service Update Success!!', {
+        duration: 1500,
+        backgroundColor: styleTheme.colorSuccess,
+      });
+    } catch (e) {
+      if (e.response) {
+        setError(UNEXPECTED_ERROR);
+      } else {
+        setError(NETWORK_ERROR);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     getServiceInfo();
   }, []);
@@ -66,6 +93,7 @@ const useServiceEdit = (
     isLoading,
     error,
     serviceInfo,
+    updateServiceInfo,
   };
 };
 
