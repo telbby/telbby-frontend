@@ -1,21 +1,19 @@
 import React, { FC, useCallback } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { authApi } from '@/apis';
-import { useSetUserState } from '@/atoms/userState';
 import Jumbotron from '@/components/common/Jumbotron';
 import Logo from '@/components/common/Logo';
 import Shell from '@/components/shell/Shell';
 import { reject, renderProps, resolve } from '@/components/shell/helper';
 import { NETWORK_ERROR, UNEXPECTED_ERROR, loginError } from '@/constants/error';
 import Uri from '@/constants/uri';
+import useAuth from '@/hooks/useAuth';
 import { LoginRequestBody } from '@/types';
 
 import { footerStyle, headerStyle, layoutStyle } from './style';
 
 const SigninPage: FC = () => {
-  const setUserState = useSetUserState();
-  const { push } = useHistory();
+  const { login } = useAuth();
 
   const checkIsValueEmpty = useCallback(
     (option: {
@@ -37,11 +35,7 @@ const SigninPage: FC = () => {
     if (val !== 'y') return reject(2, 'Access denied');
 
     try {
-      await authApi.login(body);
-
-      setUserState((prev) => ({ ...prev, userId: body.userId }));
-
-      push(Uri.service);
+      await login(body);
 
       return resolve();
     } catch (error) {

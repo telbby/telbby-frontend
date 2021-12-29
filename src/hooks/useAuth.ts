@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { authApi } from '@/apis';
-import { LoginRequestBody } from '@/types';
 import { useSetUserState } from '@/atoms/userState';
-import { NETWORK_ERROR, loginError, UNEXPECTED_ERROR } from '@/constants/error';
+import { NETWORK_ERROR, UNEXPECTED_ERROR, loginError } from '@/constants/error';
 import Uri from '@/constants/uri';
+import { LoginRequestBody } from '@/types';
 
 const useAuth = (): {
   login: ({ userId, password }: LoginRequestBody) => Promise<void>;
@@ -24,9 +24,11 @@ const useAuth = (): {
 
       await authApi.login({ userId, password });
 
-      // @TODO 로그인 성공 시 사용자 정보 가져오는 API 호출 후 상태로 저장
+      setUserState((prev) => ({ ...prev, userId }));
 
-      history.replace(Uri.home);
+      setIsLoading(false);
+
+      history.replace(Uri.service);
     } catch (e) {
       if (e.response) {
         if (loginError[e.response.status]) {
@@ -37,9 +39,10 @@ const useAuth = (): {
       } else {
         setError(NETWORK_ERROR);
       }
-      throw e;
-    } finally {
+
       setIsLoading(false);
+
+      throw e;
     }
   };
 
