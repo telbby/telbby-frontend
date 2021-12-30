@@ -2,18 +2,19 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { authApi } from '@/apis';
-import { useSetUserState } from '@/atoms/userState';
+import { useUserState } from '@/atoms/userState';
 import { NETWORK_ERROR, UNEXPECTED_ERROR, loginError } from '@/constants/error';
 import Uri from '@/constants/uri';
-import { LoginRequestBody } from '@/types';
+import { LoginRequestBody, User } from '@/types';
 
 const useAuth = (): {
+  user: User;
   login: ({ userId, password }: LoginRequestBody) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
   error: string;
 } => {
-  const setUserState = useSetUserState();
+  const [user, setUserState] = useUserState();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const history = useHistory();
@@ -25,6 +26,8 @@ const useAuth = (): {
       await authApi.login({ userId, password });
 
       setUserState((prev) => ({ ...prev, userId }));
+
+      localStorage.setItem('userId', userId);
 
       setIsLoading(false);
 
@@ -48,12 +51,14 @@ const useAuth = (): {
 
   const logout = () => {
     setUserState(null);
-    authApi.logout().catch(() => {
-      /* 로그아웃의 경우, 별도의 에러 처리를 하지 않음 */
-    });
+
+    localStorage.removeItem('userId');
+
+    authApi.logout();
   };
 
   return {
+    user,
     login,
     logout,
     isLoading,

@@ -10,12 +10,10 @@ import ServicePage from './pages/ServicePage';
 import SigninPage from './pages/SigninPage';
 import SignupPage from './pages/SignupPage';
 import PrivateRoute from './components/common/PrivateRoute';
-import { useUserStateValue } from './atoms/userState';
+import useAutoLogin from './hooks/useAutoLogin';
 
 const App: FC = () => {
-  const user = useUserStateValue();
-
-  const isAuthenticated = !!user;
+  const { isLoggedIn } = useAutoLogin();
 
   return (
     <ErrorBoundary>
@@ -25,19 +23,19 @@ const App: FC = () => {
           path={Uri.signup}
           exact
           component={SignupPage}
-          isAccessible={!isAuthenticated}
+          isAccessible={!isLoggedIn}
         />
         <PrivateRoute
           path={Uri.signin}
           exact
           component={SigninPage}
-          isAccessible={!isAuthenticated}
+          isAccessible={!isLoggedIn}
         />
         <PrivateRoute
           path={Uri.service}
           exact
           component={ServicePage}
-          isAccessible={isAuthenticated}
+          isAccessible={isLoggedIn}
         />
         <Route path={Uri.serviceEdit} exact component={ServiceEditPage} />
         <Route component={NotFoundPage} />
