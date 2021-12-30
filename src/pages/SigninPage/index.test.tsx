@@ -4,13 +4,16 @@ import { MemoryRouter, Router } from 'react-router-dom';
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { RecoilRoot } from 'recoil';
 
 import SigninPage from '.';
 
 describe('SigninPage 테스트', () => {
   const signupPageContainer = (
     <MemoryRouter>
-      <SigninPage />
+      <RecoilRoot>
+        <SigninPage />
+      </RecoilRoot>
     </MemoryRouter>
   );
 
@@ -34,7 +37,9 @@ describe('SigninPage 테스트', () => {
 
     render(
       <Router history={history}>
-        <SigninPage />
+        <RecoilRoot>
+          <SigninPage />
+        </RecoilRoot>
       </Router>,
     );
 
