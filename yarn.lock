@@ -2627,6 +2627,11 @@
   dependencies:
     "@jest/create-cache-key-function" "^27.3.1"
 
+"@telbby/validation@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@telbby/validation/-/validation-1.1.4.tgz#ee34fc47d08f746de7f5920342dea0b262a90839"
+  integrity sha512-4wQbMO4h5r/hs1pG4vEcj2GxrZasnBJyJ23vdS7QcrCKEWReojDKw2pbPAYilpi1OowKQixiAIrTXIYXvEEeog==
+
 "@testing-library/dom@^8.0.0":
   version "8.11.1"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-8.11.1.tgz#03fa2684aa09ade589b460db46b4c7be9fc69753"

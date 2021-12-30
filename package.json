@@ -78,6 +78,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.5.0",
+    "@telbby/validation": "^1.1.4",
     "axios": "^0.24.0",
     "core-js": "3",
     "nanoid": "^3.1.30",
