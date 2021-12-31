@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import Jumbotron from '@/components/common/Jumbotron';
 import Logo from '@/components/common/Logo';
@@ -14,6 +14,7 @@ import { footerStyle, headerStyle, layoutStyle } from './style';
 
 const SigninPage: FC = () => {
   const { login } = useAuth();
+  const history = useHistory();
 
   const checkIsValueEmpty = useCallback(
     (option: {
@@ -36,6 +37,8 @@ const SigninPage: FC = () => {
 
     try {
       await login(body);
+
+      history.replace(Uri.service);
 
       return resolve();
     } catch (error) {

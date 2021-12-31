@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import { authApi } from '@/apis';
 import { useSetUserState } from '@/atoms/userState';
 import { NETWORK_ERROR, UNEXPECTED_ERROR, loginError } from '@/constants/error';
-import Uri from '@/constants/uri';
 import { LoginRequestBody } from '@/types';
 
 const useAuth = (): {
@@ -16,7 +14,6 @@ const useAuth = (): {
   const setUserState = useSetUserState();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const history = useHistory();
 
   const login = async ({ userId, password }: LoginRequestBody) => {
     try {
@@ -27,8 +24,6 @@ const useAuth = (): {
       setUserState((prev) => ({ ...prev, userId }));
 
       setIsLoading(false);
-
-      history.replace(Uri.service);
     } catch (e) {
       if (e.response) {
         if (loginError[e.response.status]) {
