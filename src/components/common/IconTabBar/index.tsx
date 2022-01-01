@@ -3,7 +3,7 @@ import React, { FC, MouseEventHandler } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import {
-  tabNavbarStyle,
+  tabBarStyle,
   tabIconStyle,
   tabItemStyle,
   tabCurvedBlockStyle,
@@ -88,11 +88,11 @@ TabIcon.defaultProps = {
   selectable: true,
 };
 
-type IconTabNavbarProps = {
+type IconTabBarProps = {
   direction?: 'top' | 'right' | 'bottom' | 'left';
 };
 
-const IconTabNavbar: FC<IconTabNavbarProps> & {
+const IconTabBar: FC<IconTabBarProps> & {
   TabIcon: FC<TabIconProps>;
   TabItem: FC<TabItemProps>;
 } = ({ children, direction }) => {
@@ -101,18 +101,18 @@ const IconTabNavbar: FC<IconTabNavbarProps> & {
   return (
     <div
       className={direction}
-      css={(cssTheme: Theme) => tabNavbarStyle(cssTheme, isRow)}
+      css={(cssTheme: Theme) => tabBarStyle(cssTheme, isRow)}
     >
       {children}
     </div>
   );
 };
 
-IconTabNavbar.defaultProps = {
+IconTabBar.defaultProps = {
   direction: 'right',
 };
 
-IconTabNavbar.TabIcon = TabIcon;
-IconTabNavbar.TabItem = TabItem;
+IconTabBar.TabIcon = TabIcon;
+IconTabBar.TabItem = TabItem;
 
-export default IconTabNavbar;
+export default IconTabBar;

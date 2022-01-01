@@ -137,7 +137,7 @@ const curvedBlockStyleByDirection = css`
   }
 `;
 
-export const tabNavbarStyle = (
+export const tabBarStyle = (
   theme: Theme,
   isRow: boolean,
 ): SerializedStyles => css`

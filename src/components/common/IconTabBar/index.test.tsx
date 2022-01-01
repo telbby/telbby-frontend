@@ -4,20 +4,20 @@ import { createMemoryHistory } from 'history';
 
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import IconTabNavbar from '.';
+import IconTabBar from '.';
 
-describe('<IconTabNavbar/> component test', () => {
+describe('<IconTabBar/> component test', () => {
   it('탭 요소들을 렌더링 해야 합니다.', () => {
     render(
       <MemoryRouter>
-        <IconTabNavbar>
-          <IconTabNavbar.TabItem>ITEM 1</IconTabNavbar.TabItem>
-          <IconTabNavbar.TabItem>ITEM 2</IconTabNavbar.TabItem>
-          <IconTabNavbar.TabItem>ITEM 3</IconTabNavbar.TabItem>
-          <IconTabNavbar.TabIcon src="#">ICON 1</IconTabNavbar.TabIcon>
-          <IconTabNavbar.TabIcon src="#">ICON 2</IconTabNavbar.TabIcon>
-          <IconTabNavbar.TabIcon src="#">ICON 3</IconTabNavbar.TabIcon>
-        </IconTabNavbar>
+        <IconTabBar>
+          <IconTabBar.TabItem>ITEM 1</IconTabBar.TabItem>
+          <IconTabBar.TabItem>ITEM 2</IconTabBar.TabItem>
+          <IconTabBar.TabItem>ITEM 3</IconTabBar.TabItem>
+          <IconTabBar.TabIcon src="#">ICON 1</IconTabBar.TabIcon>
+          <IconTabBar.TabIcon src="#">ICON 2</IconTabBar.TabIcon>
+          <IconTabBar.TabIcon src="#">ICON 3</IconTabBar.TabIcon>
+        </IconTabBar>
       </MemoryRouter>,
     );
 
@@ -30,11 +30,11 @@ describe('<IconTabNavbar/> component test', () => {
     expect(screen.queryByAltText('ICON 3')).toBeInTheDocument();
   });
 
-  describe('<IconTabNavbar.TabItem/> component test', () => {
+  describe('<IconTabBar.TabItem/> component test', () => {
     it('자식 요소를 렌더링 해야 합니다.', () => {
       render(
         <MemoryRouter>
-          <IconTabNavbar.TabItem>Content</IconTabNavbar.TabItem>
+          <IconTabBar.TabItem>Content</IconTabBar.TabItem>
         </MemoryRouter>,
       );
 
@@ -44,9 +44,9 @@ describe('<IconTabNavbar/> component test', () => {
     it('함수로 전달된 자식 요소에 URL을 기반으로한 선택 여부를 전달해야 합니다.', () => {
       render(
         <MemoryRouter initialEntries={['/target']}>
-          <IconTabNavbar.TabItem to="/target">
+          <IconTabBar.TabItem to="/target">
             {(selected) => selected && 'TRUE'}
-          </IconTabNavbar.TabItem>
+          </IconTabBar.TabItem>
         </MemoryRouter>,
       );
 
@@ -58,13 +58,13 @@ describe('<IconTabNavbar/> component test', () => {
 
       render(
         <MemoryRouter>
-          <IconTabNavbar.TabItem
+          <IconTabBar.TabItem
             onClickHandler={() => {
               isClickHandlerCalled = true;
             }}
           >
             ITEM
-          </IconTabNavbar.TabItem>
+          </IconTabBar.TabItem>
         </MemoryRouter>,
       );
 
@@ -78,7 +78,7 @@ describe('<IconTabNavbar/> component test', () => {
 
       render(
         <Router history={history}>
-          <IconTabNavbar.TabItem to="/target">ITEM</IconTabNavbar.TabItem>
+          <IconTabBar.TabItem to="/target">ITEM</IconTabBar.TabItem>
         </Router>,
       );
 
@@ -88,7 +88,7 @@ describe('<IconTabNavbar/> component test', () => {
     });
   });
 
-  describe('<IconTabNavbar.TabIcon/> component test', () => {
+  describe('<IconTabBar.TabIcon/> component test', () => {
     const DEFAULT_ALT_TEXT = 'icon';
 
     it('클릭 핸들러가 지정된 아이콘을 클릭하면 해당 클릭 핸들러가 호출되어야 합니다.', () => {
@@ -96,7 +96,7 @@ describe('<IconTabNavbar/> component test', () => {
 
       render(
         <MemoryRouter>
-          <IconTabNavbar.TabIcon
+          <IconTabBar.TabIcon
             src="#"
             onClickHandler={() => {
               isClickHandlerCalled = true;
@@ -115,7 +115,7 @@ describe('<IconTabNavbar/> component test', () => {
 
       render(
         <Router history={history}>
-          <IconTabNavbar.TabIcon src="#" to="/target" />
+          <IconTabBar.TabIcon src="#" to="/target" />
         </Router>,
       );
 
@@ -127,9 +127,9 @@ describe('<IconTabNavbar/> component test', () => {
     it('아이콘 이미지의 대체 텍스트를 지정할 수 있어야 합니다.', () => {
       render(
         <MemoryRouter>
-          <IconTabNavbar.TabIcon src="#" to="/target">
+          <IconTabBar.TabIcon src="#" to="/target">
             Icon Alt Text
-          </IconTabNavbar.TabIcon>
+          </IconTabBar.TabIcon>
         </MemoryRouter>,
       );
 
