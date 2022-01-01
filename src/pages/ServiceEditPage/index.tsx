@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import Layout from '@/components/common/Layout';
+import SideLayout from '@/components/layout/SideLayout';
 import ServiceEditForm from '@/components/service/ServiceEditForm';
 import { ServiceInfo } from '@/types/service';
 
@@ -14,13 +14,13 @@ const ServiceEditPage: FC = () => {
   }, []);
 
   return (
-    <Layout>
+    <SideLayout>
       {serviceInfo ? (
         <ServiceEditForm serviceInfo={serviceInfo} />
       ) : (
         <div>Loading</div>
       )}
-    </Layout>
+    </SideLayout>
   );
 };
 

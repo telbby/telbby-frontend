@@ -2,6 +2,7 @@ import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from '@emotion/react';
 import GlobalStyle from '../src/styles/global';
 import theme from '../src/styles/theme';
+import { BrowserRouter } from 'react-router-dom';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -18,7 +19,9 @@ export const decorators = [
     <RecoilRoot>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Story />
+        <BrowserRouter>
+          <Story />
+        </BrowserRouter>
       </ThemeProvider>
     </RecoilRoot>
   ),

@@ -4,6 +4,7 @@ enum Uri {
   signup = '/signup',
   service = '/service',
   serviceEdit = '/service-edit',
+  feedback = '/feedback',
 }
 
 export default Uri;

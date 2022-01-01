@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-import Navbar from '../Navbar';
-import Footer from '../Footer';
+import Navbar from '@/components/common/Navbar';
+import Footer from '@/components/common/Footer';
 
 import { layoutStyle } from './style';
 
