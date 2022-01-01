@@ -21,7 +21,7 @@ const Sidebar: FC = ({ children }) => {
   return (
     <div css={sidebarStyle}>
       <IconTabBar>
-        <IconTabBar.TabIcon src={LogoIcon} to={Uri.home} selectable={false}>
+        <IconTabBar.TabIcon src={LogoIcon} to={Uri.service} selectable={false}>
           Logo
         </IconTabBar.TabIcon>
         <IconTabBar.TabIcon src={ChatIcon} to={Uri.feedback}>

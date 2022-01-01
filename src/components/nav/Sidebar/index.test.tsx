@@ -17,7 +17,7 @@ describe('<Sidebar/> component test', () => {
     expect(screen.queryByText('Sidebar Contents')).toBeInTheDocument();
   });
 
-  it('Logo 아이콘을 클릭했을 때 home 페이지로 이동해야 합니다.', () => {
+  it('Logo 아이콘을 클릭했을 때 service 페이지로 이동해야 합니다.', () => {
     const history = createMemoryHistory();
     history.replace('/other');
 
@@ -29,7 +29,7 @@ describe('<Sidebar/> component test', () => {
 
     fireEvent.click(screen.getByAltText('Logo'));
 
-    expect(history.location.pathname).toBe('/');
+    expect(history.location.pathname).toBe('/service');
   });
 
   it('Chat 아이콘을 클릭했을 때 feedback messages 페이지로 이동해야 합니다.', () => {
