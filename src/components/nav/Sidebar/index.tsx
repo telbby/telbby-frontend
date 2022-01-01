@@ -33,10 +33,10 @@ const Sidebar: FC = ({ children }) => {
       </IconTabBar>
 
       <div css={sidebarContentStyle}>
-        <h1 className="title">
+        <h1 className="head">
           {SIDEBAR_HEADINGS[location.pathname] ?? 'Telbby'}
         </h1>
-        {children}
+        <div className="body">{children}</div>
       </div>
     </div>
   );
