@@ -50,13 +50,18 @@ TabItem.defaultProps = {
 type TabIconProps = {
   src: string;
   children?: string;
-  to: string;
   selectable?: boolean;
-};
+} & Omit<TabItemProps, 'children'>;
 
-const TabIcon: FC<TabIconProps> = ({ children, src, to, selectable }) => {
+const TabIcon: FC<TabIconProps> = ({
+  children,
+  src,
+  to,
+  selectable,
+  onClickHandler,
+}) => {
   return (
-    <TabItem to={to}>
+    <TabItem to={to} onClickHandler={onClickHandler}>
       {(selected) => (
         <div
           css={tabCurvedBlockStyle}
