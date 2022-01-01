@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import Jumbotron from '@/components/common/Jumbotron';
-import Layout from '@/components/common/Layout';
+import Layout from '@/components/layout/Layout';
 import ServiceList from '@/components/service/ServiceList';
 import Shell from '@/components/shell/Shell';
 

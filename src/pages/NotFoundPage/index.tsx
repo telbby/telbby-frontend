@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import Layout from '@/components/common/Layout';
+import Layout from '@/components/layout/Layout';
 import Jumbotron from '@/components/common/Jumbotron';
 import Uri from '@/constants/uri';
 import notFoundImg from '@/assets/images/page-not-found.png';

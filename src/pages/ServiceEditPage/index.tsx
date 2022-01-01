@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import Layout from '@/components/common/Layout';
+import Layout from '@/components/layout/Layout';
 import ServiceEditForm from '@/components/service/ServiceEditForm';
 import { ServiceInfo } from '@/types/service';
 
