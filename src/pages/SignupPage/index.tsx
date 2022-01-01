@@ -1,5 +1,6 @@
 import React, { FC, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { idValidator, pwValidator } from '@telbby/validation';
 
 import { userApi } from '@/apis';
 import Jumbotron from '@/components/common/Jumbotron';
@@ -13,21 +14,25 @@ import { LoginRequestBody } from '@/types';
 import { footerStyle, headerStyle, layoutStyle } from './style';
 
 const SignupPage: FC = () => {
-  const checkIsValueEmpty = useCallback(
-    (option: {
-        goBackSequence: number;
-        nextSequence: number;
-        errorMessage: string;
-      }) =>
-      (val: string) => {
-        const { goBackSequence, nextSequence, errorMessage } = option;
+  const checkIsIdValid = useCallback((input: string) => {
+    if (!input) return reject(1, 'Please enter your Id');
 
-        if (!val) return reject(goBackSequence, errorMessage);
+    const [isIdValid, idWarningMessage] = idValidator(input);
 
-        return resolve(nextSequence);
-      },
-    [],
-  );
+    if (!isIdValid) return reject(1, idWarningMessage);
+
+    return resolve(2);
+  }, []);
+
+  const checkIsPwValid = useCallback((input: string) => {
+    if (!input) return reject(1, 'Please enter your password');
+
+    const [isPwValid, pwWarningMessage] = pwValidator(input);
+
+    if (!isPwValid) return reject(2, pwWarningMessage);
+
+    return resolve(3);
+  }, []);
 
   const attemptSignup = useCallback(async (val, body: LoginRequestBody) => {
     if (val !== 'y') return reject(2, 'Access denied');
@@ -40,6 +45,7 @@ const SignupPage: FC = () => {
       if (!error.response) return reject(1, NETWORK_ERROR);
 
       const { message } = error.response.data;
+
       if (message) return reject(1, message);
 
       return reject(1, UNEXPECTED_ERROR);
@@ -63,21 +69,13 @@ const SignupPage: FC = () => {
             render={renderProps('readLine', 'question', 'username')}
             formKey="userId"
             maxLength={30}
-            onEnter={checkIsValueEmpty({
-              goBackSequence: 1,
-              nextSequence: 2,
-              errorMessage: 'Please enter your ID',
-            })}
+            onEnter={checkIsIdValid}
           />
           <Shell.Command
             formKey="password"
             maxLength={35}
             render={renderProps('readLine', 'question', 'password')}
-            onEnter={checkIsValueEmpty({
-              goBackSequence: 2,
-              nextSequence: 3,
-              errorMessage: 'Please enter your password',
-            })}
+            onEnter={checkIsPwValid}
           />
           <Shell.Command
             defaultValue="y"
