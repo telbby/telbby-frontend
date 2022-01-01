@@ -142,7 +142,7 @@ export const tabNavbarStyle = (
   isRow: boolean,
 ): SerializedStyles => css`
   position: relative;
-  display: flex;
+  display: inline-flex;
   overflow: hidden;
   flex-direction: ${isRow ? 'row' : 'column'};
 
