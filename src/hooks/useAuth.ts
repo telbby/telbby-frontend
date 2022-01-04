@@ -54,7 +54,9 @@ const useAuth = (): {
 
     localStorage.removeItem('userId');
 
-    authApi.logout();
+    authApi.logout().catch(() => {
+      /* 로그아웃의 경우, 별도의 에러 처리를 하지 않음 */
+    });
   };
 
   return {
